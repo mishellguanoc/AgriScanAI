@@ -1,0 +1,25 @@
+plant,disease,area_m2,severity,lat,lon,date
+Tomato,Late Blight,120,0.9,-0.937,-78.616,2026-03-01
+Tomato,Leaf Mold,80,0.5,-0.940,-78.62,2026-02-15
+Tomato,Bacterial Spot,95,0.7,-0.932,-78.61,2026-03-10
+Potato,Early Blight,200,0.85,-1.249,-78.617,2026-01-20
+Potato,Black Scurf,150,0.6,-1.251,-78.62,2026-02-28
+Potato,Late Blight,90,0.75,-1.245,-78.615,2026-03-05
+Tomato,Late Blight,60,0.4,-0.935,-78.612,2026-02-10
+Potato,Early Blight,110,0.65,-1.247,-78.618,2026-03-12
+Tomato,Bacterial Spot,150,0.8,-0.925,-78.605,2026-01-15
+Tomato,Late Blight,200,0.95,-1.26,-78.63,2026-02-20
+Potato,Late Blight,300,0.8,-1.27,-78.61,2026-01-05
+Potato,Late Blight,80,0.4,-0.95,-78.64,2026-03-08
+Potato,Early Blight,115,0.7,-1.23,-78.6,2026-02-05
+Tomato,Leaf Mold,130,0.6,-0.915,-78.59,2026-01-25
+Tomato,Septoria Leaf Spot,75,0.45,-0.51,-78.52,2026-03-14
+Potato,Early Blight,400,0.9,0.045,-78.14,2026-03-15
+Potato,Late Blight,250,0.85,0.038,-78.12,2026-02-18
+Tomato,Late Blight,180,0.75,-0.01,-78.45,2026-03-02
+Tomato,Spider Mites,90,0.6,-0.05,-78.48,2026-01-10
+Potato,Black Scurf,140,0.55,-1.3,-78.55,2026-02-12
+Potato,Late Blight,100,0.65,-0.88,-78.58,2026-03-09
+Tomato,Target Spot,110,0.5,-0.96,-78.65,2026-02-01
+Tomato,Yellow Leaf Curl Virus,65,0.7,-0.92,-78.62,2026-01-05
+Potato,Common Scab,180,0.4,-1.28,-78.64,2026-02-25
