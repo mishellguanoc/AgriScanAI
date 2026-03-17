@@ -16,9 +16,6 @@ env/
 .DS_Store
 Thumbs.db
 
-# Model weights (muy pesados)
-*.pth
-*.pt
 
 # Map exports
 *.html
