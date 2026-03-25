@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import pandas as pd
 import folium
 import base64
@@ -102,7 +103,7 @@ def map_page():
 
     # HEATMAP
     heat_data = filtered[["lat","lon","severity"]].values.tolist()
-    HeatMap(heat_data, radius=25, blur=15).add_to(m)
+    HeatMap(heat_data, radius=10, blur=8, max_zoom=10).add_to(m)
 
     # MOSTRAR MAPA (Metodo optimizado con Componentes HTML para mayor estabilidad en Tabs)
     map_html = m._repr_html_()
@@ -121,24 +122,24 @@ def map_page():
             daily_counts = filtered.groupby("date").size().reindex(all_dates, fill_value=0)
             cumulative_counts = daily_counts.cumsum()
 
-            # Crear figura de Plotly
-            fig = go.Figure()
+            # Crear figura de Plotly con dos ejes Y
+            fig = make_subplots(specs=[[{"secondary_y": True}]])
 
             # Título dinámico
             plant_title = plant_filter if plant_filter != "All" else "All Crops"
             disease_title = f" - {disease_filter}" if disease_filter != "All" else ""
             full_title = f"Trend: {plant_title}{disease_title}"
 
-            # Traza de casos diarios (Barras)
+            # Traza de casos diarios (Barras) en el eje primario
             fig.add_trace(go.Bar(
                 x=[d.strftime('%Y-%m-%d') for d in all_dates],
                 y=daily_counts,
                 name="New Daily Cases",
                 marker_color="#e74c3c",
                 opacity=0.7
-            ))
+            ), secondary_y=False)
 
-            # Traza de tendencia acumulada (Línea)
+            # Traza de tendencia acumulada (Línea) en el eje secundario
             fig.add_trace(go.Scatter(
                 x=[d.strftime('%Y-%m-%d') for d in all_dates],
                 y=cumulative_counts,
@@ -146,18 +147,21 @@ def map_page():
                 mode="lines+markers",
                 line=dict(color="#2c3e50", width=3),
                 marker=dict(size=6)
-            ))
+            ), secondary_y=True)
 
             fig.update_layout(
                 title=full_title,
-                xaxis_title="Registration Date",
-                yaxis_title="Case Count",
                 hovermode="x unified",
                 template="plotly_white",
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
                 margin=dict(l=0, r=0, t=50, b=0),
                 height=400
             )
+
+            # Nombres de ejes
+            fig.update_xaxes(title_text="Registration Date")
+            fig.update_yaxes(title_text="Daily Cases", secondary_y=False)
+            fig.update_yaxes(title_text="Cumulative Cases", secondary_y=True)
 
             st.plotly_chart(fig, use_container_width=True)
             
