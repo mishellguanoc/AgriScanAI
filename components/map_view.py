@@ -22,7 +22,7 @@ def map_page():
     st.header("AgriScan Epidemiological Map")
 
     # LOAD DATA (Epidemiological outbreaks)
-    data = get_epidemic_data("assets/epidemic_data.csv")
+    data = get_epidemic_data("data/epidemic_data.csv")
 
     if data.empty:
         st.warning("No epidemiological data found in the records.")

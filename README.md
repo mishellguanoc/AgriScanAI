@@ -113,8 +113,8 @@ AgriScanProject
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/agriscan-ai.git
-cd agriscan-ai
+git clone https://github.com/mishellguanoc/AgriScanAI.git
+cd AgriScanAI
 ```
 
 Install dependencies:
