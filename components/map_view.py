@@ -4,25 +4,18 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
 import folium
-import base64
 from folium.plugins import MarkerCluster, HeatMap
 from utils.map_export import export_map_to_jpg
+from utils.db_manager import fetch_all_records
 import os
 
-@st.cache_data
-def get_epidemic_data(path):
-    if os.path.exists(path):
-        data = pd.read_csv(path)
-        data['date'] = pd.to_datetime(data['date']).dt.date
-        return data
-    return pd.DataFrame()
 
 def map_page():
 
     st.header("AgriScan Epidemiological Map")
 
-    # LOAD DATA (Epidemiological outbreaks)
-    data = get_epidemic_data("assets/epidemic_data.csv")
+    # LOAD DATA (Epidemiological outbreaks from Supabase)
+    data = fetch_all_records()
 
     if data.empty:
         st.warning("No epidemiological data found in the records.")

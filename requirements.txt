@@ -8,3 +8,5 @@ streamlit-folium
 selenium
 webdriver-manager
 plotly
+SQLAlchemy
+psycopg2-binary
