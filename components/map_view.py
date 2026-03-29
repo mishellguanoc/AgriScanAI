@@ -10,6 +10,43 @@ from utils.db_manager import fetch_all_records
 import os
 
 
+@st.cache_data
+def get_cached_map_html(filtered_df):
+    # cached
+    # CREAR MAPA
+    m = folium.Map(
+        location=[-0.8, -78.5],
+        zoom_start=9,
+        tiles="cartodbpositron"
+    )
+
+    cluster = MarkerCluster().add_to(m)
+
+    for _, row in filtered_df.iterrows():
+        popup_text = f"""
+        <b>Plant:</b> {row['plant']}<br>
+        <b>Disease:</b> {row['disease']}<br>
+        <b>Affected Area:</b> {row['area_m2']} m²<br>
+        <b>Severity:</b> {row['severity']*100:.1f}%<br>
+        <b>Registration:</b> {row['date']}
+        """
+        
+        folium.CircleMarker(
+            location=[row["lat"], row["lon"]],
+            radius=8 + row["severity"]*10,
+            popup=folium.Popup(popup_text, max_width=200),
+            color="#e74c3c",
+            fill=True,
+            fill_color="#e74c3c",
+            fill_opacity=0.7
+        ).add_to(cluster)
+
+    # HEATMAP
+    heat_data = filtered_df[["lat","lon","severity"]].values.tolist()
+    HeatMap(heat_data, radius=10, blur=8, max_zoom=10).add_to(m)
+
+    return m._repr_html_()
+
 def map_page():
 
     st.header("AgriScan Epidemiological Map")
@@ -66,40 +103,9 @@ def map_page():
 
     st.write(f"Detected outbreaks: **{len(filtered)}**")
 
-    # CREAR MAPA
-    m = folium.Map(
-        location=[-0.8, -78.5],
-        zoom_start=9,
-        tiles="cartodbpositron"
-    )
-
-    cluster = MarkerCluster().add_to(m)
-
-    for _, row in filtered.iterrows():
-        popup_text = f"""
-        <b>Plant:</b> {row['plant']}<br>
-        <b>Disease:</b> {row['disease']}<br>
-        <b>Affected Area:</b> {row['area_m2']} m²<br>
-        <b>Severity:</b> {row['severity']*100:.1f}%<br>
-        <b>Registration:</b> {row['date']}
-        """
-        
-        folium.CircleMarker(
-            location=[row["lat"], row["lon"]],
-            radius=8 + row["severity"]*10,
-            popup=folium.Popup(popup_text, max_width=200),
-            color="#e74c3c",
-            fill=True,
-            fill_color="#e74c3c",
-            fill_opacity=0.7
-        ).add_to(cluster)
-
-    # HEATMAP
-    heat_data = filtered[["lat","lon","severity"]].values.tolist()
-    HeatMap(heat_data, radius=10, blur=8, max_zoom=10).add_to(m)
-
     # MOSTRAR MAPA (Metodo optimizado con Componentes HTML para mayor estabilidad en Tabs)
-    map_html = m._repr_html_()
+    # This now uses the cached HTML map instead of rebuilding it every time
+    map_html = get_cached_map_html(filtered)
     components.html(map_html, height=500)
 
     # TENDENCIA TEMPORAL
