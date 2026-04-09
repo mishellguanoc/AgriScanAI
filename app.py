@@ -15,127 +15,137 @@ st.set_page_config(
 )
 
 # =========================
-# 🌙 TEMA (TOGGLE EN SIDEBAR)
+# 🌙 TEMA (POR DEFECTO OSCURO)
 # =========================
 if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = True
 
-with st.sidebar:
-    st.title("⚙️ Configuración")
-    st.session_state.dark_mode = st.toggle(" Dark Mode", value=st.session_state.dark_mode)
+# Usaremos variables de Streamlit en el CSS para máxima compatibilidad.
 
 # =========================
-# 🎨 COLORES
+# 🎨 CSS PREMIUM DESIGN SYSTEM
 # =========================
-if st.session_state.dark_mode:
-    bg_color = "#0E1117"
-    text_color = "#FAFAFA"
-    card_color = "#1A1D23"
-    button_color = "#4CAF50"
-else:
-    bg_color = "#F5F7FA"
-    text_color = "#111111"
-    card_color = "#FFFFFF"
-    button_color = "#2E7D32"
-
-# =========================
-# 💄 CSS PRO (FIX COMPLETO)
-# =========================
-st.markdown(f"""
+st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap');
 
-/* ===== FONDO GLOBAL ===== */
-.stApp {{
-    background-color: {bg_color};
-    color: {text_color};
-}}
+/* ===== CORE STYLING ===== */
+:root {
+    --glass-bg: var(--secondary-background-color);
+    --glass-border: rgba(128, 128, 128, 0.15);
+    --accent-gradient: linear-gradient(135deg, #2E7D32, #1E88E5);
+}
 
-/* ===== SIDEBAR ===== */
-section[data-testid="stSidebar"] {{
-    background-color: {card_color};
-    border-right: 1px solid rgba(255,255,255,0.08);
-}}
+.stApp {
+    background-color: transparent;
+    font-family: 'Inter', sans-serif;
+}
 
-/* ===== TITULOS ===== */
-h1, h2, h3 {{
-    color: {text_color} !important;
-    font-weight: 700;
-}}
+/* ===== TITLES & HEADERS ===== */
+h1, h2, h3, [data-testid="stHeader"] {
+    font-family: 'Outfit', sans-serif !important;
+    letter-spacing: -0.02em;
+}
 
-/* ===== SELECTBOX ===== */
-div[data-baseweb="select"] > div {{
-    background-color: {card_color} !important;
-    color: {text_color} !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(255,255,255,0.15) !important;
-}}
+h1 { font-weight: 800 !important; }
+h2 { font-weight: 700 !important; }
 
-div[data-baseweb="select"] span {{
-    color: {text_color} !important;
-}}
+/* ===== LOGO FIX (NO CLIPPING) ===== */
+/* Remove any rounding or overflow from the logo container */
+[data-testid="stImage"] {
+    overflow: visible !important;
+}
 
-/* ===== INPUTS ===== */
-input {{
-    background-color: {card_color} !important;
-    color: {text_color} !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-}}
+[data-testid="stImage"] > div {
+    border-radius: 0 !important;
+    overflow: visible !important;
+}
 
-/* ===== RADIO BUTTONS ===== */
-div[role="radiogroup"] > label {{
-    background: {card_color};
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-}}
+[data-testid="stImage"] img {
+    border-radius: 0 !important;
+    mix-blend-mode: difference;
+    filter: brightness(1.2); /* Boost visibility */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-/* ===== FILE UPLOADER ===== */
-section[data-testid="stFileUploader"] > div {{
-    background: {card_color} !important;
-    border-radius: 12px !important;
-    border: 2px dashed rgba(255,255,255,0.2) !important;
-    padding: 20px;
-}}
-
-section[data-testid="stFileUploader"] small {{
-    color: gray !important;
-}}
-
-/* ===== BOTONES ===== */
-.stButton>button {{
-    background: linear-gradient(135deg, {button_color}, #1E88E5);
-    color: white;
-    border-radius: 12px;
-    padding: 10px 20px;
-    border: none;
-    font-weight: 600;
-}}
-
-.stButton>button:hover {{
+[data-testid="stImage"] img:hover {
     transform: scale(1.05);
-    opacity: 0.9;
-}}
+}
+
+/* ===== CARDS & CONTAINERS ===== */
+div[data-testid="stVerticalBlock"] > div > div[data-testid="stVerticalBlock"] {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    /* Removed backdrop-filter: blur(10px) because it creates a stacking context preventing mix-blend-mode difference from working against the body */
+    transition: all 0.3s ease;
+}
+
+/* ===== SELECTBOX & INPUTS ===== */
+div[data-baseweb="select"] > div, input {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 12px !important;
+    color: var(--text-color) !important;
+    /* Native padding and heights are kept to avoid cropping text */
+    transition: border-color 0.2s ease !important;
+}
+
+div[data-baseweb="select"] > div:hover, input:focus {
+    border-color: #2E7D32 !important;
+}
+
+/* ===== BUTTONS ===== */
+.stButton > button {
+    background: var(--accent-gradient) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 14px !important;
+    padding: 12px 24px !important;
+    font-weight: 600 !important;
+    font-family: 'Outfit', sans-serif !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.2) !important;
+    opacity: 0.95;
+}
 
 /* ===== TABS ===== */
-button[data-baseweb="tab"] {{
-    color: {text_color} !important;
-    font-weight: 600;
-}}
+button[data-baseweb="tab"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
+    color: var(--text-color) !important;
+    opacity: 0.7;
+}
 
-button[aria-selected="true"] {{
-    border-bottom: 3px solid {button_color} !important;
-}}
+button[aria-selected="true"] {
+    opacity: 1 !important;
+    border-bottom: 3px solid #2E7D32 !important;
+}
 
-/* ===== TEXTO ===== */
-label, .stMarkdown, p {{
-    color: {text_color} !important;
-}}
+/* ===== SIDEBAR ===== */
+section[data-testid="stSidebar"] {
+    background: rgba(14, 17, 23, 0.6) !important;
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--glass-border);
+}
 
-/* ===== OCULTAR MENU ===== */
-#MainMenu {{visibility: hidden;}}
-footer {{visibility: hidden;}}
+/* ===== DIVIDER ===== */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--glass-border), transparent);
+    margin: 30px 0;
+}
+
+/* ===== HIDE FOOTER REDUNDANCY ===== */
+footer { visibility: hidden; }
 
 </style>
 """, unsafe_allow_html=True)
