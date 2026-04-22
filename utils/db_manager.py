@@ -5,6 +5,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.dialects.postgresql import UUID
 import pandas as pd
 import uuid
+import os
 from datetime import datetime
 
 Base = declarative_base()
@@ -13,6 +14,7 @@ class FileUpload(Base):
     __tablename__ = 'file_upload'
     upload_id = Column(UUID(as_uuid=True), primary_key=True)
     received_timestamp = Column(DateTime(timezone=True))
+    status = Column(String(50), nullable=True, default="Solicitado")
     
     geospatial = relationship("GeospatialData", back_populates="upload", uselist=False)
     diagnosis = relationship("DiagnosisResult", back_populates="upload", uselist=False)
@@ -39,12 +41,16 @@ class DiagnosisResult(Base):
     upload = relationship("FileUpload", back_populates="diagnosis")
 
 def get_engine():
+    db_url = os.getenv("SUPABASE_DB_URL")
+    if db_url:
+        return create_engine(db_url)
+        
     try:
         db_url = st.secrets["SUPABASE_DB_URL"]
         return create_engine(db_url)
-    except KeyError:
-        st.error("Supabase Database URL not found in .streamlit/secrets.toml")
-        return None
+    except Exception:
+        pass
+    return None
 
 @st.cache_data
 def fetch_all_records():
@@ -130,3 +136,66 @@ def save_diagnosis_to_db(plant, disease, confidence, lat, lon, captured_dt, area
         return False
     finally:
         session.close()
+
+def create_initial_ticket(upload_id: uuid.UUID, lat: float, lon: float, captured_dt: datetime):
+    """Creates the initial FileUpload and Geospatial records."""
+    engine = get_engine()
+    if not engine: return False
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        upload = FileUpload(
+            upload_id=upload_id,
+            received_timestamp=datetime.now(),
+            status="Solicitado"
+        )
+        session.add(upload)
+        geo = GeospatialData(
+            upload_id=upload_id,
+            latitude=lat,
+            longitude=lon,
+            elevation=0.0,
+            captured_timestamp=captured_dt or datetime.now()
+        )
+        session.add(geo)
+        session.commit()
+        return True
+    except Exception as e:
+        session.rollback()
+        print(f"Error creating ticket: {e}")
+        return False
+    finally:
+        session.close()
+
+def update_ticket_status(upload_id: uuid.UUID, status: str, plant: str = None, disease: str = None, 
+                         confidence: float = None, area_m2: float = 0.0, severity: float = 0.0):
+    """Updates status and creates DiagnosisResult when completed."""
+    engine = get_engine()
+    if not engine: return False
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        upload = session.query(FileUpload).filter_by(upload_id=upload_id).first()
+        if upload:
+            upload.status = status
+            
+        if status == "Completado" and plant and disease:
+            diag = DiagnosisResult(
+                upload_id=upload_id,
+                crop_type=plant,
+                predicted_disease=disease,
+                confidence_score=confidence or 0.0,
+                area_m2=area_m2,
+                severity=severity
+            )
+            session.add(diag)
+            
+        session.commit()
+        return True
+    except Exception as e:
+        session.rollback()
+        print(f"Error updating ticket: {e}")
+        return False
+    finally:
+        session.close()
+
