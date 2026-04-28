@@ -3,8 +3,8 @@ import requests
 import redis
 import traceback
 import torch
-from torchvision import models, transforms
 import torch.nn as nn
+from torchvision import models, transforms
 from PIL import Image
 
 from distributed_pipeline.config import (
@@ -12,34 +12,52 @@ from distributed_pipeline.config import (
 )
 
 print("Starting Tomato Specialist Worker (Level 2)...")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-transform = transforms.Compose([
+# 1. Preprocesamiento (exactamente igual al notebook de entrenamiento)
+inference_transforms = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 ])
 
-classes = ["Tomato___Bacterial_spot", "Tomato___Early_blight", "Tomato___healthy", "Tomato___Late_blight"]
+# 2. Clases en orden alfabético (igual que ImageFolder en entrenamiento)
+NUM_CLASSES = 10
+MODEL_PATH = MODELS_WEIGHTS_DIR / "best_tomato_worker.pth"
+CLASS_NAMES = [
+    'Tomato_Bacterial_spot',
+    'Tomato_Early_blight',
+    'Tomato_Late_blight',
+    'Tomato_Leaf_Mold',
+    'Tomato_Septoria_leaf_spot',
+    'Tomato_Spider_mites_Two_spotted_spider_mite',
+    'Tomato__Target_Spot',
+    'Tomato__Tomato_YellowLeaf__Curl_Virus',
+    'Tomato__Tomato_mosaic_virus',
+    'Tomato_healthy'
+]
 
+# 3. Arquitectura CON Dropout (igual que en entrenamiento de especialistas)
 try:
-    model_path = MODELS_WEIGHTS_DIR / "best_tomato_worker.pth"
-    model = models.resnet18(pretrained=False)
+    model = models.resnet18(weights=None)
     num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, len(classes))
-    
-    if model_path.exists():
-        model.load_state_dict(torch.load(model_path, map_location=device))
+    model.fc = nn.Sequential(
+        nn.Dropout(0.5),
+        nn.Linear(num_ftrs, NUM_CLASSES)
+    )
+    if MODEL_PATH.exists():
+        model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu'), weights_only=True))
         print("Successfully loaded best_tomato_worker.pth")
-    model.to(device)
+    else:
+        print(f"Warning: Model not found at {MODEL_PATH}")
     model.eval()
 except Exception as e:
     print(f"Error loading model: {e}")
+    traceback.print_exc()
 
 redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
-def send_webhook(task_id: str, status: str, crop_type: str, disease: str, confidence: float):
-    url = BROKER_WEBHOOK_URL.replace("/webhook/status", f"/webhook/status/{task_id}")
+def send_webhook(task_id: str, status: str, crop_type: str = "Tomato", disease: str = None, confidence: float = 0.0):
+    url = f"http://localhost:8000/webhook/status/{task_id}"
     payload = {
         "upload_id": task_id,
         "status": status,
@@ -48,42 +66,40 @@ def send_webhook(task_id: str, status: str, crop_type: str, disease: str, confid
         "confidence_score": confidence
     }
     try:
-        requests.patch(url, json=payload, timeout=5)
+        r = requests.patch(url, json=payload, timeout=5)
+        print(f"Webhook sent: {status} ({r.status_code})")
     except Exception as e:
-        print(f"Failed to send webhook: {e}")
+        print(f"Failed to send webhook to {url}: {e}")
 
+print("Tomato Worker is waiting for tasks...")
 while True:
     try:
         _, message = redis_client.blpop(QUEUE_TOMATO)
         ticket = json.loads(message)
+        
         task_id = ticket["upload_id"]
         image_path = ticket["image_path"]
         
-        print(f"Tomato Worker processing {task_id}")
+        print(f"Processing ticket {task_id}")
         
         img = Image.open(image_path).convert('RGB')
-        img_t = transform(img).unsqueeze(0).to(device)
+        img_t = inference_transforms(img).unsqueeze(0)
         
-        if 'model_path' in locals() and model_path.exists():
-            with torch.no_grad():
-                outputs = model(img_t)
-                probs = torch.nn.functional.softmax(outputs, dim=1)
-                conf, preds = torch.max(probs, 1)
-                predicted_class = classes[preds[0].item()]
-                confidence_score = float(conf[0].item()) * 100.0
-        else:
-            predicted_class = "Tomato___healthy"
-            confidence_score = 98.5
+        with torch.no_grad():
+            outputs = model(img_t)
+            probs = torch.nn.functional.softmax(outputs, dim=1)
+            conf, preds = torch.max(probs, 1)
+            predicted_class = CLASS_NAMES[preds[0].item()]
+            confidence = float(conf[0].item())
             
-        # Send Final Webhook
-        send_webhook(task_id, "Completado", "Tomate", predicted_class, confidence_score)
-        print(f"Completed {task_id} with {predicted_class} ({confidence_score}%)")
-        
+        print(f"Tomato prediction: {predicted_class} ({confidence*100:.2f}%)")
+        send_webhook(task_id, "Completado", "Tomato", predicted_class, confidence)
+            
     except Exception as e:
-        print(f"Critical error in Tomato Worker: {e}")
+        print(f"Critical error processing ticket: {e}")
         traceback.print_exc()
         try:
             if 'task_id' in locals():
-                send_webhook(task_id, "Error", "Tomate", "Unknown", 0.0)
+                send_webhook(task_id, "Error")
         except:
             pass

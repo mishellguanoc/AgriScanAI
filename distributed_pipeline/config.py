@@ -22,6 +22,13 @@ BROKER_HOST = os.getenv("BROKER_HOST", "0.0.0.0")
 BROKER_PORT = int(os.getenv("BROKER_PORT", 8000))
 BROKER_WEBHOOK_URL = os.getenv("BROKER_WEBHOOK_URL", f"http://localhost:{BROKER_PORT}/webhook/status")
 
+# =====================================================
+# BASE URL for client-side requests (Streamlit -> Broker)
+# For multi-machine demo: change this to the LAN IP of the Broker machine
+# Example: BROKER_BASE_URL = "http://192.168.1.50:8000"
+# =====================================================
+BROKER_CLIENT_URL = os.getenv("BROKER_CLIENT_URL", f"http://localhost:{BROKER_PORT}")
+
 # Queue Names
 QUEUE_ROUTER = "router_q"
 QUEUE_TOMATO = "tomato_q"

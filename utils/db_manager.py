@@ -199,3 +199,48 @@ def update_ticket_status(upload_id: uuid.UUID, status: str, plant: str = None, d
     finally:
         session.close()
 
+def get_ticket_status(upload_id: uuid.UUID):
+    """Retrieves the current status and diagnosis of a ticket."""
+    engine = get_engine()
+    if not engine: return {"status": "Error", "disease": None}
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        upload = session.query(FileUpload).filter_by(upload_id=upload_id).first()
+        if not upload:
+            return {"status": "Not_Found", "disease": None}
+            
+        result = {"status": upload.status, "disease": None, "confidence": None}
+        diag = session.query(DiagnosisResult).filter_by(upload_id=upload_id).first()
+        if diag:
+            result["disease"] = diag.predicted_disease
+            result["confidence"] = diag.confidence_score
+            
+        return result
+    except Exception as e:
+        return {"status": f"Error: {e}", "disease": None}
+    finally:
+        session.close()
+
+def update_map_fields(upload_id, area_m2: float, severity: float):
+    engine = get_engine()
+    if not engine: return False
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        if isinstance(upload_id, str):
+            upload_id = uuid.UUID(upload_id)
+        diag = session.query(DiagnosisResult).filter_by(upload_id=upload_id).first()
+        if diag:
+            diag.area_m2 = area_m2
+            diag.severity = severity
+            session.commit()
+            return True
+        return False
+    except Exception as e:
+        session.rollback()
+        return False
+    finally:
+        session.close()
+
+
