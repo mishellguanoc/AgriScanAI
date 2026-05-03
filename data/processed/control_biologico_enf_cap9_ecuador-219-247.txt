@@ -1,0 +1,92 @@
+
+CONTROL BIOLOGICO DE ENFERMEDADES EN ECUADOR
+
+
+TOMATE / TOMATE DE RINON
+
+
+LUGAR/CONDICIONES: En la Estacin Experimental Boliche del INIAP, se han seleccionado cepas nativas
+de Pasteuria penetrans para el control de Meloidogyne incognita y Meloidogyne javanica en tomate
+(Lycopersicon esculentum). En los valles de la sierra ecuatoriana la introduccin de Pasteuria
+penetrans ha reducido eficientemente poblaciones de Meloidogyne spp. En tomate a nivel comercial, la
+aplicacin de esporas de Pasteuria penetrans en semillero o en el sitio definitivo del cultivo fue
+eficiente para controlar Meloidogyne spp. Las aplicaciones pueden realizarse manualmente o
+incorporarse al suelo.
+CONTROL: El efecto de varios productos biolgicos comerciales (Nemater (Myrothecium verrucaria),
+Intercep (Pseudomonas cepacia), Biostat (Paecilomyces lilacinus), Micosplag (Metarhizium anisopliae,
+Paecilomyces lilacinus, Beauveria bassiana), Bioway (Bacillus subtilis, Bacillus cereus, Pseudomonas
+aeruginosa, Pseudomonas stutzeri, Proteus sp., Actinomicetes), el extracto botnico Neen-X
+(Azadirachta indica)) y dos productos qumicos (Rugby (Cadusafos) y Furadan 10G (Carbofuran)) fueron
+probados en el control de Meloidogyne incognita en tomate de mesa variedad Titn. En base al anlisis
+comparativo de la poblacin inicial versus la poblacin final, los productos biolgicos presentaron
+mayor o similar eficiencia que los nematicidas qumicos en el control de Meloidogyne incognita en
+tomate de mesa cultivado bajo invernadero. Con el nematicida biolgico Biostat se obtuvo una
+eficiencia en control del 96%. El costo de los productos y costo de aplicacin de los productos
+biolgicos no fue rentable como cuando se utiliz Furadan, sin embargo los productos biolgicos no
+afectan la salud humana y el medio ambiente y se logra productos orgnicos.
+
+PAPA
+
+SNTOMAS: La lancha o tizn tardo de la papa, causada por Phytophthora infestans, constituye la
+enfermedad mas destructiva, ya que si no se realiza un manejo adecuado puede alcanzar el 100% de
+prdidas.
+CONTROL: En un primer estudio se explor la posibilidad de encontrar hongos filamentosos, bacterias
+y levaduras en la filsfera de hojas de papa con posibilidad de controlar a Phytophthora infestans.
+Al menos 53 aislamientos mostraron habilidad inhibitoria del crecimiento miceliar del patgeno. En
+pruebas de invernadero 12 antagonistas redujeron las lesiones causadas por Phytophthora infestans en
+hojas de papa variedad Gabriela, luego de 168 horas de la inoculacin, a 15 grados C. Se encontraron
+Bacillus subtilis, Acinetobacter sp, Pseudomonas sp., y levaduras Sporobolomyces roseus.
+Con el objeto de establecer un banco de microrganismos benficos para controlar Phytophthora
+infestans en el cultivo de papa, se recolectaron muestras de suelo en fincas productoras de papa, en
+varias localidades de las provincias de Tungurahua, Carchi y Pichincha. Con aislamientos de
+Trichoderma spp. que mostraron eficiencia inhibitoria en ensayos in vitro se condujeron estudios
+bajo invernadero, en las variedades Superchola (susceptible) y Fripapa (resistente). Luego de 15 das
+de la emergencia de las plantas, se aplic en la maana 1x108 UFC/mL de Trichoderma spp. y en la tarde
+se inocul va aspersin 1x105 UFC/mL de Phytophthora infestans. Las plantas testigo fueron tratadas
+con Mancozeb 1 g/L y otras fueron inoculadas con el patgeno. La aplicacin de antagonistas y testigo
+qumico se realiz cada 7 das en 8 ocasiones. El patgeno se re-inocul cada 15 das en 4 ocasiones. La
+incidencia de la enfermedad se present tardamente en los tratamientos biolgicos y qumico, comparado
+con los testigos que recibieron solo al patgeno. Los mejores resultados se obtuvieron al aplicar los
+diferentes tratamientos en la variedad Fripapa, demostrando un control ms eficiente al bajar la
+presin de inculo con Trichoderma spp. en combinacin con la resistencia gentica de la planta.
+Incluso, la aplicacin de Trichoderma spp. fue significativamente igual que el tratamiento qumico, en
+la variedad resistente.
+Tabla 2. Incidencia y severidad de Phytophthora infestans debido al efecto de tres aislamientos de
+Trichoderma sp. y un tratamiento qumico en dos variedades de papa.
+Tratamientos Incidencia Severidad Trichoderma sp.- C10R1+Fripapa 0,79 7,92 Trichoderma sp.-
+C5R1+Fripapa 0,77 7,90 Trichoderma sp.- C5R1+Superchola 0,84 7,78 Trichoderma sp.- C9R1+Fripapa 0,76
+7,77 Mancozeb +Fripapa 0,77 7,66 Trichoderma sp.- C10R1+Superchola 0,84 7,56 Testigo
+absoluto+Fripapa 0,84 7,54 Trichoderma sp.- C9R1+Superchola 0,83 7,39 Mancozeb +Superchola 0,84 7,22
+Testigo absoluto+Superchola 0,91 6,57
+De la misma forma se aislaron cepas nativas de Pseudomonas spp y Bacillus subtilis de zonas
+productoras de papa. La eficiencia del control de Pseudomonas spp. frente a Phytophthora infestans
+se evalu in vitro comprobando la reduccin significativa de micelio del patgeno. En estudios
+realizados en planta bajo condiciones de invernadero todos los tratamientos protegidos con
+suspensiones de Pseudomonas spp. mostraron menor severidad en comparacin con el testigo. En un
+segundo ensayo, un aislamiento de Pseudomonas fluorescens y el tratamiento qumico con Mancozeb
+disminuyeron significativamente la severidad del tizn tardo tanto en la variedad susceptible
+Superchola como en la resistente Fripapa. Otros estudios in vitro demostraron la habilidad de
+Bacillus subtilis para inhibir el crecimiento miceliar de Phytophthora infestans. En dos estudios
+llevados a cabo en invernadero, los tratamientos que recibieron a los antagonistas fueron ms
+eficientes cuando aplicados en la variedad resistente (Fripapa) comparados con el control qumico.
+Para controlar a Phytophthora infestans de la papa es necesario desarrollar biopesticidas o usar
+las sustancias txicas extradas de antagonistas dentro de un plan de rotacin con productos qumicos.
+En este plan de rotacin debera estudiarse la interaccin de los biopesticidas con fungicidas
+protectantes y sistmicos para determinar dosis, frecuencia y pocas de aplicacin. La interaccin
+debera evaluarse en variedades de papa con resistencia vertical (I-Fripapa, I-Margarita, I-Rosita) o
+la variedad I-Santa Catalina con resistencia horizontal, determinando umbrales de infeccin
+econmicos.
+Erazo (2006) evalu tres dosis de Trichoderma harzianum para el control de Rhizoctonia solani
+(costra negra) en papa variedad Fripapa. Dosis de 0,75, 1,50 y 2,25 L de T. harzianum en 200 L de
+agua disminuyeron la severidad de Rhizoctonia solani y mejoraron la sanidad de tubrculos. Las
+aplicaciones del antagonista incrementaron la altura de la planta. Un anlisis microbiolgico indic
+que Trichoderma harzianum increment la poblacin de actinomycetes en el suelo. El uso de antagonistas
+en variedades resistentes de papa incrementa el control de patgenos del suelo.
+Patgenos del suelo causan grandes prdidas en la produccin de papa. La situacin se agrava debido a
+que la siembra repetida en una misma parcela es una prctica habitual. Este hecho incrementa la
+poblacin de patgenos especializados, como Rhizoctonia solani en tubrculos de papa. Con el objeto de
+obtener tubrculo-semilla de buena calidad sanitaria se propuso investigar tiempos de solarizacin en
+combinacin con Trichoderma harzianum en dosis de 30 g/m2. Parcelas de 16 m2 fueron cubiertas con
+plstico transparente de 50 m de espesor y se solarizaron por 4, 8 y 12 semanas en combinacin con
+Trichoderma harzianum. La menor severidad de Rhizoctonia solani se obtuvo mediante la solarizacin
+por 4 semanas en combinacin con el antagonista.

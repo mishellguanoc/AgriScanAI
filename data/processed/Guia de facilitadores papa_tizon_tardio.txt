@@ -1,0 +1,111 @@
+ENFERMEDAD: Tizón tardío de la papa (lancha) AGENTE CAUSAL: Hongo Fitóftora (Phytophthora
+infestans)
+
+SÍNTOMAS: - En hojas: Manchas redondeadas de color marrón oscuro de apariencia aguachenta. A veces
+las manchas pueden estar rodeadas de un anillo de color verde amarillento. - En tallos: Manchas
+secas de color marrón oscuro. Los tallos pueden romperse en el sitio de la mancha. - En tubérculos:
+En la superficie aparecen manchas de color marrón claro, ligeramente hundidas. Al partir los
+tubérculos se ven manchas secas de color marrón claro. Los tubérculos con tizón tardío no presentan
+mal olor. - Un cultivo infectado presenta un olor parecido a hojas podridas.
+
+DIAGNÓSTICO DIFERENCIAL (No confundir con): - Heladas: Producen manchas de apariencia seca y
+quebradiza generalmente en las hojas superiores. - Tizón temprano: Presenta manchas con anillos de
+color marrón. La hoja puede volverse amarilla. - Fomosis: Presenta manchas pequeñas que se pueden
+unir y cubrir buena parte de la hoja. - Septoriosis: Presenta manchas pequeñas con diminutos puntos
+negros. Las manchas pueden estar rodeadas por un anillo amarillo.
+
+CICLO DE LA ENFERMEDAD: El ciclo dura entre 3 y 15 días. 1. Las esporas vuelan desde fuentes de
+Fitóftora (cultivos de papa enfermos, plantas silvestres, plantas voluntarias). 2. Las esporas
+entran a hojas y tallos sanos. Para que entren es necesaria la presencia de agua (lluvia, rocío o
+neblina). Las primeras manchas aparecen en las hojas de la parte inferior. 3. Las manchas crecen. A
+mayor temperatura, las manchas crecen más rápido. 4. Se forma la pelusilla (esporulación). Para que
+se produzca pelusilla es necesaria alta humedad (noche con rocío, lluvia o neblina). La pelusilla
+está formada por esporas. 5. Las esporas salen hacia otras plantas y hacia los tubérculos: vuelan
+(en ausencia de lluvia), son salpicadas por la lluvia (de planta enferma a sana), o son lavadas
+hacia los tubérculos (si hay humedad en la tierra, entran a los tubérculos causando manchas).
+
+CONDICIONES AMBIENTALES FAVORABLES: - Humedad alta (clima húmedo) es el principal elemento. -
+Temperatura tibia: las manchas crecen más rápido. - El tizón tardío no es un problema serio en
+temporadas secas y frías.
+
+VARIEDADES DE PAPA Y RESPUESTA AL TIZÓN TARDÍO: - Variedad resistente: Se enferma poco. En tiempo
+lluvioso no muere y la producción es aceptable. Características: pocas esporas entran, las manchas
+crecen lento, forma poca pelusilla. Beneficios: necesita menos aplicaciones de fungicidas (menos
+gasto, menos contaminación, menos daño a la salud), menor riesgo de perder la producción en año
+lluvioso. - Variedad susceptible: Se enferma mucho. En tiempo lluvioso puede morir y la producción
+puede ser muy baja. Características: muchas esporas entran, las manchas crecen rápido, forma mucha
+pelusilla. - Variedades resistentes listadas: INIAP-Fripapa, INIAP-Margarita, INIAP-Rosita,
+INIAP-Soledad. - Variedad moderadamente resistente: INIAP-Santa Catalina. - Variedades susceptibles
+listadas: Bolona, Cecilia, Chola, INIAP-Esperanza, INIAP-Gabriela, INIAP-María, INIAP-Santa Isabela,
+Superchola, Uvilla, Yema de huevo.
+
+VARIEDADES INMUNES (Opcional): - Variedad que no se enferma. Las esporas pueden entrar pero no
+forman ni manchas ni pelusilla. - La inmunidad se pierde porque las esporas de Fitóftora cambian con
+el tiempo. Las plantas de papa no cambian, solo aumentan su número. Se puede retrasar la pérdida de
+inmunidad con aplicaciones de fungicidas, pero es casi imposible evitarla.
+
+CONTROL CON FUNGICIDAS:
+
+Conceptos básicos: - Fungicida: Veneno que controla enfermedades causadas por hongos. - Nombre
+comercial: Nombre con el que se vende un fungicida. - Ingrediente activo: Nombre del veneno de un
+fungicida. Hay fungicidas con diferentes nombres comerciales pero el mismo ingrediente activo. -
+Formulación: Forma cómo se presentan los fungicidas: sólida (polvos y gránulos) o líquida. Los
+fungicidas en polvo son peligrosos (se pueden respirar) y hay que agitarlos continuamente.
+
+Modo de acción: - Fungicida de contacto (preventivo o protectante): Se queda sobre las hojas y no
+penetra en la planta. Mata solo esporas que están fuera de la planta, no detiene el crecimiento de
+las manchas. Se aplica cuando el tiempo no es muy lluvioso y antes de que aparezcan manchas. Se lava
+con la lluvia. No pierde efectividad. Precio bajo. - Fungicida sistémico (curativo): Penetra en la
+planta y se mueve en su interior. Mata hongos que están dentro de la planta y detiene el crecimiento
+de las manchas. Se aplica cuando el tiempo es muy lluvioso o luego de que aparezcan manchas. No se
+lava con la lluvia. Puede perder efectividad (algunos). Precio alto.
+
+Prevención: - El tizón tardío es una enfermedad muy rápida: en una o dos semanas se puede perder
+todo el cultivo. Si las condiciones son muy favorables, se deben aplicar fungicidas antes de que
+aparezcan manchas.
+
+Datos de campo para decidir la aplicación (criterios): 1. Cantidad de tizón alrededor y dentro del
+campo: Mucho tizón = más aplicaciones. Poco tizón = menos aplicaciones. 2. Condiciones ambientales
+(lluvia y temperatura): Lluvioso y tibio = más aplicaciones. Seco y frío = menos aplicaciones. - La
+lluvia ayuda a que las esporas entren, a que se produzca pelusilla, transporta esporas hacia
+tubérculos, salpica esporas a plantas sanas, y lava el fungicida de las hojas. - La temperatura: a
+mayor temperatura, las manchas crecen más rápido. 3. Resistencia de la variedad: Susceptible = más
+aplicaciones. Resistente = menos aplicaciones. 4. Estado de crecimiento del cultivo: De emergencia a
+floración = más aplicaciones. Maduración = menos aplicaciones. Si en cultivos anteriores hubo tizón
+en tubérculos, aplicar fungicida también en las últimas etapas para proteger los tubérculos. También
+ayudan los aporques altos y cortar el follaje cuando los tubérculos alcanzan tamaño comercial. 5.
+Período desde la última aplicación: Si hubo lluvias fuertes después de la última aplicación, es
+probable que el fungicida se haya lavado y se necesite aplicar nuevamente. Si el tiempo fue seco, el
+fungicida puede seguir presente.
+
+Frecuencia de aplicación recomendada: - Condiciones extremadamente favorables: cada 5 a 7 días. -
+Condiciones favorables: cada 10 a 15 días. - Condiciones desfavorables: cada 21 a 30 días o más.
+
+Sistema de apoyo de decisión (puntajes para aplicar o no fungicida): Factores y puntajes: -
+Resistencia de la variedad: Muy susceptible=3, Susceptible=2, Resistente=1 - Condiciones
+ambientales: Muy lluvioso=3, Lluvioso=2, Seco=1 - Estado del cultivo: Crecimiento y floración=2,
+Madurez=1 - Cantidad de tizón alrededor y dentro del campo: Mucho tizón=3, Poco tizón=2, Sin tizón=1
+- Período desde última aplicación: Más de 14 días=3, Entre 8 y 13 días=2, 7 días o menos=1
+Recomendación según suma: 5 puntos = No aplicar fungicida. 6 a 9 puntos = Aplicar fungicida de
+contacto. 10 a 14 puntos = Aplicar fungicida sistémico.
+
+GUÍA DE FUNGICIDAS PARA TIZÓN TARDÍO (Ingredientes activos y mezclas):
+
+Fungicidas de contacto (ingredientes activos): - Clorotalonil - Fentín - Folpet - Mancozeb - Maneb
+- Metiran - Propineb - Zineb - Cobres de contacto (usar después de floración)
+
+Fungicidas sistémicos (ingredientes activos): - Benalaxyl (usar en rotación) - Cobre sistémico -
+Cymoxanil - Dimethomorph - Fosetyl aluminio - Furalaxyl (usar en rotación) - Metalaxyl (usar en
+rotación) - Propamocarb - Ofurace (usar en rotación) - Oxadixyl (usar en rotación)
+
+Mezclas sistémicas + contacto (ejemplos con dosis): - Benalaxyl + mancozeb: 50 g por 20 litros -
+Cymoxanil + mancozeb: 50 g por 20 litros - Cymoxanil + metiram: 50 g por 20 litros - Cymoxanil +
+propineb: 50 g por 20 litros - Dimetomorph + mancozeb: 75 g por 20 litros - Fosetyl + mancozeb: 50 a
+100 g por 20 litros - Metalaxyl + cobre: 200 a 250 g por 20 litros - Metalaxyl + mancozeb: 50 g por
+20 litros - Ofurace + mancozeb: 50 a 100 g por 20 litros - Oxadixyl + mancoceb: 2,4 a 3 kg por ha
+
+PRÁCTICAS DE CONTROL ADICIONALES: - Visitar la parcela al menos una vez por semana para evaluar la
+presencia de tizón. - Al ingresar al campo, tener cuidado de no llevar esporas en la ropa de una
+planta enferma a una sana. - Realizar aporques altos para proteger tubérculos. - Cortar el follaje
+cuando los tubérculos alcancen tamaño comercial, especialmente si ha habido tizón en tubérculos en
+cultivos anteriores. - Usar variedades resistentes es la mejor forma de control.

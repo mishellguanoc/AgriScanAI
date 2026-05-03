@@ -1,0 +1,157 @@
+ENFERMEDAD: Complejo de Punta Morada de la Papa (CPMP) CULTIVO AFECTADO: Papa (Solanum tuberosum)
+OTROS CULTIVOS MENCIONADOS (no se extrajo información detallada): tomate de árbol, uvilla, pimiento,
+ají, tomate riñón, zanahoria amarilla, naranjilla.
+
+AGENTES CAUSALES: - Candidatus Phytoplasma spp. - Candidatus Liberibacter solanacearum (CaLso) –
+causa el síntoma de papa rayada o zebra chip en el tubérculo. - Ambos patógenos se encuentran en el
+floema de la planta.
+
+INSECTO VECTOR: - Nombre: Bactericera cockerelli (Sulc.) o psílido de la papa. - Mecanismo de
+alimentación: Picador-chupador. Introduce el estilete hasta el floema. - Daños: Directos (por
+alimentación) e indirectos (transmisión de la bacteria). - Transmisión de CaLso: Puede ocurrir 2
+horas después de la colonización del psílido.
+
+CICLO DE VIDA DEL PSÍLIDO: - Huevo: Mide ~0.3 mm, color amarillo. Duración: 3 a 7 días. - Ninfa:
+Aplanada, color verdoso amarillento, ojos rojizos. Se mueven al tocarlas (diferencia de mosca
+blanca). Duración: 21 días en promedio. Pasan por 5 estadios ninfales. - Adulto: Mide 2.5-3.0 mm de
+largo. Cuerpo negro con bandas blancas (una horizontal en la base, una longitudinal, una en forma de
+V invertida en el extremo del abdomen). Alas transparentes (1.5 veces el largo del cuerpo). Se
+asemeja a una chicharra diminuta. - Oviposición: Hembra adulta puede ovipositar en promedio 500
+huevos (reportes de hasta 1,500 por hembra). - Longevidad: Machos ~20 días, Hembras ~60 días. -
+Diferencia con insectos similares: Se diferencia del saltón de hojas y del pulgón por las bandas
+blancas en el abdomen.
+
+PÉRDIDAS ECONÓMICAS (DATOS CUANTITATIVOS): - Pérdidas en producción: entre el 30% y el 100% (según
+el documento, puede producir pérdidas entre el 30-100% de la producción).
+
+SÍNTOMAS EN PLANTA: - Desarrollo anormal de la estructura. - Enanismo. - Ramas o tallos que
+sobresalen en forma de zigzag. - Hojas superiores enrolladas, amarillentas y moradas. -
+Engrosamiento y acortamiento de nudos y entrenudos del tallo. - Formación de tubérculos aéreos. -
+Muerte temprana de la planta. - Brotes ahilados (en tubérculos-semilla infectados).
+
+SÍNTOMAS EN TUBÉRCULO (Zebra chip o papa rayada o manchada): - Estrías de color marrón claro en la
+pulpa, formando una especie de halo concéntrico. - Síntoma se hace más evidente cuando los
+tubérculos se fríen. - El pardeamiento interno hace que los tubérculos sean rechazados en el mercado
+en fresco y de procesamiento. - Tubérculos-semilla infectados: generalmente no brotan, o si lo
+hacen, presentan brotes muy alargados o ahilados. - Rendimiento: decrece significativamente y el
+tamaño de los tubérculos se reduce.
+
+TIEMPOS CLAVE: - Los síntomas aparecen entre 3 y 6 semanas después de que la planta fue infectada.
+- CaLso puede ser transmitido 2 horas después de la colonización del psílido. - Umbral de acción: 1
+adulto por trampa (para iniciar control oportuno).
+
+ESTRATEGIA DE MANEJO INTEGRADO: - Enfoque principal: evitar el ingreso de los psílidos al cultivo
+dada su gran capacidad reproductiva y de transmisión. - Componentes: semilla sana, monitoreo de
+insectos vectores, aplicaciones de insecticidas, prácticas culturales, productos naturales o
+biorracionales (elicitores, microorganismos benéficos, sustancias repelentes), búsqueda de
+resistencia/tolerancia, control biológico, medidas legales, capacitación.
+
+1. SELECCIÓN Y PREPARACIÓN DEL SUELO: - Lugares con menor incidencia: altitudes mayores a 3,200 m
+(sin sobrepasar la frontera agrícola) porque las bajas temperaturas retardan el desarrollo del
+psílido y su población es baja. - Preparación del suelo: con al menos 3 meses de antelación. Incluir
+análisis de suelo, correcciones con enmiendas, abonaduras, aplicación de productos biológicos
+(Trichoderma, Bacillus, Paecilomyces).
+
+2. USO DE SEMILLA SANA: - Usar semilla certificada o de calidad con brotes fuertes, firmes y
+vigorosos. - Evitar semilla proveniente de lotes con reportes de CPMP.
+
+3. ACONDICIONAMIENTO DE SEMILLA: - Desinfectar el material antes de la siembra con productos
+químicos, biológicos u otras moléculas. - Si se hace al momento de la siembra, aplicar sobre los
+tubérculos y al fondo del surco antes de tapar. - El tratamiento puede proteger los brotes hasta por
+3 semanas. - Aplicaciones preferiblemente en las primeras horas de la mañana o en la tarde.
+
+4. SIEMBRA: - Densidad de siembra: calcular por número de tallos por m². Cada brote origina un
+tallo, cada tallo produce en promedio 6 estolones, cada estolón origina un tubérculo. - Importancia
+de usar tubérculos con brotación múltiple.
+
+5. EMERGENCIA: - Una rápida y vigorosa emergencia junto a una adecuada nutrición permite alcanzar
+buena producción en el menor tiempo posible (estrategia de "escape").
+
+6. FERTILIZACIÓN: - El cultivo requiere altos niveles de fertilización. Sistema radicular escaso (2
+cm/cm³). - Extracción de nutrientes en orden de importancia: potasio, fósforo, nitrógeno, calcio,
+azufre, magnesio. - Se recomienda análisis de suelo previo. - Una fertilización equilibrada crea
+mecanismos de defensa ante condiciones adversas.
+
+7. PRÁCTICAS CULTURALES: - Planificación: Antes de la siembra, asegurar que no haya cultivos de
+papa contaminados en los alrededores. - Surcado: surcos más anchos y profundos (>1.40 m; para
+semilla >1.60 m), en dirección de las corrientes de aire. Facilitan aireación, ventilación,
+fumigación, y evitan microclimas favorables. - Medio aporque y aporque: aplicar insecticida de largo
+efecto residual con bactericida a ambos lados del surco antes de aporcar. Un aporque alto y surco
+apretado. No hacer más de 3 aplicaciones del mismo grupo químico durante el ciclo. - Plantas
+hospederas: eliminar plantas voluntarias y silvestres como hierba mora, chamico, papa silvestre,
+uvilla silvestre y otras solanáceas. - Variedades resistentes o tolerantes: No existen actualmente.
+Se pueden usar variedades precoces como INIAP-CIP Libertad o INIAP-Fátima. - Rotación de cultivos:
+obligatoria para reducir incidencia de plagas. - Purificación del lote: eliminar semanalmente
+plantas espontáneas, atípicas, deformes y con síntomas. Cortar el follaje 15 días antes de la
+cosecha. - Fortalecimiento de defensas naturales: mediante metabolitos secundarios, elicitores,
+proteínas relacionadas con la patogénesis.
+
+8. DETECCIÓN Y MONITOREO: - El psílido coloniza primero los bordes del campo. Monitoreo desde las
+orillas hacia el centro. - Iniciar estrategia de manejo cuando se detecten los primeros insectos
+vectores, no esperar síntomas (aparecen 3-6 semanas después de la infección). - Umbral de acción: 1
+adulto por trampa. - Frecuencia de monitoreo: 2-3 veces por semana.
+
+a) Monitoreo de adultos en trampas amarillas: - Instalar a la siembra. Mínimo 5 trampas por
+hectárea (4 en extremos, 1 en centro). - Trampas planas o cilíndricas impregnadas con aceite
+comestible usado o pegante comercial. - Usar lupa para ver psílidos.
+
+b) Monitoreo de oviposturas y ninfas en el follaje: - Frecuencia: 1 vez por semana desde emergencia
+hasta aporque, luego 2 veces por semana. - Método: cada 10 pasos seleccionar una planta, revisar
+brotes terminales y hojas apicales (huevos), y tercio inferior de la planta (ninfas).
+
+9. CONTROL QUÍMICO: - Iniciar aplicaciones tan pronto se detecten los primeros adultos en trampas
+y/o huevos/ninfas en monitoreos. - Rotación de insecticidas según grupo químico y modo de acción
+para evitar resistencia. Máximo 3 aplicaciones del mismo grupo químico por ciclo. - Tecnología de
+aspersión: equipos calibrados, boquillas adecuadas, corregir pH y dureza del agua. Es fundamental
+cubrir el envés de las hojas bajeras (donde se aloja el insecto). Usar bombas de motor con boquillas
+dobles y extensiones si es posible. - Frecuencia de aplicaciones: depende de la población y
+temperatura. En lugares fríos (>3,200 m) se puede aplicar cada 2 semanas. En etapa de mayor
+desarrollo de la planta, la frecuencia debe ser corta (principalmente en zonas de mayor riesgo). -
+En etapa de crecimiento rápido: insecticida sistémico es más efectivo. En planta madura: insecticida
+de contacto puede durar más. - Si hay presencia del psílido en tuberización: aplicaciones alternas
+según presencia de huevos, adultos, ninfas.
+
+10. RECOMENDACIONES PARA DISEÑO DE ESTRATEGIAS DE CONTROL: Considerar: - Grupo químico del
+insecticida. - Modo y mecanismo de acción. - Fase de desarrollo del insecto (huevo, ninfa, adulto)
+sobre la que tiene efecto. - Clima. - Fase fenológica del cultivo. - Tecnología de aplicación. -
+Impacto ambiental. - Efecto sobre controladores biológicos. - Costo. - Disponibilidad. - Destino de
+la producción (semilla o consumo).
+
+ANEXO 1: INSECTICIDAS REGISTRADOS EN ECUADOR PARA CONTROL DE BACTERICERA COCKERELLI EN PAPA (Tabla
+de ingredientes activos, grupo químico, modo de acción, mecanismo de acción, estado de la plaga que
+controlan, y categoría toxicológica).
+
+Ingredientes activos listados (extraído de la tabla): - Carbosulfan (1A) - Acefato (1B) - Diazinon
+(1B) - Pirimifos metil (1B) - Profenofos (1B) - Fipronil (2B) - Acetamiprid (4A) - Imidacloprid (4A)
+- Tiametoxam (4A) - Flupyradifurone (4D) - Abamectina (6) - Piriproxifen (7C) - Tetradifon (12D) -
+Thiocyclam Hydrogen Oxalate (14) - Diflubenzuron (15) - Fipronil + Tiametoxam (2B + 4A) -
+Lambdacialotrina + Tiametoxam (4A + 3A) - Acetamiprid + Piriproxifen (4A + 7C) - Bifentrin +
+Imidacloprid + Lambdacialotrina (3A+4A+3A) - Sulfoxaflor (4C) - Spinosad (5) - Diafentiuron (12A) -
+Novaluron (15) - Triflumuron (15) - Spirotetramat (23) - Ciantraniliprole (28) - Clorantraniliprole
+(28) - Bifentrin + Imidacloprid (3A + 4A) - Spirotetramat + Tiacloprid (23 + 4A) -
+Clorantroniliprole + Tiametoxam (28 + 4A) - Ciantraniliprole + Abamectina (28 + 6) - Pyrimidifen
+(21A) - Etoxazol (10B) - Milbemectina (6) - Hexythiazox (10A) - Thiocyclam (14) - Buprofezin (16) -
+Teflubenzuron (15) - Hexythiazox + abamectina (10 A+6) - Spinetoram (5) - Indoxacarb (22A) -
+Lambdacialotrin (3A) - Cartap hydrochloride (14) - Dinotefuran (4A)
+
+ANEXO 2: BACTERICIDAS (lista de ingredientes activos, grupo químico, modo de acción, mecanismo de
+acción): - Kasugamicina (Aminoglicósidos), Sulfato de Cobre Pentahidratado (Compuesto de Cobre),
+Ácido Oxolinico (Quinolona).
+
+ANEXO 3: PRODUCTOS BIOLÓGICOS Y ELICITORES O INDUCTORES DE RESISTENCIA: - Trichoderma - Bacillus
+subtilis - Fosfitos de Cu, Ca, B, etc. - Metalosatos - Silicatos - Plata coloidal + extracto de
+plantas - Aceite ozonizado - Rutina flavonoide - Metabolitos de bacillus subtilis + nano partículas
+verdes - Bacillus licheniformes + Brevibacillus brevis - Peroxide chlorine + extractos de plantas -
+Peroxide chlorine + yoduro - Ácido salicílico + nano partículas verdes - Productos inorgánicos a
+base de: Cu, Mg, Zn y cloruro de metilrosanilina Mecanismos de acción: Competencia, micoparasitismo,
+antibiosis, enzimas líticas, resistencia inducida. Categoría toxicológica: Ligeramente Tóxico (en
+general).
+
+ANEXO 4: EJEMPLO DE ESTRATEGIA DE MANEJO POR FASE FENOLÓGICA DEL CULTIVO Y GRUPO QUÍMICO (8
+aplicaciones en el ciclo): - Fondo de Surco (día 0): Grupo químico 4a, Biológicos, Biorracionales. -
+Deshierba (días 35-45): Grupo químico 1a, 1b, 2b, 4c, 4d, 5, 6, 7c, 12a, 12d, 13, 14, 16, 23, 28,
+Biorracionales. - Rascadillo (días 45-60): Similar al anterior. - Aporque (días 70-75): Similar al
+anterior. - Prefloración (días 80-90): Similar al anterior. - Inicio tuberización (días 100-120):
+Similar al anterior. - Tuberización (días >120): Similar al anterior. - Maduración (días >150):
+Similar al anterior. Nota clave: No realizar más de 3 aplicaciones del mismo grupo químico en el
+ciclo de cultivo.

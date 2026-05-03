@@ -1,0 +1,341 @@
+CULTIVO: Tomate riñón (Lycopersicon esculentum Mill.) TIPO DE DOCUMENTO: Guía de Buenas Prácticas
+Agrícolas (BPA) ÁMBITO DE APLICACIÓN: Unidades de Producción Agropecuaria (UPA) a campo abierto o
+bajo condiciones protegidas, en Ecuador. OBJETIVO: Establecer especificaciones técnicas para
+implementar BPA orientadas a asegurar la inocuidad del producto, protección del ambiente, salud y
+seguridad de los trabajadores.
+
+CONDICIONES EDAFOCLIMÁTICAS ÓPTIMAS: - Temperatura óptima de crecimiento: 21 a 27°C - Temperatura
+óptima para cuajado de frutos: 23 a 26°C - Temperatura óptima nocturna: 14 a 17°C - Humedad relativa
+óptima: 65 a 75% - Suelos: fértiles, bien aireados, con buen drenaje interno, capacidad de retener
+humedad, texturas francas a franco arcillosas - Materia orgánica: por sobre el 5% - pH: 5,8 a 6,8
+
+SELECCIÓN DEL TERRENO E HISTORIAL: - Evitar plantaciones con riesgos de contaminación cercanos
+(establos, desechos industriales, rellenos sanitarios, suelos contaminados). - Se recomienda
+seleccionar terrenos donde anteriormente no se haya cultivado solanáceas (misma familia botánica),
+cuyas plagas son generalmente las mismas. - Antes de la siembra, realizar análisis físico y químico
+completo del suelo. Análisis microbiológico y de metales pesados solo si hay riesgo de
+contaminación. - Se recomienda establecimiento cerca de fuentes de agua libres de contaminantes
+químicos y microbiológicos. - Contar con historial del terreno y uso actual, incluyendo terrenos
+colindantes.
+
+PREPARACIÓN DEL SUELO: - Considerar resultados y recomendaciones del análisis de suelo realizado en
+laboratorio acreditado por el SAE. - Desinfectar suelos por medios físicos, químicos o biológicos si
+el cultivo anterior ocasiona problemas fitosanitarios. - Para tratamientos con agroquímicos al
+suelo, respetar el periodo de acción antes de establecer la plantación. - Hacer correcciones de pH
+si es necesario. - Las labores de preparación (arada, rastrillada) deben mejorar las características
+del suelo, controlar malezas, sin compactar ni erosionar. - Revisar condiciones de drenaje para
+evitar excesos de humedad que causen problemas de productividad y plagas. - Cuando el suelo ya ha
+sido sembrado, aplicar labranza mínima únicamente en el sitio donde van los surcos o camas. -
+Trazado de surcos o camas perpendicular a la pendiente o en terrazas siguiendo curvas de nivel para
+evitar erosión. - Distancias entre surcos adecuadas para labores culturales eficientes, según
+variedad. - Incorporar abonos orgánicos preparados en el predio solo si están descompuestos y
+tratados técnicamente. - Si se incorpora estiércol fresco, dejar pasar el mayor tiempo posible entre
+la aplicación y la plantación. - No aplicar estiércol fresco, líquidos del mismo o lodos residuales
+sin tratar en plantaciones establecidas o en producción. - Identificar lotes de producción con
+rótulos visibles con: número de lote, fecha de siembra, superficie, nombre de la variedad, densidad
+de siembra, fecha aproximada de cosecha.
+
+ESTABLECIMIENTO DEL CULTIVO (VIVERO, SUSTRATO, MATERIAL DE PROPAGACIÓN, TRASPLANTE): - En caso de
+vivero comercial, debe registrarse y cumplir requisitos de AGROCALIDAD. - Si el productor obtiene
+sus propias plántulas, debe adecuar infraestructura para semilleros y cumplir con parámetros mínimos
+de AGROCALIDAD (Resolución N° 021). El vivero debe estar alejado de peligros de contaminación. -
+Llevar a cabo Manejo Integrado de Plagas (MIP) en vivero. - Se recomienda vivero bajo cobertura
+plástica o invernadero para controlar temperatura, humedad relativa, lluvia, plagas y entrada de
+animales. - El vivero debe tener accesos adecuados para transporte de plantas, insumos y materiales.
+- Sustratos (comerciales o elaborados en la UPA) deben lograr características físicas, químicas y
+biológicas propicias para la germinación. - El suelo o sustrato para semilleros debe ser tratado
+mediante desinfección o esterilización para impedir desarrollo de plagas, con productos autorizados
+por la Autoridad Nacional Competente. - Considerar la variedad de semilla que mejor se adapte a las
+características climáticas y de suelo de la zona, autorizada por la ANC. - Fomentar el uso de
+variedades según exigencias del mercado, resistentes o tolerantes a plagas limitantes desde el punto
+de vista económico y uso racional de agroquímicos. - La adquisición de plántulas debe ser en viveros
+registrados y autorizados por la ANC. - Para producción de plántulas, usar plaguicidas y
+fertilizantes registrados y autorizados por la ANC. - Previo al trasplante, someter la planta a
+menor riego para provocar mayor resistencia y soportar el estrés del trasplante. - Trasplantar
+plantas con condiciones fitosanitarias y de desarrollo óptimas según recomendación técnica. -
+Realizar trasplante en horas de la mañana o de la tarde.
+
+SISTEMA DE TUTORADO: - Para el tipo de tutorado y amarre, considerar: densidad de siembra,
+topografía del terreno, intensidad del viento, disponibilidad de materiales y costos. - Si la
+plantación está bajo condiciones protegidas, el tutorado debe ser independiente y no fijado a la
+estructura del invernadero para no afectar su resistencia. - Al finalizar el cultivo, eliminar
+adecuadamente el material de tutoreo sobrante.
+
+LABORES CULTURALES (PODAS): - Realizar podas para permitir mayor producción de frutos de mayor
+tamaño y calidad, así como para control de plagas. - Podas recomendadas: poda de formación, poda de
+yemas o chupones y hojas, poda de frutos mal formados o enfermos, poda de yema terminal o despunte.
+- Las herramientas de poda deben estar limpias y desinfectadas para evitar contaminación y
+diseminación de plagas. - Todo material vegetal resultante de la poda debe ser manejado
+adecuadamente fuera del área de cultivo.
+
+CONTROL DE MALEZAS: - Realizar control de malezas de forma integrada, dando prioridad a métodos
+preventivos, manuales o mecánicos. - No es recomendable aplicar herbicidas dentro del invernadero
+por la residualidad. En campo abierto, usar solo productos registrados por la ANC bajo recomendación
+y justificación de un técnico. - Como buena práctica, usar coberturas sobre el surco o cama.
+
+MANEJO DEL AGUA: - Identificar la procedencia del agua de riego y sus posibles causas de
+contaminación. - Para certificación, contar con un documento emitido por la ANC que garantice la
+calidad del agua de riego. Realizar análisis físico, químico y microbiológico una vez al año o
+cuando amerite, en laboratorios acreditados por el SAE. - Si los análisis arrojan resultados
+adversos a la norma nacional (TULAS, Anexo 1), adoptar y documentar medidas correctivas. - Se
+prohíbe usar para el riego aguas residuales no tratadas. Si se usan aguas tratadas, deben cumplir
+con características de agua de uso agrícola. - Respetar la reglamentación local sobre volúmenes y
+formas de empleo de agua para riego. - Los equipos del sistema de riego deben tener mantenimiento
+periódico para evitar mal funcionamiento y riesgos de contaminación. - Los reservorios y sistemas de
+almacenamiento de agua de riego deben permanecer limpios y protegidos contra fuentes externas de
+contaminación. - Si el tomate es sometido a lavado, el agua utilizada debe tener calidad
+microbiológica equivalente a agua potable (Norma INEN NTE 1108) y contener suficiente desinfectante
+para impedir contaminación cruzada. - El agua para desinfección será monitoreada con frecuencia
+suficiente para preservar condiciones sanitarias adecuadas. - Las instalaciones cerradas para
+producción primaria deben disponer de abastecimiento suficiente de agua potable o limpia, con medios
+adecuados para su almacenamiento y distribución. - El sistema de distribución de agua potable no
+debe tener conexión con el sistema de agua no potable, ni permitir el reflujo. Cada sistema debe
+estar claramente identificado. - Se debe limpiar y desinfectar periódicamente las instalaciones y
+áreas de almacenamiento de agua.
+
+FERTIRRIGACIÓN: - Contar con apoyo de un técnico o profesional para aplicación de preparaciones,
+cantidades y frecuencias según estado nutricional de las plantas. - Todas las sustancias a inyectar
+en el sistema de riego deben ser evaluadas para determinar su compatibilidad o si causarán
+reacciones químicas indeseadas (ver Anexo 12 de compatibilidad). - Todas las partes en contacto con
+soluciones concentradas o sustancias químicas deben ser de materiales resistentes a la corrosión. -
+El agua que contiene fertilizantes químicos no debe ser utilizada en ninguna otra actividad, mucho
+menos para bebida de seres humanos y animales.
+
+FERTILIZACIÓN: - Existir un programa de fertilización basado en análisis de suelo, análisis
+foliares, requerimiento del cultivo y tipo de manejo, justificado por responsable técnico. - Conocer
+el aporte nutricional del fertilizante químico u orgánico a aplicar (suelo o foliar). - Si se usan
+fertilizantes químicos, deben estar registrados ante la ANC y seguir instrucciones de uso y
+almacenamiento. Contar con ficha técnica. - Almacenamiento de fertilizantes: separados de
+pesticidas, etiquetados o señalizados, área cubierta limpia y seca, aislados del piso para evitar
+humedecimiento. No mezclar con alimentos o productos terminados, no guardar en sitios de residencia.
+- Evitar aplicación de fertilizantes con alta solubilidad donde exista riesgo de contaminación de
+aguas superficiales o profundas. - Equipos de aplicación de fertilizantes deben mantenerse limpios y
+en buen estado, con mantenimiento periódico. - Para abonos orgánicos comerciales: deben tener
+registro ante la ANC y seguir instrucciones de uso. Contar con ficha técnica. - Para abonos
+orgánicos elaborados en el predio: identificar origen del material, preferentemente material libre
+de contaminantes químicos o biológicos de la misma finca o de proveedores con certificación. - Los
+desechos de origen animal y vegetal generados en la plantación y fuera de ella deben pasar por
+procesos de transformación que garanticen no ser fuente de contaminación para la fruta, ambiente y
+trabajadores. - Áreas para elaboración de abonos orgánicos deben estar distantes de zonas de
+producción, áreas de poscosecha, bodegas de insumos, fuentes de agua y áreas residenciales. - Se
+prohíbe el uso de residuos sólidos y/o líquidos de origen humano y/o urbano como fertilizantes.
+
+MANEJO INTEGRADO DE PLAGAS (MIP): - Contar con un plan de MIP para el cultivo, respaldado y
+justificado por un profesional del área. - El plan debe contemplar la reducción y racionalización
+del uso de plaguicidas mediante técnicas preventivas y de control antes, durante y después del
+cultivo. - Prácticas antes del establecimiento: rotación de cultivos, material genético idóneo,
+variedades resistentes, densidad de siembra adecuada. - Prácticas durante el cultivo: monitoreo
+periódico fitosanitario, fertilización balanceada, correcta preparación del suelo, control de
+malezas, podas fitosanitarias. - Prácticas después del cultivo: eliminación de focos de infección,
+desinfección de herramientas, recolección de frutos enfermos, cosechas oportunas.
+
+LISTADO DE PLAGAS QUE ATACAN EL TOMATE RIÑÓN (según el manual): BACTERIAS: - Ralstonia solanacearum
+
+HONGOS: - Alternaria solani - Cladosporium fulvum - Corynespora cassiicola - Sclerotium rolfsii -
+Phytophthora infestans (Stramenopila)
+
+NEMÁTODOS: - Meloidogyne arenaria - Meloidogyne hapla - Meloidogyne javanica - Tylencholaimus
+americanus
+
+INSECTOS: - Bemisia tabaci - Bemisia argentifolii - Corythaica costata - Keiferia lycopersicella -
+Prodiplosis longifila - Spodoptera frugiperda - Spodoptera sunia - Trialeurodes vaporariorum
+
+USO CORRECTO Y MANEJO RESPONSABLE DE PLAGUICIDAS: - Tener pleno conocimiento de las plagas que
+atacan al cultivo y al grupo al que pertenecen. - Todos los plaguicidas utilizados deben estar
+registrados y aprobados por AGROCALIDAD. El productor debe contar con las fichas técnicas. - No
+utilizar plaguicidas prohibidos según la legislación ecuatoriana (ver listado de prohibidos en Anexo
+16). - Deben existir procedimientos claros de uso correcto y manejo responsable, incluyendo señales
+de advertencia. - El uso de Equipo de Protección Personal (EPP) debe basarse en las recomendaciones
+de la etiqueta de cada producto. - Se recomienda elegir plaguicidas compatibles con el control
+biológico. - Alternar productos con diferente ingrediente activo y grupo químico. - Adquirir
+agroquímicos solamente en sus envases originales y en lugares de venta autorizados. Conservar
+facturas de compras. - Equipos de aplicación deben someterse a mantenimiento periódico. - Para hacer
+un uso racional, realizar monitoreo (muestreo) constante del cultivo para conocer el estado
+fitosanitario y la evolución de la población de plagas. - Seguir las recomendaciones de uso del
+producto especificadas en la etiqueta: cultivo autorizado, dosis, plazo de seguridad, forma de
+aplicación, toxicología, periodo de carencia. - Llevar registros de aplicación de plaguicidas. En
+caso de intoxicación, seguir procedimiento de la etiqueta o ir al centro de salud más cercano.
+
+LÍMITES MÁXIMOS DE RESIDUOS (LMR): - El productor o comercializador debe llevar un plan de
+vigilancia de control de residuos de plaguicidas para demostrar que se cumplen los LMR establecidos
+por el país o según el país de destino. - Conocer y respetar el período de carencia de los
+plaguicidas empleados. - Los análisis de residuos deben realizarse en laboratorio acreditado o
+autorizado por la ANC. - Establecer un procedimiento documentado para medidas correctivas
+(comunicación a clientes, recuperación de producto, eliminación) en caso de que el análisis exceda
+los LMR.
+
+PROTECCIÓN DEL PERSONAL PARA APLICACIÓN DE PLAGUICIDAS: - El personal encargado debe utilizar sin
+excepción el Equipo de Protección Personal (EPP). - Respetar los tiempos de reingreso al predio
+después de la aplicación según etiqueta. Si no dispone, esperar al menos hasta que el producto se
+haya secado.
+
+GESTIÓN DE RESIDUOS DE PLAGUICIDAS Y ENVASES: - Todos los envases de plaguicidas deben ser
+recuperados y sometidos a triple lavado (solo con agua), perforados para evitar reutilización, y
+devueltos al gestor ambiental calificado, casa comercial o distribuidor (Resolución 021 del MAE). No
+quemar ni enterrar. - Los envases vacíos deben almacenarse en lugar exclusivo, con buena
+ventilación, separado de la bodega de plaguicidas, fertilizantes y herramientas. - La disposición
+final debe gestionarse con el gestor ambiental correspondiente o ente autorizado.
+
+ALMACENAMIENTO DE PLAGUICIDAS: - Realizar en lugares seguros, iluminados, separados de vivienda,
+bodegas de alimentos, no sujetos a inundaciones o exceso de humedad, separados de fuentes de agua. -
+Instalaciones construidas con materiales no inflamables, buena ventilación, equipados con
+extintores, cables eléctricos protegidos, señalización, identificación de productos por grado de
+toxicidad, equipos de primeros auxilios. - Llevar registro de existencias y caducidad.
+
+PRÁCTICAS DE COSECHA: - El tomate riñón es un fruto climatérico (sigue madurando después de
+cosechado). Considerar esta característica para elegir el grado de madurez de cosecha. - Grados de
+madurez para cosecha (referencia): - Estado 1 - Verde Maduro: superficie total verde. - Estado 2 -
+Rompiendo: otro color en no más del 10% de la superficie. - Estado 3 - Pintón: 10-30% de superficie
+con color amarillo pálido, rosado, rojo o combinación. - Estado 4 - Rosado: 30-60% de superficie con
+color rosado o rojo. - Estado 5 - Rojo claro: 60-90% de superficie roja. - Estado 6 - Rojo: más del
+90% de color rojo. - La cosecha debe realizarse evitando daño o deterioro de la planta y de los
+frutos. - Los frutos deben recolectarse en recipientes destinados para tal fin, que cumplan
+condiciones físicas y de higiene adecuadas. Una vez recolectados, resguardados en lugares limpios,
+protegidos del sol y temperaturas altas. - Evitar contaminación cruzada con tierra, estiércol,
+abonos y otros. - El personal de recolección debe estar capacitado en manejo higiénico del producto,
+utensilios y herramientas, y usar EPP. - Para disminuir el avance de la maduración, se recomienda
+realizar prácticas de pre-enfriado. - Los frutos no aptos para consumo humano deben separarse
+durante la recolección y eliminarse adecuadamente. - Evitar el ingreso de animales a sectores de
+cultivo y acopio.
+
+PRÁCTICAS DE POSCOSECHA: - La selección de frutos para comercializar debe descartar aquellos con
+descomposición o daño mecánico. - Las operaciones de selección y clasificación deben efectuarse en
+instalaciones que garanticen inocuidad a la fruta y seguridad al trabajador. - El personal de
+selección y clasificación debe contar con EPP y cumplir condiciones de higiene. - La limpieza de
+frutos se puede realizar por cualquier método que permita obtener productos inocuos y con buena
+presentación. - Si se realiza lavado, el agua debe ser segura o potable. - Contar con un
+procedimiento por escrito (POE) para lavado y desinfección, y registros de implementación. - Los
+desinfectantes utilizados para poscosecha deben estar registrados y autorizados para uso en
+alimentos por la ANC.
+
+INSTALACIONES PARA POSCOSECHA: - Construidas con materiales no tóxicos que permitan limpieza,
+suficiente iluminación y aireación, sistemas de desagüe y eliminación de desechos. - Contar con
+abastecimiento de agua potable o segura. - Para limpieza y desinfección, la UPA debe establecer POES
+según su necesidad. - El acceso a las instalaciones debe ser controlado. - El área circundante a las
+instalaciones de poscosecha debe estar libre de escombros, basura o desechos de cosechas. - Se
+recomienda implementar sistemas de sanitización y de tratamiento de aguas residuales de poscosecha.
+
+EMPACADO O EMBALADO: - Utilizar empaques de materiales que garanticen calidad e inocuidad. -
+Superficies de trabajo (mesas para empacado) deben ser de materiales de grado alimenticio o
+permitidos en industria de alimentos; deben lavarse y desinfectarse periódicamente. - Los
+recipientes para empaque a campo no deben almacenarse en la plantación o dentro de invernaderos. -
+El embalaje debe ser realizado por personal capacitado. - Los materiales de embalaje deben ser, en
+lo posible, nuevos. Si son reutilizados, deben estar en buen estado y pasar por proceso de limpieza
+y desinfección previo al empacado. - El proceso de embalaje debe efectuarse en sitio protegido para
+evitar contaminación.
+
+ALMACENAMIENTO: - Instalaciones de almacenamiento o bodegaje construidas para reducir
+contaminación, deterioro y evitar acceso de plagas. - Los almacenes o bodegas para tomate fresco
+deben incluir mecanismos de control de temperatura y ambiente. - Para colocación de fruta, usar
+estantes o tarimas a altura que evite contacto directo con el piso. - Los frutos no deben
+almacenarse junto a plaguicidas, fertilizantes o cualquier fuente potencial de contaminación. - Se
+recomienda que la distribución sea realizada lo antes posible para evitar deterioro.
+
+CONTROL DE PLAGAS EN CENTROS DE ACOPIO, EMPAQUE Y ALMACÉN: - Establecer y aplicar un programa de
+control de plagas para minimizar peligro de contaminación. - Cuando la producción es en
+establecimientos cerrados (invernaderos), deben mantenerse en buenas condiciones, con reparaciones
+necesarias para impedir acceso de plagas y eliminar posibles lugares de reproducción. - Si se
+contrata servicio de control de plagas, la empresa y los plaguicidas aplicados deben estar
+registrados ante la ANC, reportando frecuencia de aplicaciones y tipos de plagas detectadas. -
+Examinar periódicamente las instalaciones y zonas circundantes para detectar posibles infestaciones.
+- Las infestaciones de plagas deberán combatirse de manera inmediata mediante técnicas preventivas,
+químicas, físicas o biológicas sin perjuicio de la inocuidad y calidad del tomate.
+
+TRANSPORTE: - Los vehículos usados para transporte deben mantener condiciones higiénicas y de
+temperatura adecuada para garantizar conservación, calidad e inocuidad. - El tomate no debe
+transportarse junto con productos no alimenticios o sustancias tóxicas que puedan contaminarlo. -
+Cada embarque debe identificarse con registro que contenga: nombre del transporte, transportista,
+productor y/o empacadora, fecha de embarque, tiempo estimado de viaje, números de lote, variedad,
+cantidad del producto.
+
+HIGIENE Y SEGURIDAD DEL PERSONAL: - El personal que participa en producción, cosecha, poscosecha,
+transporte debe cumplir estrictamente con medidas de higiene y salud establecidas por la UPA. - No
+permitir que personas con enfermedades transmisibles a través de la fruta ingresen a zonas donde se
+manipulan alimentos. - Los trabajadores deben evitar comportamientos que atenten contra la
+inocuidad: incorrecta higiene personal, uso incorrecto de uniformes, uso de accesorios y joyas,
+fumar, comer en lugares de producción y poscosecha, no lavado frecuente de manos. - Implementar POES
+para trabajadores en distintas áreas de producción. - Contar con infraestructura sanitaria para
+empleados en campo y poscosecha, con dispensador de agua, jabón y elementos de secado de manos. - En
+todas las jornadas, contar con agua potable o apta para consumo humano para bebida y lavado de
+manos. - Contar con plan de identificación y señalización de zonas y actividades peligrosas, con
+señalética y procedimientos para emergencias y accidentes (incluir teléfonos de emergencia). -
+Botiquines de primeros auxilios equipados y mantenidos, disponibles en todas las áreas de trabajo,
+de fácil acceso. - Maquinaria, equipos de trabajo y equipos eléctricos deben mantenerse en buen
+estado, con mantenimiento periódico para evitar accidentes. - Actuar de acuerdo al Código Laboral
+del Ecuador respecto al trabajo infantil. - Proveer instalaciones seguras para guardar y comer
+alimentos. - Registrar y documentar accidentes de trabajo, indicando acciones tomadas.
+
+CAPACITACIÓN: - Contar con programa de capacitación para BPA, BPM, BPH, seguridad laboral y otras.
+- El personal relacionado con cultivo y recolección debe estar al corriente de las BPA, BPH, y su
+papel en la protección del alimento. - Los trabajadores agrícolas deben tener conocimientos y
+capacidad para llevar a cabo actividades agrícolas, de cosecha, poscosecha y transporte, así como
+uso responsable de insumos. - El personal que manipule productos químicos de limpieza u otras
+sustancias peligrosas debe ser instruido en técnicas de manipulación. - El personal nuevo debe tener
+capacitación específica teórica y práctica sobre sus funciones. - Las instrucciones sobre Buenas
+Prácticas deben presentarse de forma clara, sencilla, por medios escritos, ilustrativos y/o en
+idioma predominante de los trabajadores, siempre a la vista cerca de los puestos de trabajo. - Cada
+capacitación debe quedar registrada y contar con certificado de asistencia o aprobación.
+
+PROTECCIÓN DEL AMBIENTE: - Conocer y cumplir legislación ambiental vigente (nacional, provincial y
+local). - Aprovechar eficientemente los recursos naturales, reduciendo al mínimo el impacto
+ambiental. - Se recomienda desarrollar bordes de biodiversidad con árboles o arbustos que atraigan
+insectos benéficos para control de plagas. - Identificar zonas no aptas para agricultura que deben
+ser reforestadas como zonas de protección. - Identificar fuentes de agua con usos compartidos
+(especialmente áreas de pasturas o producción animal) y tomar medidas para contrarrestar riesgo de
+contaminación.
+
+MANEJO DE RESIDUOS (NO BIODEGRADABLES Y BIODEGRADABLES): - Los residuos de cosecha (podas, plantas
+enfermas, renovación del cultivo) deben ser tratados en proceso de compostaje para evitar que actúen
+como fuente de inóculo o infestación. - Todo tipo de residuo debe ser identificado, clasificado y
+dispuesto para reciclaje o eliminación. - Las instalaciones de la finca deben estar libres de basura
+y desechos, con sitios adecuados para eliminación. - Productos contaminantes (agroquímicos, aceites,
+combustibles, efluentes de viviendas) deben ser identificados y dispuestos adecuadamente. -
+Establecer plan de manejo de contaminantes tóxicos y determinar sitio de disposición. - Residuos
+orgánicos tratados en sitios acondicionados (compostaje). - Para producción bajo invernadero,
+considerar manejo y disposición final de plásticos según composición y velocidad de degradación. -
+Definir lugar para recolectar o almacenar residuos plásticos en el predio, aislado y distante de
+residencias y áreas de producción. - El retiro de plásticos debe realizarse con la mayor limpieza y
+precaución para evitar accidentes. Se recomienda lavarlos para estimular reutilización y reciclaje.
+- Se prohíbe la quema de residuos plásticos, a menos que se cuente con sistema de incineración
+controlada que minimice emisiones contaminantes.
+
+SISTEMA DE TRAZABILIDAD: - Disponer de programas que garanticen identificación efectiva de lotes de
+producción desde el campo hasta los sitios de distribución y/o expendio. Capaces de rastrear
+lugares, insumos, unidad de producción (finca, lote, sector), producto, lote, semana de cosecha,
+fecha de cada proceso en la empacadora, número de cajas de cada lote. - Manejar a través de un
+código de trazabilidad, conocido por productor y cliente. - El código debe colocarse de forma clara
+y precisa con materiales indelebles que no causen contaminación, en lugar visible en cada empaque. -
+Establecer procedimientos para identificar y registrar volúmenes de productos certificados y no
+certificados en BPA, así como ventas. - Si el producto pertenece a un grupo organizado, registrar
+todos los movimientos: fecha de recibo, volumen recibido, nombre del productor y/o finca de
+procedencia, fecha de salida, cantidad, calidades de entrega, nombre del transportista, número de
+placa y cliente.
+
+TABLA DE COMPATIBILIDAD DE FERTILIZANTES (Anexo 12): - Se puede mezclar: Nitrato amónico con
+Sulfato amónico (+). Nitrato amónico con Urea (+). Nitrato amónico con Nitrato potásico (+). Nitrato
+amónico con Ácido fosfórico (+). Sulfato amónico con Urea (+). Solución nitrogenada con Nitrato
+amónico, Sulfato amónico, Urea, Nitrato potásico, Ácido fosfórico (+). Urea con Nitrato amónico,
+Sulfato amónico, Nitrato potásico, Ácido fosfórico (+). Nitrato cálcico con Nitrato potásico (+).
+Nitrato potásico con todos excepto Nitrato cálcico (+). Fosfato monoamónico con Nitrato cálcico y
+Nitrato potásico (+). Ácido fosfórico con Nitrato cálcico y Nitrato potásico (+). - No se pueden
+mezclar: Nitrato cálcico con Sulfato amónico (x). Fosfato monoamónico con Urea y Ácido fosfórico
+(x). Ácido fosfórico con Fosfato monoamónico (x). - Nota: (+) = fertilizante que se puede mezclar.
+(+) = fertilizante que se puede mezclar al momento de aplicarlos. (x) = fertilizantes que no se
+pueden mezclar.
+
+CRITERIOS DE CALIDAD PARA AGUA DE USO AGRÍCOLA (Anexo 1 del TULAS, límites máximos permisibles
+según el manual): - Aluminio: 5,0 mg/l - Arsénico (total): 0,1 mg/l - Cadmio: 0,01 mg/l - Carbamatos
+totales: 0,1 mg/l - Cianuro (total): 0,2 mg/l - Cobre: 2,0 mg/l - Cromo hexavalente: 0,1 mg/l -
+Mercurio (total): 0,001 mg/l - Níquel: 0,2 mg/l - Organofosforados (totales): 0,1 mg/l -
+Organoclorados (totales): 0,2 mg/l - Plomo: 0,05 mg/l - Sólidos disueltos totales: 3000 mg/l -
+Coliformes Totales: 1000 nmp/100 ml - Huevos de parásitos: 0 por litro - pH: 6-9 - (El anexo incluye
+más parámetros, se extraen los más relevantes para inocuidad).
+
+TIPOS DE TOMATE (referencia del manual): - Milano: se usa en ensaladas, en rodajas, consume maduro
+o verde. Forma achatada o semiachatada, 4 o más lóculos, peso 200-400 g. Mayor valor comercial y
+palatabilidad. - Chonto: forma redonda a ovalada, levemente elongada u oblonga, 2-4 lóculos, peso
+70-220 g. Se consume en fresco y en preparación de guisos o pastas. - Cherry: tamaño muy pequeño,
+1-3 cm de diámetro, peso promedio 10 g, se agrupan en ramilletes de 15 o más frutos. Colores
+variables (amarillo, rojo, naranja). Consumo en fresco como pasabocas, cócteles y decoración. -
+Industrial: alta cantidad de sólidos solubles para procesamiento (salsas y pastas). Forma variable
+(redonda a piriforme), color rojo intenso.

@@ -1,0 +1,113 @@
+[FUENTE: control_septoria_tomate_con_stevia.pdf | AUTORES: José Angel Lesme Brun, Laura Concepción
+Soilán Duarte, Cristhian Javier Grabowski Ocampos]
+
+======================================== EXTRACTO DE KA'A HE'Ē (STEVIA REBAUDIANA) PARA CONTROL DE
+SEPTORIOSIS Y MANCHA BACTERIANA EN TOMATE ========================================
+
+RESUMEN: La Septoriosis y Mancha bacteriana son enfermedades foliares que reducen hasta 60% la
+producción del tomate. Se evaluó el efecto del extracto de Ka'a He'ē sobre la severidad de ambas
+enfermedades y la promoción de crecimiento del tomate. La dosis baja (50 mL/L) redujo la severidad
+de Septoriosis, aumentó área foliar, altura, longitud radicular y masa seca. La dosis media (150
+mL/L) redujo la severidad de Mancha bacteriana. La dosis alta (300 mL/L) incrementó el contenido de
+clorofila y el rendimiento del cultivo. La mezcla con producto químico aumentó los °Brix y disminuyó
+la severidad de las enfermedades.
+
+======================================== ENFERMEDADES ========================================
+
+SEPTORIOSIS: - Agente causal: Hongo Septoria lycopersici - Síntomas: Manchas circulares o elípticas
+con margen marrón oscuro, centro grisáceo, con o sin halo clorótico y puntos negros (picnidios) en
+el centro de la lesión. - Las hojas bajeras al estar próximas a la fuente de inóculo (suelo) son las
+primeras en ser afectadas, y sirven de fuente de inóculo secundario para diseminación hacia hojas
+más nuevas.
+
+MANCHA BACTERIANA: - Agente causal: Bacteria Xanthomonas campestris pv. vesicatoria - Síntomas:
+Pequeñas áreas de tejido encharcado, forma circular o irregular, frecuentemente en bordes y a lo
+largo de heridas en hojas. Al secarse, presentan aspecto brillante por exudación bacteriana. -
+Condiciones favorables: Humedad relativa alta, temperaturas entre 20-30°C y agua libre sobre el
+tejido.
+
+======================================== MATERIALES Y MÉTODOS
+========================================
+
+Extracto de Ka'a He'ê (KH) [Stevia rebaudiana]: concentración 1:5 (1 kg de hojas en 5 L de agua),
+proveído por Empresa Insumos Agropecuarios Ka'a He'ê Pirungá.
+
+Producto químico: Oxicloruro de Cobre 78% + Estreptomicina 2%, aplicación foliar.
+
+Variedad de tomate: "Bright Pearl" de crecimiento indeterminado.
+
+Dosis evaluadas: - Dosis baja (BKH): 50 mL/L - Dosis media (MKH): 150 mL/L - Dosis alta (AKH): 300
+mL/L - Testigo absoluto (TA): Agua - Testigo químico (TQ): 2 g/L de Oxicloruro de Cobre +
+Estreptomicina - Mezcla (MKHTQ): Dosis media + producto químico
+
+Aplicaciones: A los 15, 30 y 45 días después de la emergencia (Experimento 1). A los 21 días
+después del trasplante, inicio de floración, 60% de floración y posterior a primera cosecha
+(Experimento 2).
+
+======================================== RESULTADOS - EXPERIMENTO 1: PROMOCIÓN DE CRECIMIENTO
+========================================
+
+CONTENIDO DE CLOROFILA (unidades SPAD): - Testigo absoluto (TA): 40.0 - Dosis baja (BKH): 38.0 -
+Dosis media (MKH): 40.5 - Dosis alta (AKH): 42.8 - Testigo químico (TQ): 43.2 Conclusión: Mayores
+valores de clorofila con dosis crecientes del extracto.
+
+ÁREA FOLIAR (cm²): - TA: 152.2 - BKH: 166.0 - MKH: 151.3 - AKH: 147.8 - TQ: 153.2 No se encontraron
+diferencias significativas entre tratamientos.
+
+ALTURA DE PLANTA (cm): - TA: 43.9 - BKH: 48.1 (mayor altura, +9.5% vs TA) - MKH: 44.9 - AKH: 41.0 -
+TQ: 40.3 Conclusión: Dosis baja aumenta la altura, dosis altas la disminuyen.
+
+LONGITUD RADICULAR (cm): - TA: 22.7 - BKH: 26.3 (mayor longitud) - MKH: 21.6 - AKH: 18.8 - TQ: 19.2
+Conclusión: Dosis baja aumenta +6% la longitud radicular.
+
+MASA SECA (g/planta): - TA: 11.5 - BKH: 12.2 (mayor masa seca, +6%) - MKH: 11.6 - AKH: 10.3 - TQ:
+11.5 Conclusión: Dosis baja aumenta la acumulación de biomasa.
+
+======================================== RESULTADOS - EXPERIMENTO 2: CONTROL DE ENFERMEDADES
+========================================
+
+SEVERIDAD DE SEPTORIOSIS (%): Estrato inferior (sin diferencias significativas): - TA: 82.5% - BKH:
+83.2% - MKH: 84.9% - AKH: 85.8% - TQ: 80.8%
+
+Estrato medio: - TA: 76.9% (mayor severidad) - TQ: 71.8% (menor severidad) - BKH: 75.0% - MKH:
+74.8% - AKH: 75.6%
+
+Conclusión: El testigo químico presentó la menor severidad. El extracto y su mezcla con químico son
+alternativas para control.
+
+SEVERIDAD DE MANCHA BACTERIANA (%): Estrato superior: - TA: 38.8% - BKH: 39.4% - MKH: 29.6% - AKH:
+48.2% - TQ: 45.8%
+
+Conclusión: Dosis media redujo severidad en 9.2% comparado con testigo.
+
+RENDIMIENTO (kg/planta): - TA: 0.64 (menor rendimiento) - BKH: 0.94 - MKH: 0.86 - AKH: 1.19 (mayor
+rendimiento, +86% vs TA) - MKHTQ: 0.94 - TQ: 1.07
+
+Conclusión: Dosis alta incrementa significativamente el rendimiento.
+
+SÓLIDOS SOLUBLES (°Brix): - TA: 3.22 - BKH: 3.02 - MKH: 2.97 - AKH: 2.80 - MKHTQ: 3.13 - TQ: 3.02
+Conclusión: Mezcla con químico aumenta °Brix.
+
+======================================== CONCLUSIONES PRINCIPALES
+========================================
+
+1. Dosis baja (50 mL/L): Reduce severidad de Septoriosis, aumenta área foliar, altura (+9.5%),
+longitud radicular (+6%) y masa seca (+6%).
+
+2. Dosis media (150 mL/L): Reduce severidad de Mancha bacteriana (-9.2%).
+
+3. Dosis alta (300 mL/L): Incrementa contenido de clorofila y rendimiento del cultivo (+86%).
+
+4. Mezcla con producto químico: Aumenta sólidos solubles (°Brix) y reduce severidad de Septoriosis
+y Mancha bacteriana.
+
+5. El extracto de Stevia rebaudiana posee compuestos capaces de influenciar los procesos de
+desarrollo y producción del tomate.
+
+======================================== RECOMENDACIONES PRÁCTICAS
+========================================
+
+- Para control de Septoriosis y promoción de crecimiento: Aplicar 50 mL/L de extracto de Stevia. -
+Para control de Mancha bacteriana: Aplicar 150 mL/L. - Para mayor rendimiento: Aplicar 300 mL/L. -
+Para mejores resultados en calidad de frutos: Mezclar dosis media con Oxicloruro de Cobre +
+Estreptomicina. - Aplicaciones cada 15 días desde emergencia o trasplante.

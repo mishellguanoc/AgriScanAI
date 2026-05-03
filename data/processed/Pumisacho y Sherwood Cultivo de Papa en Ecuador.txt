@@ -1,0 +1,388 @@
+================================================================================ EXTRACCIÓN DEL
+DOCUMENTO: EL CULTIVO DE LA PAPA EN ECUADOR
+================================================================================
+
+TEMA: ENFERMEDADES DE LA PAPA, TRATAMIENTOS Y TABLAS RELEVANTES
+================================================================================
+
+================================================================================ 1. MANEJO
+INTEGRADO DE PLAGAS Y ENFERMEDADES - ASPECTOS GENERALES
+================================================================================
+
+En este libro se usa el término plaga y peste para referirse al conjunto de anormalidades que
+ocurren durante el crecimiento y funcionamiento del cultivo causadas por agentes bióticos y
+abióticos. Esta definición incluye, además de insectos, a las enfermedades causadas por hongos,
+bacterias, virus y aquellas causadas por factores como deficiencias nutricionales, salinidad y
+granizos.
+
+Manejo Integrado de Plagas (MIP): Es simplemente el manejo del agroecosistema a favor del
+agricultor. Propone una estrategia que, tomando en cuenta la socioeconomía y ecología de la finca,
+utiliza todos los métodos y técnicas apropiadas para promover la salud y productividad del cultivo.
+La prevención, el uso de umbrales y sistemas de apoyo a decisiones son elementos claves.
+
+Instrumentos de apoyo para la toma de decisiones: - Análisis del Agroecosistema (AAE). - Umbrales:
+Umbral de Daño (UD), Umbral de Pérdidas Económicas (UPE), Umbral de Acción (UA). - Sistemas de
+predicción (ej. BLITECAST, PROFY).
+
+Métodos de manejo: - Prácticas culturales (rotación, labranza, fertilización, incorporación de
+materia orgánica). - Medidas sanitarias preventivas. - Control biológico (organismos antagónicos,
+parasitoides, predadores, entomopatógenos). - Resistencia varietal. - Control físico (termoterapia,
+solarización). - Control químico (uso racional de plaguicidas).
+
+================================================================================ 2. ENFERMEDADES
+FOLIARES CAUSADAS POR HONGOS
+================================================================================
+
+2.1 TIZÓN TARDÍO, LANCHA Agente causal: Phytophthora infestans (Mont.) de Bary
+
+Síntomas: Inicialmente pequeñas manchas pálidas o verde oscuras de forma irregular que se expanden
+rápidamente, formando grandes lesiones necróticas de color café oscuro. Con suficiente humedad
+ocurre un crecimiento fungoso blanco en el envés de la hoja. Las plantas infectadas despiden un olor
+característico similar a una helada.
+
+Manejo: - Presiembra: Sanidad, uso de variedades resistentes y precoces, fertilización balanceada
+(evitar exceso de N), tratar semilla sana. - Durante el cultivo: Monitoreo frecuente. * Para
+variedades resistentes: Intervenir cuando la epidemia alcance más del 0.5% (un par de manchas en
+pocas plantas en un radio de 10 m). * Si hay lluvias o neblinas, iniciar aplicación cuando el
+cultivo tenga 80% de emergencia. * No usar fungicidas sistémicos más de tres veces por estación,
+alternando el ingrediente activo. - A la cosecha y almacenamiento: Destruir el follaje si hay
+epidemia, enterrar tubérculos rechazados, seleccionar y desinfectar la semilla.
+
+TABLA: Escala para estimación del Tizón en el follaje Infección (%) | Síntomas 0 | No hay síntomas
+visibles. 0.1 - 1 | Pocas plantas afectadas, no más de 2 lesiones en un radio de 10 metros o en una
+hilera de la misma longitud. 3 | Hasta 10 lesiones pequeñas por planta. 5 | De 30 a 50 manchas
+pequeñas por planta o 1 de cada 20 folíolos con síntomas. 25 | Casi todos los folíolos con alguna
+lesión. Las plantas tienen forma normal, de aspecto verdoso aunque casi todas están afectadas y
+empiezan a oler a tizón. 50 | Todas las plantas están afectadas y cerca de la mitad del follaje ha
+sido destruido; el campo aparece moteado de verde y café. 75 | Tres cuartas partes de cada planta
+están destruidas por el tizon. El follaje no es ni del todo café ni del todo verde. 95 | Sólo unos
+pocos folíolos verdes. Los tallos generalmente están verdes. El aspecto del campo es
+predominantemente café. 100 | Tallos y hojas muertos.
+
+TABLA: Fungicidas y adherentes más comunes para el control del Tizón tardío Producto | Ingrediente
+activo | % de i.a. | Modo de acción | Dosis del producto por ha | Volumen /ha en litros | Intervalo
+recomendado entre aplicaciones (días) DITIOCARBAMATOS Baktanne | Mancozeb | 455 g/l | contacto | 3.7
+l | 200-1000 | 10 a 14 Bardlay | Mancozeb | 80 | contacto | 2 kg | 200-1000 | 7 a 14 Dithane 945 |
+Mancozeb | 80 | contacto | 2.25 kg | 200 | 10 a 14 Duphar | Mancozeb | 80 | contacto | 2.25 kg |
+400-1000 | 10 a 14 Baneb 80 | Maneb | 80 | contacto | 2.85 kg | 200-1000 | 7 a 14 Baneb 80 extra |
+Maneb + Magnesio | 72+11 | contacto | 3.1 kg | 200-1000 | 7 a 14 Polyram DF | Metiram | 80 |
+contacto | 2 a 2.5 kg | 400-1100 | 10 a 14 Trilmanzone | Maneb Zineb Ferbam | 60 10 10 | contacto |
+2.5 kg | 225 | 7 a 10 ORGANOTINS Brestanid flow | Fentin hidroxido | 50 | contacto | 600 ml | 200 a
+500 | 10 a 14 Fermatin | Fentin Acetate | 60 | contacto | 0.40 kg | 200 a 1000 | 10 a 14 Duter |
+Fentin Hidroxido | 50 | contacto | 600 ml | 400 | 10 a 14 MEZCLAS DITIOCARBAMATOS Y ORGANOTINS
+Brestan 60 | Fentin acetate + maneb | 54 y 18 | contacto | 0.55 | 200 a 1000 | 7 a 14 Mirotin |
+Fentin acetate + maneb | 11 y 33 | contacto | 1.55 kg | 200 a 1000 | 7 a 14 SISTEMICOS* Patafol Plus
+| Ofurace+ mancozeb | 5.8 67 | Sistémico + protectante | 2.5 kg | 200 a 1000 | 10 a 14 Ridomil MZ 72
+WP | Metalaxyl+ Mancozeb | 8 64 | Sistémico + Protectante | 2.5 kg | >200 | 10 a 14 Galben M |
+Benalaxyl+ mancozeb | 8 65 | Sistémico + protectante | 2.5 kg | >220-450 | 10 a 14 Ripost |
+Oxadixyl+ mancozeb | 8 56 | Sistémico + protectante | 3.2 kg? (dato ilegible) | 200 a 1000 | 7 a 14
+
+2.2 TIZÓN TEMPRANO, LANCHA TEMPRANA O CAFÉ Agente causal: Alternaria solani
+
+Síntomas: Manchas necróticas con ángulos pronunciados limitados por nervaduras, con anillos
+concéntricos. Ocurre primero en hojas inferiores. En tubérculos causa pudrición seca color café
+oscuro. Manejo: Mantener el cultivo vigoroso, usar fungicidas protectores y sistémicos, evitar daños
+al tubérculo en cosecha.
+
+2.3 OIDIOSIS, OIDIUM O MILDIU POLVOSO Agente causal: Erysiphe chichoracearum
+
+Síntomas: Pequeñas masas blancas de micelio y esporas en ambos lados de la hoja, que luego
+necrosan. Manejo: Usar fungicidas azufrados (Elosal, Cumulus) como preventivos. En casos severos
+usar sistémicos como benomyl (Benlate o Bayleton). El riego por aspersión ayuda a lavar las esporas.
+
+2.4 ROYA Agente causal: Puccinia pittieriana P. Henn.
+
+Síntomas: Pústulas ovaladas o redondas de color café rojizo en el envés de la hoja, dando un
+aspecto rojizo al follaje. Manejo: Fungicidas azufrados y carbamatos.
+
+2.5 SEPTORIOSIS Agente causal: Septoria lycopersici sg.
+
+A
+
+Síntomas: Manchas de bordes circulares de color café muy oscuro con anillos concéntricos y pequeños
+puntos grisáceos (picnidios) en el centro. Manejo: Fungicidas de contacto a base de carbamatos y
+mancozeb.
+
+2.6 MOHO GRIS Agente causal: Botrytis cinerea
+
+Síntomas: Lesiones de color café claro que se expanden, a menudo con restos de pétalos en el punto
+de infección. En alta humedad desarrolla conidióforos color café grisáceo. Manejo: Rara vez
+justifica control. Se pueden usar fungicidas preventivos como carbamatos.
+
+================================================================================ 3. ENFERMEDADES
+CAUSADAS POR HONGOS DEL SUELO
+================================================================================
+
+Reglas generales de manejo integrado de la salud del suelo: Rotación y barbecho, higiene, manejo de
+suelos y agua (buen drenaje), manejo de la semilla (calidad, desinfección, mínimo daño).
+
+3.1 CARBÓN Agente causal: Thecaphora solani
+
+Síntomas: Protuberancias en tubérculos, tallos y estolones que contienen esporas de color café a
+negro. Manejo: Usar semilla sana, medidas de higiene (evitar mover suelo contaminado), cuarentena de
+suelos infestados.
+
+3.2 LANOSA O TORBO Agente causal: Rosellinia sp.
+
+Síntomas: Ataque en el cuello de la planta (decoloración café oscura). Raíces y tubérculos
+envueltos en una gruesa capa de micelio blanco. La planta se marchita. Manejo: Enterrar restos del
+cultivo anterior, tener cuidado durante el rompe de terrenos (evitar arbustos y bosques), eliminar
+plantas hospederas, rotaciones largas.
+
+3.3 RHIZOCTONIASIS O COSTRA NEGRA Agente causal: Rhizoctonia solani Kühn
+
+Síntomas: Ataque a brotes y tallos causando pobre emergencia. Lesiones alargadas, hundidas y color
+café rojizo en raíces, estolones y tallos. En tubérculos forma esclerocios delgados y negros en la
+superficie ("costra negra"). Manejo: - Usar semilla de calidad con brotes fuertes. - Evitar daño a
+brotes durante siembra. - Sembrar superficialmente en suelos fríos y húmedos. - Desinfectar la
+semilla con pencycluron (Moncereen) si la infección es moderada o ligera. - Rotación amplia (mínimo
+1:5). - Minimizar el tiempo que los tubérculos permanecen en el suelo tras cortar el follaje.
+
+TABLA: Escala de severidad de la infección basada en el grado de cobertura con esclerocios en el
+tubérculo Infección | Síntomas Sanas | no hay síntomas Muy ligera | trazas de infección hasta en un
+5% de la superficie afectada Ligera | de 5% hasta un 25% de superficie Moderada | de un 25% a un 50%
+Severa | mayor a 50%
+
+3.4 PUDRICIÓN SECA Agente causal: Fusarium solani var. coeruleum, Fusarium sulphureum
+
+Síntomas: Zonas oscuras y levemente hundidas que se extienden formando anillos concéntricos. En
+etapas avanzadas, el tubérculo se momifica y endurece. Manejo: - Temperaturas moderadas (15°C) y
+alta humedad (95%) aceleran la suberificación y previenen la infección. - Desinfección de semilla
+con fungicidas (imazalil, metilthiofanato, carbendazim, thiabenzadol, benomilo) en proporción 1.5
+kg/tonelada. - Rotación de cultivos. - No almacenar si hay más del 1% de infección.
+
+3.5 MARCHITEZ (por Fusarium spp.) Agente causal: Fusarium spp.
+
+Síntomas: Amarillamiento precoz de hojas inferiores, retraso en crecimiento, decoloración de haces
+vasculares en tallos y tubérculos (necrosis en la inserción del estolón). Manejo: Usar semilla de
+calidad y desinfectada, buen manejo del agua del suelo (evitar excesos y déficits), rotación amplia.
+
+3.6 MARCHITEZ POR VERTICILLIUM Agente causal: Verticillium dahlia, V. Albo-atrum
+
+Síntomas: Marchitez unilateral, amarillamiento a partir de hojas basales. Anillo vascular del tallo
+y parte basal del tubérculo se vuelven color marrón. Manejo: Rotar con pastos y cereales (evitar
+leguminosas que son hospederas), tratar semilla con fungicidas sistémicos, quemar rastrojos
+infectados.
+
+3.7 PUDRICIÓN BASAL Agente causal: Sclerotium rolfsi
+
+Síntomas: Amarillamiento y marchitez. Masa de micelio blanco en la base del tallo con esclerocios
+que de blancos se vuelven pardos. Tubérculos se pudren con consistencia esponjosa. Manejo: Arado
+profundo para enterrar el patógeno, rotación con cultivos no hospedantes (arroz), elegir fechas de
+siembra menos cálidas.
+
+3.8 ESCLEROTINIOSIS Agente causal: Sclerotinia sclerotiorum
+
+Síntomas: Ataca el tallo a nivel del suelo o axilas de hojas. Lesiones acuosas de tono marrón.
+Tejido interno colonizado por micelio blanco con esclerocios. Tubérculos se tornan oscuros y negros.
+Manejo: Rotar con especies no susceptibles, destruir restos infectados y plantas hospedantes.
+
+3.9 ROÑA O SARNA POLVORIENTA Agente causal: Spongospora subterranea
+
+Síntomas: Pequeñas agallas claras en raíces que se vuelven oscuras. En tubérculos, ampollitas que
+se desprenden formando pústulas con una masa de esporas polvorienta color café oscuro. Manejo: -
+Usar sólo semilla sana. - Cultivar en suelos no contaminados. - No usar abono de animales
+forrajeados con papas infectadas. - Rotación amplia (mínimo 1:5). - Asegurar buen drenaje.
+
+TABLA: Escala para la valoración de sarna de pradera y sarna polvorienta Valor | Incidencia y
+severidad en 100 tubérculos 1 | 50% de los tubérculos sin síntomas. En el resto puede aparecer un
+máximo de 1 o 2 lesiones superficiales, individuales o unidas. Máximo 3% de la superficie se ve
+afectada. 2 | 33% sin síntomas. En el resto puede aparecer un máximo de 6.3% de la superficie
+afectada con lesiones poco profundas. 2.5 | Casi todos los tubérculos presentan síntomas. Existen de
+5 a 10 lesiones individuales o unidas, pero no afectan más del 12.5% de la superficie. 3.5 |
+Prácticamente todo el lote presenta algo de sarna. Existen por tubérculo de 20 a 40 lesiones
+superficiales que a veces se unen. El área afectada por tubérculo no excede el 25% de la superficie.
+
+3.10 PUDRICIÓN ACUOSA Agente causal: Pythium spp.
+
+Síntomas: Decoloración ligera de piel y carne que luego se pudre adquiriendo consistencia acuosa y
+olor a pescado. La piel puede permanecer intacta. Manejo: Evitar daño mecánico, cosechar cuando la
+piel esté firme, no dejar costales de papa al sol después de la cosecha.
+
+================================================================================ 4. ENFERMEDADES
+CAUSADAS POR NEMATODOS
+================================================================================
+
+4.1 EL NEMATODO DEL QUISTE Especie importante: Globodera pallida
+
+Epidemiología: Ciclo de vida de 6 a 10 semanas. Los quistes pueden sobrevivir en el suelo por más
+de 20 años. Síntomas y daños: Plantas pequeñas en parches, decoloración, marchitez en días soleados.
+Confundible con deficiencias nutricionales. Pérdidas de hasta 2 t/ha cuando la infestación supera
+los 20 huevos/gramo de suelo. Manejo: - Sucesión de otros cultivos en la rotación. - Limpieza de
+equipos. - Erradicación de papas voluntarias. - Uso de variedades resistentes y tolerantes. -
+Barbecho con remoción de suelo en época seca. - Cultivos trampa (chocho Lupinus spp.). - Uso de
+biocontroladores.
+
+TABLA: Umbral de daño y nivel de equilibrio del nematodo del quiste de la papa Variedades | Umbral
+de daño (Larvas y huevos/g de suelo) | Nivel de equilibrio* (Larvas y huevos/g de suelo) Grupo 1
+(INIAP Gabriela, INIAP Esperanza) | 40-47 | 410-437 Grupo 2 (INIAP María, INIAP Catalina, INIAP
+Cecilia, Superchola, Violeta) | 12-23 | 174-280 Grupo 3 (Chola, Uvilla, Yema de Huevo) | 3-11 |
+150-275
+
+TABLA: Resumen de los principales tipos de nematodos que atacan los cultivos en suelos livianos
+Cultivos | Nematodo del quiste (Globodera pallida) | Nódulos de la raíz | De vida libre Papas | Ff |
+Fm | Fm? (texto ilegible) Remolacha | Ff | Ff | Bm Espinaca | Mm | Mm | Bb Avena | Ff | . | .
+Centeno | Fb | . | . Cebada | Fm | . | . Maíz | . | . | . Raigras | Fb | . | . Trébol | Bm | Ff |
+BFm Arveja | . | . | . Vainitas | Bm | Mb | MFm Habas | Mm | Fm | B Fm Coles | Fm | Bn | Bn
+Zanahoria | Mf | Bf | Mf Nabos | Mm | Mf | Mm Puerto | Bn | Bn | B Fb Cebollas | Bf | Bf | B Fb
+Achicoria | Ff | Mn | Nn Las letras denotan la capacidad de multiplicación del nematodo en el
+cultivo y la tolerancia al daño. Capacidad de multiplicación: Ninguna (N), Baja (B), Moderada (M) y
+Fuerte (F) Sensibilidad al daño: Ninguna (n), Baja (b), Moderada (m) y Fuerte (f)
+
+TABLA: Esquema de manejo integrado de Globodera pallida por niveles de población (Ciclos y
+componentes para niveles bajo, medio y alto de población. Se detalla la fluctuación poblacional
+usando rotación con variedades (Chola, Esperanza, Santa Catalina), barbecho con remoción (-73%),
+pastos (-20%, -30%), trigo (-30%) y haba (-30%)).
+
+================================================================================ 5. ENFERMEDADES
+CAUSADAS POR BACTERIAS
+================================================================================
+
+5.1 PIERNA NEGRA O PIE NEGRO Agente causal: Erwinia spp. (E. carotovora spp atroseptica)
+
+Síntomas: Pudrición suave en la base del tallo de color café claro que se torna negro. La planta se
+marchita y muere. En tubérculos produce manchas acuosas que pudren todo el tubérculo. Manejo: - Usar
+semilla de calidad garantizada. - No sembrar en parcelas con antecedentes de la enfermedad. -
+Sembrar cuando la temperatura del suelo supere los 12°C. - Buen drenaje. - Eliminar plantas
+infectadas (para semilla). - Cosechar en clima seco y con mínimo daño. - No almacenar papa mojada.
+
+5.2 SARNA COMÚN Agente causal: Streptomyces scabies, Streptomyces spp.
+
+Síntomas: Lesiones superficiales angulosas y redondeadas en la piel del tubérculo, desde hendiduras
+profundas hasta protuberancias tipo verruga o consistencia corchosa. La sarna de pradera (reticular)
+es común en Ecuador. Manejo: - No existen productos químicos efectivos. Para sarna de pradera se
+puede aplicar mancozeb en polvo (8%) a la semilla. - Usar semilla de alta calidad. - Rotaciones
+largas, evitar cultivos hospederos (zanahoria, nabo, etc.). - No sembrar en suelos de rompe. - No
+encalar antes de sembrar.
+
+5.3 MARCHITEZ BACTERIANA Agente Causal: Pseudomonas (Ralstonia) solanacearum (No se ha constatado a
+nivel epidémico en Ecuador, pero se menciona como prevención).
+
+Síntomas: Decoloración leve de un lado de la hoja, marchitez, secado y muerte de la planta. Al
+cortar el tallo o tubérculo y sumergirlo en agua, fluye una secreción bacteriana lechosa. Manejo:
+Mantener semilla libre de infección, no sembrar en suelos con historia de marchitez, arrancar
+plantas voluntarias de solanáceas, rotaciones amplias de al menos 5 años.
+
+================================================================================ 6. ENFERMEDADES
+CAUSADAS POR VIRUS ================================================================================
+
+Medida más efectiva: Prevención. Usar tubérculos con garantía sanitaria y manejo de vectores.
+
+6.1 AMARILLAMIENTO DE LAS VENAS DE LA PAPA (PYVV) Agente causal: Desconocido (posiblemente
+Crinivirus), vector: mosca blanca (Trialeurodes vaporariorum). Manejo: Usar semilla de calidad,
+eliminar especies hospederas (Lycopersicum spp., Solanum nigrum).
+
+6.2 VIRUS DEL ENROLLAMIENTO DE LAS HOJAS (PLRV) Agente Causal: Potato Leaf Roll Virus (Luteovirus).
+Vector: áfidos (Myzus persicae). Manejo: Usar semilla de calidad, controlar vectores, eliminar
+follaje y plantas enfermas si hay alta población de áfidos.
+
+6.3 VIRUS LEVES O LATENTES (PVX, PVYS) Agente Causal: Potato virus X y S. Transmisión por contacto.
+Manejo: Usar semilla de calidad, limpiar y desinfectar maquinaria agrícola, controlar el movimiento
+en el campo.
+
+6.4 MOSAICO SEVERO (PVY) Agente Causal: Potato virus Y (Potyvirus). Vector: pulgones (modo no
+persistente). Manejo: Usar semilla de calidad o de áreas libres de virus, controlar áfidos, preferir
+cultivo en época lluviosa cuando la población de pulgón es baja.
+
+================================================================================ 7. PLAGAS (SOLO
+DESCRIPCIÓN DE TRATAMIENTOS RELEVANTES)
+================================================================================
+
+7.1 POLILLA DE LA PAPA (Tecia solanivora)
+
+Medidas de prevención en el campo: - Sembrar semilla sana. - Realizar aporques altos. - Cosechar
+oportunamente. - No dejar residuos de cosecha. - Rotación de cultivos.
+
+Medidas de prevención en bodega: - Desinfestar la bodega. - Utilizar sacos nuevos. - Revisar
+periódicamente la semilla.
+
+Medidas de control: - Asolación (exponer tubérculos al sol hasta 10 días). - Uso de baculovirus
+(INIAP trabaja en su producción). - Gas toxín (una pastilla para cinco quintales, requiere
+asesoramiento por peligrosidad). - Insecticidas en polvo (Sevín y Malathión al 5% espolvoreados). -
+Trampas con feromonas para monitoreo y control.
+
+7.2 GUSANO BLANCO (Premnotrypes vorax)
+
+Manejo integrado (30 días antes a 30 días después de la siembra): - Trampas: ramas frescas de papa
+envenenada con insecticida, cubiertas con cartón. - Plantas cebo: plantas de papa alrededor de la
+parcela tratadas con insecticida (más efectivas). * Número: 100 trampas y 100 plantas cebo por
+hectárea. * Productos: profenofos (2.5cc/l) o acefato (2.0g/l). Para trampas solo se puede usar
+carbaryl (3g/l). - Control químico (si no se eliminaron los adultos): máximo 3 aplicaciones de
+profenofos o acefato a los 40, 60 y 80 días. Manejo agronómico: - Rotación de al menos 3 años. -
+Cosecha completa, eliminar tubérculos y plantas espontáneas. - Períodos de campo limpio. - Usar
+plásticos bajo las papas en cosecha para que las larvas no pasen al suelo.
+
+================================================================================ TABLAS ADICIONALES
+RELEVANTES (NO INCLUIDAS EN SECCIONES ANTERIORES)
+================================================================================
+
+TABLA 21. Algunas enfermedades cuya intensidad disminuye tras la incorporación o enmienda con
+materia orgánica de ciertos orígenes Enfermedad | Organismo causal | Fuente de materia orgánica
+Marchitez | V. Albo-atrum | Paja de cebada Sarna | Streptomyces scabies | Abonos verdes Lancha |
+Phytophthora infestans | Paja de trigo + T. harzianum Nematodos de la Lesión | Pratylenchus
+penetrans | Deshechos de celulosa avena, pasto Sudan Nematodos nódulo de raíz | Meloidogynis
+incognita | Alfalfa, lino
+
+TABLA 22. Relaciones entre antagonistas y patógenos de papas y su probable mecanismo de acción
+Enfermedad | Organismo patógeno | Especie antagonista | Mecanismo de acción Sarna común | S. scabies
+| Pseudomonas fluorescens, P. no-fluorescentes, Enterobacter agglomerans, Acinetobacter sp. |
+Antibiosis Rhizoctoniasis | R. Solani | Verticillium bigutatum, Thrichodermas sp., Gliocladium
+roseum, G. viridens | Hiperparasitismo Rhizoctoniasis | R. Solani | Rhizoctonia binucleata,
+Actinomyces sp. | Competencia Rhizoctoniasis | R. Solani | Enterobacter, Bacillus subtilis |
+Antibiosis Pie negro | Erwinia carotovora | E. agglomerans, Acinetobacter spp., Pseudomonas
+fluorescens, Pseudomonas putida | (No especifica) Fusarium rot | Fusarium spp. | Fusarium
+no-patógeno | Competencia, Protección cruzada Fusarium rot | Fusarium spp. | Pseudomonas spp.
+flourescentes | Promotoras de crecimiento Sclerotinia | S. sclerotiorum | Coniothyrium minitans |
+Hiperparasitismo Lancha | P infestans | Scytalidium spp | Hiperparasitismo, Antibiosis Lancha | P
+infestans | Bacillus subtilis IMP215, Pseudomonas putida AR33, Thrichoderma viride, Trichoderma
+harzianum | Antibiosis Lancha | P infestans | Fusarium oxysporum MT0062, Streptomyces spp.,
+Phytophtothora criptogea | Induce resistencia en planta (RSA)
+
+TABLA 31. Principales malezas según zonas de cultivo (Contiene listado de malezas de hoja ancha y
+hoja angosta para las zonas Norte, Centro y Sur del Ecuador).
+
+TABLA 32. Grado de nocividad de las malezas que se presentan en el cultivo de papa (Contiene nombre
+vulgar, nombre científico y grado de nocividad: Alta, Media, Baja, y ciclo: Anual o Perenne).
+
+TABLA 33. Herbicidas recomendados para el manejo de las malezas en papa Herbicida (Nombre común) |
+Nombre comercial | Dosis / ha | Malezas que controlan y época de aplicación metribuzina | Sencor 70%
+35% | 0.6 Kg 1.2 Kg en cultivo (hasta 10 cm) | Hoja ancha y angosta en preemergencia y
+postemergencia glifosato + linuron | Ranger(324g/l) o Coloso (480 g/l) + Atalon (500 g/l) | 1.1 o
+0.75 L + 1.5 L | Hoja ancha y angosta en preemergencia glifosato + diuron | Ranger (324 g/l) o
+Coloso (480 g/l) + Diuron (800g/l) | 1.1 o 0.75 L + 1.0 L | Hoja ancha y angosta en preemergencia
+glifosato + prometrina | Ranger (324 g/l) o Coloso (480 g/l) + Prometrex (500g/l) | 1.1 o 0.75 L +
+2.4 L | Hoja ancha y angosta en preemergencia glifosato | Coloso 480g/l | 2 a 4 L | Para todo tipo
+de malezas, antes de la siembra. 2,4 D-ester (mayor a 2.800 msnm.) o amina (menor a 2.800 msnm) |
+Esterpac 480 g/l o Ecuamina 4.480 g/L Ecuamina 6.720 g/L | 2 a 3 L 1.5 a 3 a 2 | Para hoja ancha
+anual y perenne antes de la siembra fluasifop-buty | Hache uno super | 1 a 2 L | Para combatir
+gramíneas en postemergencia
+
+TABLA 34. Clasificación de insecticidas relacionados con el cultivo de la papa Por su vía de
+ingreso al insecto: Contacto, Ingestión, Fumigantes, Asfixia. Por su composición química: -
+Inorgánicos: Arseniatos. - Orgánicos: Vegetal, De síntesis (Clorados, Fosforados, Carbamatos,
+Piretroides, Inhibidores de la síntesis de la quitina, Biomesticidas (bacterias, virus, hongos)).
+
+TABLA 35. Fungicida protectores usados en campo para controlar P. infestans (Clases: Compuestos de
+cobre, Compuestos de azufre, Ditiocarbamatos, Compuestos aromáticos, Compuestos heterocíclicos,
+Dicarboximidas. Se indica su mecanismo de acción y ejemplos).
+
+TABLA 36. Fungicidas sistémicos usados en papa para controlar P. infestans (Clases: Oxantinas,
+Fenilamidas, Benzimidazoles, Inhibidores de la biosíntesis de ergosteral, Estrobirulinas, Fosetil
+aluminio. Se indica su mecanismo de acción y ejemplos).
+
+TABLA 37. Clasificación de los herbicidas utilizados en la producción de papa Herbicida |
+Selectividad | Modo acción | Mecanismo aplicación | Época | Grupo químico | Formulación Metribuzina
+| Selectivo | Inhibe la fotosíntesis | Al suelo | Pre-tardío Post-temprano | Triazina semétrica | PM
+Glifosato | Amplio espectro | Afecta la síntesis de la proteína | Al follaje | Pre-siembra | Metal
+orgánico nitrogenado | CS LS Linuron | Selectivo | Inhibe la reacción de Hill | Al suelo y follaje |
+Pre Post | Urea sustituida | PM Diuron | Selectivo | Inhibe la reacción de Hill | Al suelo | Pre |
+Urea sustituida | PM Prometrina | Selectivo | Afecta la fotosíntesis | Al suelo | Pre | Triazina |
+SC 2,4-D | Amplio espectro | Afecta la síntesis de la proteína | Al follaje | Post | Fenoxidos | CS
+Fluazifop-butyl | Selectivo a hoja ancha | no conocido | Al follaje | Post-emergencia | Bipiridillos
+| CE PM = Polvo Mojado, CS = Concentrado Soluble, LS = Líquido Soluble, SC = Suspensión Concentrada
+y CE = Concentrado Emulsionable.
+
+TABLA 38. Grado de toxicidad de los plaguicidas Categoría | Color de la etiqueta | Descripción
+(DL50) I- a | Rojo | Extremadamente peligrosa (DL50= 1 a 5 mg/kg) I- b | Rojo | Altamente peligrosa
+(DL50>5 a 50 mg/kg) II | Amarillo | Moderadamente peligrosa III | Azul | Ligeramente peligrosa IV |
+Verde | Ligeramente tóxico

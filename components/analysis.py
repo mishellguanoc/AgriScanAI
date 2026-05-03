@@ -3,7 +3,7 @@ from PIL import Image
 from models.crop_classifier import predict_crop
 from utils.image_utils import extract_exif_data
 from utils.db_manager import save_diagnosis_to_db, update_map_fields
-from distributed_pipeline.config import BROKER_CLIENT_URL
+from utils.config import BROKER_CLIENT_URL
 
 
 def analysis_page():

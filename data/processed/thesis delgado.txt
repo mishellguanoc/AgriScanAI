@@ -1,0 +1,185 @@
+Tizón tardío: variabilidad del patógeno y mejoramiento genético para resistencia a la enfermedad en
+Ecuador Ricardo Delgado
+
+Cultivo de la papa
+
+La papa pertenece a la familia Solanaceae y fue domesticada por primera vez en Sudamérica, en los
+alrededores del lago Titicaca, actualmente frontera entre Perú y Bolivia, hace aproximadamente 8000
+años (De Jong, 2016). Esto permitió el desarrollo de sociedades a lo largo de los Andes, incluido el
+Imperio Inca al momento de la llegada de los conquistadores españoles.
+
+Posteriormente, la papa fue introducida inicialmente en las Islas Canarias y en Sevilla, España,
+durante el siglo XVI, y desde allí se distribuyó al resto del mundo (Brown & Henfling, 2014;
+Bentley, 2015; De Jong, 2016).
+
+Los tubérculos de papa son ampliamente consumidos debido a su alto contenido de carbohidratos y
+proteínas. Además, constituyen una valiosa fuente de nutrientes como potasio, calcio, fósforo,
+cobre, magnesio y vitaminas C y B (Camire et al., 2009; Storey, 2007; Navarre et al., 2014).
+
+Actualmente, la papa es el quinto cultivo más importante del mundo después del maíz, trigo, arroz y
+caña de azúcar, con 376 millones de toneladas producidas. Ocupó el puesto diecisiete en superficie
+cultivada con 19 millones de hectáreas en 2016.
+
+Se cultiva en todo el mundo. China, India, Rusia y Ucrania lideran en superficie cosechada y
+producción, mientras que Estados Unidos, Nueva Zelanda, Alemania, Dinamarca y Países Bajos presentan
+los mayores rendimientos por hectárea.
+
+Papa en Ecuador
+
+Uno de los cultivos más importantes del Ecuador es la papa, por lo que constituye una parte
+relevante de la dieta alimentaria, especialmente en la Sierra (Devaux et al., 2010).
+
+El consumo anual per cápita en el país es de aproximadamente 31.8 kg por año. Se cultiva en la
+región andina ecuatoriana entre los 2000 y más de 3600 metros sobre el nivel del mar.
+
+Principalmente la producen pequeños agricultores (alrededor de 45,000) en una superficie de 29,635
+hectáreas en 2016. La mayoría de ellos (88%) cultiva en fincas de no más de 20 ha. Incluso, cerca
+del 50% produce en propiedades menores a 1 ha.
+
+Las principales provincias productoras son:
+
+- Chimborazo (7,450 ha) - Carchi (7,241 ha) - Cotopaxi (3,909 ha) - Pichincha (2,969 ha) -
+Tungurahua (2,077 ha) - Cañar (1,995 ha)
+
+En 2016 se cosecharon 422,589 toneladas. La principal provincia productora fue Carchi con 36.14%
+del total nacional, seguida por Chimborazo (26.88%) y Cotopaxi (11.11%).
+
+El rendimiento promedio nacional fue de 12.71 t/ha, siendo Carchi la provincia con mayor
+rendimiento.
+
+El 90% de la producción se consume fresca y el resto se destina a chips y papas fritas.
+
+Variedades preferidas por región:
+
+- Norte (Carchi e Imbabura): Superchola - Centro (Pichincha, Cotopaxi, Tungurahua, Chimborazo y
+Bolívar): INIAP-Fripapa - Sur (Cañar, Azuay y Loja): Bolona
+
+La variedad Superchola representa el 55% del área sembrada nacional, seguida de INIAP-Fripapa (5%)
+y otras variedades en menores porcentajes.
+
+Otras características del cultivo en Ecuador:
+
+- 85% de productores usa semilla propia de cosechas anteriores. - Solo 33% tiene acceso a riego. -
+Nivel educativo: * 58% educación básica * 26% bachillerato * 4% universidad * 7% sin educación
+formal
+
+Además de estas limitaciones, existen factores biológicos que reducen el rendimiento, siendo el
+tizón tardío el más importante.
+
+Tizón tardío en el mundo y en Ecuador
+
+El tizón tardío, llamado en Ecuador “tizón tardío” en español o “lancha” en kichwa, es causado por
+el oomiceto Phytophthora infestans (Mont.) de Bary.
+
+Es la principal enfermedad de la papa a nivel mundial. Fue la causa de la conocida hambruna
+irlandesa de la década de 1840, que provocó la muerte de un millón de personas y la migración de
+otro millón.
+
+Actualmente sigue siendo una amenaza global debido a epidemias que reducen rendimientos e ingresos
+y aumentan costos de producción.
+
+En la Unión Europea se estiman pérdidas anuales de mil millones de euros. En Estados Unidos, el
+costo de fungicidas para su control se calcula entre 300 y 500 dólares por hectárea.
+
+En Ecuador, el tizón tardío es la principal limitante del cultivo de papa.
+
+La primera descripción del patógeno en Ecuador ocurrió en cultivos frutales como pepino dulce
+(Solanum muricatum) y tzímbalo (S. caripense) en 1890. Años después se reportó afectando papa.
+
+Las epidemias pueden causar pérdidas entre 28% y 100%, dependiendo de la resistencia del hospedero
+y del clima.
+
+Síntomas principales:
+
+- Manchas cafés necróticas en hojas - Halo verde pálido o amarillo - Lesiones que se expanden y
+destruyen hojas - Lesiones oscuras en tallos - Daño severo del follaje - Reducción de fotosíntesis y
+tamaño de tubérculos
+
+Ciclo del patógeno
+
+El patógeno se reproduce asexualmente mediante esporangios, que germinan directamente o liberan
+zoosporas móviles.
+
+Se dispersa por lluvia y viento. Puede sobrevivir en tubérculos infectados, residuos de cultivo y
+plantas voluntarias.
+
+En Ecuador aparentemente solo existe el ciclo asexual.
+
+Poblaciones en Ecuador
+
+Se han identificado dos linajes clonales:
+
+- EC-1 - US-1
+
+Ambos del tipo de apareamiento A1.
+
+EC-1 predomina en papa y US-1 en tomate. Además, EC-1 resultó más agresivo que US-1.
+
+Manejo de la enfermedad
+
+Las principales estrategias de control son:
+
+1. Control químico con fungicidas 2. Uso de variedades resistentes
+
+Control químico
+
+Se utiliza principalmente en cultivos comerciales para prevenir epidemias.
+
+En Ecuador se recomienda iniciar aplicaciones cuando la severidad alcanza 0.5% o incluso
+preventivamente tras la emergencia.
+
+En variedades susceptibles como Superchola, en Carchi se observaron hasta 14 aplicaciones por
+ciclo.
+
+El costo del control puede representar hasta 20% del ingreso total.
+
+Además, el uso intensivo de fungicidas puede afectar la salud de agricultores, incluyendo
+irritación cutánea.
+
+Variedades resistentes
+
+Es una alternativa más sostenible, fácil de adoptar, segura para agricultores y amigable con el
+ambiente.
+
+Sin embargo, muchas veces los agricultores prefieren variedades susceptibles por calidad comercial
+y preferencia del consumidor.
+
+Mejoramiento genético en Ecuador
+
+El objetivo principal del mejoramiento de papa en Ecuador es obtener variedades con:
+
+- Resistencia a tizón tardío - Precocidad - Buen valor nutricional - Alta productividad - Calidad
+comercial
+
+Se usan como fuentes genéticas variedades nativas y especies como:
+
+- Solanum phureja - Solanum andigena - Solanum chaucha
+
+También se usa germoplasma introducido.
+
+Desarrollar una nueva variedad puede tomar entre 10 y 15 años.
+
+Problema principal
+
+Muchas variedades resistentes pierden rápidamente su resistencia debido a la evolución del
+patógeno. Esto ocurrió con variedades como:
+
+- Arka - Capiro - INIAP-Cecilia - INIAP-Gabriela - Superchola - Canchán - Amarilis
+
+Por ello se necesitan constantemente nuevas fuentes de resistencia.
+
+Institución responsable
+
+El desarrollo tecnológico del cultivo de papa en Ecuador corresponde al INIAP (Instituto Nacional
+de Investigaciones Agropecuarias), con énfasis en investigación aplicada.
+
+Alcance de la tesis
+
+Las variedades nativas ecuatorianas representan un recurso valioso y podrían ser fuente de
+resistencia cuantitativa al tizón tardío.
+
+Los objetivos de la tesis son:
+
+- Caracterizar la resistencia de variedades ecuatorianas - Comprender por qué una población clonal
+de P. infestans dificulta resistencia durable - Identificar QTLs asociados a resistencia frente a
+esta enfermedad devastadora
