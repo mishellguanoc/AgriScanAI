@@ -9,17 +9,16 @@ echo "🚀 Starting AgriScan AI Backend Services..."
 echo "Starting Redis server..."
 redis-server --daemonize yes
 
-# Activate the virtual environment
-if [ -f "../.venv/bin/activate" ]; then
-    echo "Activating virtual environment from ../.venv..."
-    source ../.venv/bin/activate
+# Determine the absolute path to the venv Python binary.
+# nohup spawns subprocesses that do NOT inherit the sourced venv,
+# so we must pass the full path explicitly.
+VENV_DIR="$(cd .. && pwd)/.venv"
+if [ -f "$VENV_DIR/bin/python" ]; then
+    PYTHON_BIN="$VENV_DIR/bin/python"
 else
-    echo "⚠️ Warning: Virtual environment not found at ../.venv. Using system Python..."
+    echo "⚠️ Warning: Virtual environment not found at $VENV_DIR. Falling back to system Python."
+    PYTHON_BIN="python"
 fi
-
-PYTHON_BIN="python"
-UVICORN_BIN="uvicorn"
-
 
 # 2. Start the Broker API
 echo "Starting FastAPI Broker on port 8000..."
