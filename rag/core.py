@@ -35,13 +35,13 @@ def load_faiss_index() -> FAISSManager:
     return fm
 
 # ── Retrieval semántico ────────────────────────────────────────────────────
-def retrieve(query: str, faiss_manager: FAISSManager, top_k: int = 8) -> list:
+def retrieve(query: str, faiss_manager: FAISSManager, top_k: int = 15) -> list:
     """
     Busca los chunks más relevantes usando similitud semántica (cosine via FAISS).
     Filtra por umbral mínimo de similitud 0.30.
     """
     results = faiss_manager.search(query, k=top_k)
-    return [r for r in results if r["similarity_score"] >= 0.30]
+    return [r for r in results if r["similarity_score"] >= 0.20]
 
 # ── Generación con Groq / LLaMA 3 ─────────────────────────────────────────
 def ask(query: str, faiss_manager: FAISSManager, expertise: str = "beginner", history: list = None) -> dict:
@@ -88,15 +88,19 @@ def ask(query: str, faiss_manager: FAISSManager, expertise: str = "beginner", hi
     # 3. Construir mensajes
     system_prompt = SYSTEM_BEGINNER if expertise == "beginner" else SYSTEM_EXPERT
 
-    user_message = f"""Información recuperada de la base de conocimiento agrícola:
----
+    user_message = f"""Tienes acceso a los siguientes fragmentos de documentos agrícolas. LEE TODO EL CONTEXTO CUIDADOSAMENTE antes de responder.
+
+CONTEXTO:
 {context}
----
 
-Consulta: {query}
+PREGUNTA: {query}
 
-Responde basándote ÚNICAMENTE en la información proporcionada. 
-Si la información no está disponible, indícalo claramente y recomienda consultar al INIAP o MAG."""
+INSTRUCCIONES IMPORTANTES:
+1. USA la información del contexto para responder. Si hay información relevante, ÚSALA aunque no sea perfecta.
+2. NO digas que no tienes información si el contexto contiene datos relacionados con la pregunta.
+3. Si el contexto menciona síntomas, tratamientos, fungicidas o prácticas — inclúyelos en tu respuesta.
+4. Solo recomienda el INIAP o MAG si realmente no hay NADA relevante en el contexto.
+5. Responde en español de forma clara y útil."""
 
     messages = [{"role": "system", "content": system_prompt}]
     for h in history:

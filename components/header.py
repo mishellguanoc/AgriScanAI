@@ -5,32 +5,33 @@ def show_header():
 
     # ===== CONTENEDOR PRINCIPAL =====
     with st.container():
-        # Aumentamos el ratio del logo y el espaciado general
-        col1, col2 = st.columns([1.2, 7], vertical_alignment="center")
+        col1, col2 = st.columns([0.5, 3], vertical_alignment="center")
+
 
         # ===== LOGO =====
         with col1:
-            st.image("assets/AgriScanLogoBW.svg", use_container_width=True)
+            st.image("assets/logo2.svg", use_container_width=True)
+
 
         # ===== TITULOS =====
         with col2:
             st.markdown("""
-                <div style="display:flex; flex-direction:column; justify-content:center; padding-left:30px; padding-top:10px; padding-bottom:10px;">
-                    <h1 style="margin-bottom:5px; font-size:48px; line-height:1; letter-spacing:-0.04em;">
+                <div style="display:flex; flex-direction:column; justify-content:center; padding-left:20px; padding-top:2px; padding-bottom:2px;">
+                    <h1 style="margin-bottom:2px; font-size:46px; line-height:1; letter-spacing:-0.03em;">
                         AgriScan AI
                     </h1>
-                    <p style="margin-top:5px; color: #888; font-size:18px; font-weight:500; letter-spacing:-0.01em;">
+                    <p style="margin-top:2px; color: #888; font-size:22px; font-weight:500; letter-spacing:-0.01em;">
                         Distributed Agricultural Monitoring Platform
                     </p>
                 </div>
             """, unsafe_allow_html=True)
 
-    # ===== DIVISOR PREMIUM (MÁS GRUESO) =====
+    # ===== DIVISOR =====
     st.markdown("""
         <div style="
-            height: 3px;
+            height: 2px;
             background: linear-gradient(to right, transparent, #2E7D32, #1E88E5, transparent);
-            margin: 30px 0 50px 0;
+            margin: 12px 0 24px 0;
             opacity: 0.8;
         "></div>
     """, unsafe_allow_html=True)

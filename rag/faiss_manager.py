@@ -68,7 +68,7 @@ class FAISSManager:
         # Construir resultados
         results = []
         for score, idx in zip(scores[0], indices[0]):
-            if idx != -1 and score > 0.3:  # umbral mínimo de relevancia
+            if idx != -1 and score > 0.2:  # umbral mínimo de relevancia
                 results.append({
                     **self.chunks[idx],
                     'similarity_score': float(score)

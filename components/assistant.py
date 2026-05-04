@@ -1,73 +1,154 @@
 """
 components/assistant.py
 Asistente agronómico con RAG (FAISS + Groq/LLaMA 3).
-Reemplaza el placeholder original por respuestas reales basadas en documentos.
 """
 
 import streamlit as st
 from rag.core import load_faiss_index, ask
 
+st.set_page_config(
+    page_title="AgriScanAI",
+    page_icon="assets/icon.png",
+    layout="centered",
+)
 
 @st.cache_resource
 def _get_faiss():
-    """Carga el índice FAISS una sola vez para toda la sesión."""
     return load_faiss_index()
 
 
 def assistant_page():
 
-    st.header("Agronomic Assistant")
+# ── Estilos  ───────────────────
+    st.markdown("""
+        <style>
+        /* Ajustar altura del input text */
+        .stTextInput input {
+            height: 52px !important;
+            line-height: 2 !important;
+            font-size: 1rem !important;
+            padding: 1.2rem 20px 3rem 5px !important; /* top, right, bottom, left */
+        }
 
-    # ── Cargar FAISS (cacheado) ────────────────────────────────────────────
-    try:
-        faiss_manager = _get_faiss()
-    except Exception as e:
-        st.error(f"⚠️ Could not load knowledge base: {e}")
-        st.info("Make sure `data/embeddings/faiss_index.bin` and `chunks.pkl` exist. Run `scripts/build_kb.py` to generate them.")
-        return
+        /* Ajustar altura y padding del botón Send */
+        div[data-testid="column"]:nth-of-type(2) .stButton button {
+            height: 52px !important;
+            padding: 0rem 20px 0.5rem 5px !important; /* top, right, bottom, left */
+            font-size: 5rem !important;
+            line-height: 1 !important;
+            background-color: #6FAF6A !important;
+            color: white !important;
+            border: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
 
-    # ── Sidebar: perfil de usuario ─────────────────────────────────────────
-    with st.sidebar:
-        st.markdown("### 👤 Assistant Profile")
-        role = st.radio(
-            "Profile",
-            ["beginner", "expert"],
-            format_func=lambda x: "👨‍🌾 Farmer" if x == "beginner" else "👨‍🔬 Agronomist",
-            label_visibility="collapsed"
+        div[data-testid="column"]:nth-of-type(2) .stButton button:hover {
+            background-color: #0a4425 !important;
+            color: white !important;
+        }
+
+        /* Alinear columnas en la parte inferior */
+        div[data-testid="column"]:nth-of-type(1),
+        div[data-testid="column"]:nth-of-type(2) {
+            display: flex !important;
+            align-items: flex-end !important;
+        }
+
+        /* Quitar margen extra */
+        .stTextInput {
+            margin-bottom: 0 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+    # ── Wrapper con padding lateral ────────────────────────────────────────
+    _, col_main, _ = st.columns([0.08, 0.84, 0.08])
+
+    with col_main:
+
+        # Título compacto
+        st.markdown("### Agronomic Assistant")
+
+        # Badge del modelo
+        st.markdown(
+            '<a href="https://console.groq.com/docs/models" target="_blank" style="font-size:20px; font-weight:bold; color:#6FAF6A; text-decoration:underline;">'
+            'Powered by LLaMA 3.3-70b via Groq'
+            '</a>',
+            unsafe_allow_html=True
         )
-        if st.button("🗑 Clear conversation"):
+
+        # ── Cargar FAISS ───────────────────────────────────────────────────
+        try:
+            faiss_manager = _get_faiss()
+        except Exception as e:
+            st.error(f"⚠️ Could not load knowledge base: {e}")
+            st.info("Run `scripts/build_kb.py` to generate the index.")
+            return
+
+        # ── Session state ──────────────────────────────────────────────────
+        if "rag_messages" not in st.session_state:
             st.session_state.rag_messages = []
-            st.rerun()
 
-    # ── Session state ──────────────────────────────────────────────────────
-    if "rag_messages" not in st.session_state:
-        st.session_state.rag_messages = []
+        # ── Controles: perfil + clear ──────────────────────────────────────
+        col_role, col_clear = st.columns([4, 1])
+        with col_role:
+            role = st.radio(
+                "Profile",
+                ["beginner", "expert"],
+                format_func=lambda x: "👨‍🌾 Farmer" if x == "beginner" else "👨‍🔬 Agronomist",
+                horizontal=True,
+                label_visibility="collapsed"
+            )
+        with col_clear:
+            if st.button("🗑 Clear", use_container_width=True):
+                st.session_state.rag_messages = []
+                st.rerun()
 
-    # ── Historial de mensajes ──────────────────────────────────────────────
-    for msg in st.session_state.rag_messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
-            if msg.get("sources"):
-                st.caption("📄 Sources: " + " · ".join(msg["sources"]))
+        st.divider()
 
-    # ── Input del usuario ──────────────────────────────────────────────────
-    query = st.chat_input("Ask about crop diseases, treatments or prevention...")
+        # ── Historial ──────────────────────────────────────────────────────
+        chat_container = st.container(height=380)
+        with chat_container:
+            if not st.session_state.rag_messages:
+                st.markdown(
+                    "<div style='text-align:center; color:#3a3737; padding-top:60px; font-size:2rem;'>"
+                    "<b>Start by asking about a crop disease,<br>"
+                    "treatment or prevention method</b>"
+                    "</div>",
+                    unsafe_allow_html=True
+                )
+            for msg in st.session_state.rag_messages:
+                with st.chat_message(msg["role"]):
+                    st.markdown(msg["content"])
+                    if msg.get("sources"):
+                        st.caption("📄 " + " · ".join(msg["sources"]))
 
-    if query:
-        # Mostrar mensaje del usuario
-        with st.chat_message("user"):
-            st.markdown(query)
-        st.session_state.rag_messages.append({"role": "user", "content": query})
+        # ── Input con alturas iguales ──────────────────────────────────────
+        col_input, col_btn = st.columns([5, 1])
+        with col_input:
+            query = st.text_input(
+            "query",
+            placeholder="🌱 e.g. ¿Qué síntomas tiene el tizón tardío en papa?",
+            label_visibility="collapsed",
+            key="rag_input_field"
+    )
 
-        # Construir historial para contexto multi-turno (últimos 6 mensajes)
-        history = [
-            {"role": m["role"], "content": m["content"]}
-            for m in st.session_state.rag_messages[-6:]
-            if m["role"] in ("user", "assistant")
-        ]
+        with col_btn:
+            # Quitar type="primary" para que tome los estilos personalizados
+            send = st.button("➤", use_container_width=True)
 
-        # Llamar al RAG
-        with st.chat_message("assistant"):
+        # ── Procesar ───────────────────────────────────────────────────────
+        if send and query.strip():
+            st.session_state.rag_messages.append({"role": "user", "content": query})
+
+            history = [
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.rag_messages[-6:]
+                if m["role"] in ("user", "assistant")
+            ]
+
             with st.spinner("Consulting knowledge base..."):
                 try:
                     result = ask(
@@ -76,21 +157,15 @@ def assistant_page():
                         expertise=role,
                         history=history
                     )
-                    st.markdown(result["answer"])
-                    if result["sources"]:
-                        st.caption("📄 Sources: " + " · ".join(result["sources"]))
-
                     st.session_state.rag_messages.append({
                         "role": "assistant",
                         "content": result["answer"],
                         "sources": result["sources"]
                     })
-
                 except Exception as e:
-                    error_msg = f"⚠️ Error querying the assistant: {e}"
-                    st.error(error_msg)
                     st.session_state.rag_messages.append({
                         "role": "assistant",
-                        "content": error_msg,
+                        "content": f"⚠️ Error: {e}",
                         "sources": []
                     })
+            st.rerun()
