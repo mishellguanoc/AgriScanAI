@@ -59,7 +59,7 @@ def fetch_all_records():
         return pd.DataFrame()
     
     try:
-        # Complex Join logic to fetch unified data for the map
+        # Join logic to fetch unified data for the map
         query = """
             SELECT 
                 d.crop_type as plant,
