@@ -1,5 +1,4 @@
 import json
-import requests
 import redis
 import traceback
 import torch
@@ -8,8 +7,9 @@ from torchvision import models, transforms
 from PIL import Image
 
 from distributed_pipeline.config import (
-    REDIS_HOST, REDIS_PORT, QUEUE_POTATO, BROKER_WEBHOOK_URL, MODELS_WEIGHTS_DIR
+    REDIS_HOST, REDIS_PORT, QUEUE_POTATO, MODELS_WEIGHTS_DIR
 )
+from distributed_pipeline.worker_utils import send_webhook
 
 print("Starting Potato Specialist Worker (Level 2)...")
 
@@ -49,20 +49,7 @@ except Exception as e:
 
 redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
-def send_webhook(task_id: str, status: str, crop_type: str = "Potato", disease: str = None, confidence: float = 0.0):
-    url = f"http://localhost:8000/webhook/status/{task_id}"
-    payload = {
-        "upload_id": task_id,
-        "status": status,
-        "crop_type": crop_type,
-        "predicted_disease": disease,
-        "confidence_score": confidence
-    }
-    try:
-        r = requests.patch(url, json=payload, timeout=5)
-        print(f"Webhook sent: {status} ({r.status_code})")
-    except Exception as e:
-        print(f"Failed to send webhook to {url}: {e}")
+
 
 print("Potato Worker is waiting for tasks...")
 while True:

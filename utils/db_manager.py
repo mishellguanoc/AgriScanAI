@@ -1,67 +1,37 @@
+"""
+utils/db_manager.py
+Streamlit-facing database utilities.
+Imports the shared models and backend functions from db_core and adds
+Streamlit-specific wrappers (caching, error display, cache invalidation).
+"""
+
 import streamlit as st
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.dialects.postgresql import UUID
 import pandas as pd
-import uuid
-import os
-from datetime import datetime
 
-Base = declarative_base()
+# Re-export everything from db_core so existing imports elsewhere still work
+from utils.db_core import (
+    Base,
+    FileUpload,
+    GeospatialData,
+    DiagnosisResult,
+    get_engine,
+    create_initial_ticket,
+    update_ticket_status,
+    get_ticket_status,
+    update_map_fields,
+)
 
-class FileUpload(Base):
-    __tablename__ = 'file_upload'
-    upload_id = Column(UUID(as_uuid=True), primary_key=True)
-    received_timestamp = Column(DateTime(timezone=True))
-    status = Column(String(50), nullable=True, default="Solicitado")
-    
-    geospatial = relationship("GeospatialData", back_populates="upload", uselist=False)
-    diagnosis = relationship("DiagnosisResult", back_populates="upload", uselist=False)
-
-class GeospatialData(Base):
-    __tablename__ = 'geospatial_data'
-    upload_id = Column(UUID(as_uuid=True), ForeignKey('file_upload.upload_id'), primary_key=True)
-    latitude = Column(Float, nullable=True)
-    longitude = Column(Float, nullable=True)
-    elevation = Column(Float)
-    captured_timestamp = Column(DateTime(timezone=True), nullable=False)
-    
-    upload = relationship("FileUpload", back_populates="geospatial")
-
-class DiagnosisResult(Base):
-    __tablename__ = 'diagnosis_result'
-    upload_id = Column(UUID(as_uuid=True), ForeignKey('file_upload.upload_id'), primary_key=True)
-    crop_type = Column(String(50), nullable=False)
-    predicted_disease = Column(String(100), nullable=False)
-    confidence_score = Column(Float, nullable=False)
-    area_m2 = Column(Integer)
-    severity = Column(Float)
-    
-    upload = relationship("FileUpload", back_populates="diagnosis")
-
-def get_engine():
-    db_url = os.getenv("SUPABASE_DB_URL")
-    if db_url:
-        return create_engine(db_url)
-        
-    try:
-        db_url = st.secrets["SUPABASE_DB_URL"]
-        return create_engine(db_url)
-    except Exception:
-        pass
-    return None
 
 @st.cache_data
 def fetch_all_records():
+    """Fetches all joined diagnosis records for the epidemiological map."""
     engine = get_engine()
     if engine is None:
         return pd.DataFrame()
-    
+
     try:
-        # Join logic to fetch unified data for the map
         query = """
-            SELECT 
+            SELECT
                 d.crop_type as plant,
                 d.predicted_disease as disease,
                 d.area_m2,
@@ -74,173 +44,8 @@ def fetch_all_records():
             JOIN diagnosis_result d ON f.upload_id = d.upload_id
         """
         df = pd.read_sql(query, engine)
-        
-        # Ensure date is in proper format for filtering
         df['date'] = pd.to_datetime(df['date']).dt.date
         return df
     except Exception as e:
         st.error(f"Error fetching joined data from Supabase: {e}")
         return pd.DataFrame()
-
-def save_diagnosis_to_db(plant, disease, confidence, lat, lon, captured_dt, area_m2=0, severity=0.0):
-    # saves normalized data to supabase
-    # performs a single transaction across file_upload, geospatial_data, and diagnosis_result.
-    
-    engine = get_engine()
-    if engine is None:
-        return False
-    
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    
-    try:
-        new_id = uuid.uuid4()
-        
-        # file_upload
-        upload = FileUpload(
-            upload_id=new_id,
-            received_timestamp=datetime.now()
-        )
-        session.add(upload)
-        
-        # geospatial_data
-        geo = GeospatialData(
-            upload_id=new_id,
-            latitude=lat, 
-            longitude=lon,
-            elevation=0.0,
-            captured_timestamp=captured_dt or datetime.now()
-        )
-        session.add(geo)
-        
-        # 3. Detail: diagnosis_result
-        diag = DiagnosisResult(
-            upload_id=new_id,
-            crop_type=plant,
-            predicted_disease=disease,
-            confidence_score=confidence,
-            area_m2=area_m2,
-            severity=severity
-        )
-        session.add(diag)
-        
-        session.commit()
-        
-        # CRITICAL: Clear cache so the map updates instantly on next tab switch
-        st.cache_data.clear()
-        return True
-        
-    except Exception as e:
-        session.rollback()
-        st.error(f"Database Save Error: {e}")
-        return False
-    finally:
-        session.close()
-
-def create_initial_ticket(upload_id: uuid.UUID, lat: float, lon: float, captured_dt: datetime):
-    """Creates the initial FileUpload and Geospatial records."""
-    engine = get_engine()
-    if not engine: return False
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    try:
-        upload = FileUpload(
-            upload_id=upload_id,
-            received_timestamp=datetime.now(),
-            status="Solicitado"
-        )
-        session.add(upload)
-        geo = GeospatialData(
-            upload_id=upload_id,
-            latitude=lat,
-            longitude=lon,
-            elevation=0.0,
-            captured_timestamp=captured_dt or datetime.now()
-        )
-        session.add(geo)
-        session.commit()
-        return True
-    except Exception as e:
-        session.rollback()
-        print(f"Error creating ticket: {e}")
-        return False
-    finally:
-        session.close()
-
-def update_ticket_status(upload_id: uuid.UUID, status: str, plant: str = None, disease: str = None, 
-                         confidence: float = None, area_m2: float = 0.0, severity: float = 0.0):
-    """Updates status and creates DiagnosisResult when completed."""
-    engine = get_engine()
-    if not engine: return False
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    try:
-        upload = session.query(FileUpload).filter_by(upload_id=upload_id).first()
-        if upload:
-            upload.status = status
-            
-        if status == "Completado" and plant and disease:
-            diag = DiagnosisResult(
-                upload_id=upload_id,
-                crop_type=plant,
-                predicted_disease=disease,
-                confidence_score=confidence or 0.0,
-                area_m2=area_m2,
-                severity=severity
-            )
-            session.add(diag)
-            
-        session.commit()
-        return True
-    except Exception as e:
-        session.rollback()
-        print(f"Error updating ticket: {e}")
-        return False
-    finally:
-        session.close()
-
-def get_ticket_status(upload_id: uuid.UUID):
-    """Retrieves the current status and diagnosis of a ticket."""
-    engine = get_engine()
-    if not engine: return {"status": "Error", "disease": None}
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    try:
-        upload = session.query(FileUpload).filter_by(upload_id=upload_id).first()
-        if not upload:
-            return {"status": "Not_Found", "disease": None}
-            
-        result = {"status": upload.status, "disease": None, "confidence": None}
-        diag = session.query(DiagnosisResult).filter_by(upload_id=upload_id).first()
-        if diag:
-            result["disease"] = diag.predicted_disease
-            result["confidence"] = diag.confidence_score
-            
-        return result
-    except Exception as e:
-        return {"status": f"Error: {e}", "disease": None}
-    finally:
-        session.close()
-
-def update_map_fields(upload_id, area_m2: float, severity: float):
-    engine = get_engine()
-    if not engine: return False
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    try:
-        if isinstance(upload_id, str):
-            upload_id = uuid.UUID(upload_id)
-        diag = session.query(DiagnosisResult).filter_by(upload_id=upload_id).first()
-        if diag:
-            diag.area_m2 = area_m2
-            diag.severity = severity
-            session.commit()
-            return True
-        return False
-    except Exception as e:
-        session.rollback()
-        return False
-    finally:
-        session.close()
-
-

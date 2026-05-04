@@ -10,7 +10,7 @@ from distributed_pipeline.config import (
     SHARED_DATA_DIR, REDIS_HOST, REDIS_PORT, QUEUE_ROUTER, QUEUE_TOMATO, QUEUE_POTATO, BROKER_HOST, BROKER_PORT
 )
 from distributed_pipeline.schemas import InferenceTicket, WebhookPayload
-from utils.db_manager import create_initial_ticket, update_ticket_status, get_ticket_status
+from utils.db_core import create_initial_ticket, update_ticket_status, get_ticket_status
 
 app = FastAPI(title="AgriScanAI Broker")
 

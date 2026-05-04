@@ -1,5 +1,4 @@
 import json
-import requests
 import redis
 import traceback
 import torch
@@ -8,9 +7,10 @@ from torchvision import models, transforms
 from PIL import Image
 
 from distributed_pipeline.config import (
-    REDIS_HOST, REDIS_PORT, QUEUE_ROUTER, QUEUE_TOMATO, QUEUE_POTATO, 
-    BROKER_WEBHOOK_URL, MODELS_WEIGHTS_DIR
+    REDIS_HOST, REDIS_PORT, QUEUE_ROUTER, QUEUE_TOMATO, QUEUE_POTATO,
+    MODELS_WEIGHTS_DIR
 )
+from distributed_pipeline.worker_utils import send_webhook
 
 print("Starting Router Worker (Level 1)...")
 
@@ -46,18 +46,7 @@ except Exception as e:
 
 redis_client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
-def send_webhook(task_id: str, status: str, crop_type: str = None):
-    url = f"http://localhost:8000/webhook/status/{task_id}"
-    payload = {
-        "upload_id": task_id,
-        "status": status,
-        "crop_type": crop_type
-    }
-    try:
-        r = requests.patch(url, json=payload, timeout=5)
-        print(f"Webhook sent to broker: {status} ({r.status_code})")
-    except Exception as e:
-        print(f"Failed to send webhook to {url}: {e}")
+
 
 print("Router Worker is waiting for tasks...")
 while True:
@@ -78,7 +67,7 @@ while True:
             probs = torch.nn.functional.softmax(outputs, dim=1)
             conf, preds = torch.max(probs, 1)
             predicted_class = CLASS_NAMES[preds[0].item()]
-            confidence = float(conf[0].item()) * 100.0
+            confidence = float(conf[0].item())  # Keep in 0.0–1.0 range
             
         print(f"Router prediction: {predicted_class} ({confidence:.2f}%)")
         

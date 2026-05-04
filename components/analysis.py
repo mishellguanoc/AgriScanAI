@@ -1,8 +1,7 @@
 import streamlit as st
 from PIL import Image
-from models.crop_classifier import predict_crop
 from utils.image_utils import extract_exif_data
-from utils.db_manager import save_diagnosis_to_db, update_map_fields
+from utils.db_manager import update_map_fields
 from utils.config import BROKER_CLIENT_URL
 
 
@@ -129,14 +128,7 @@ def analysis_page():
                     severity = st.slider("Severity Level", 0.0, 1.0, 0.5)
 
                 if st.button("📍 Submit to Epidemiological Map", type="primary", use_container_width=True):
-                    if "upload_id" in res:
-                        success = update_map_fields(res["upload_id"], area, severity)
-                    else:
-                        success = save_diagnosis_to_db(
-                            plant=res["plant"], disease=res["disease"],
-                            confidence=res["confidence"], lat=res["lat"], lon=res["lon"],
-                            captured_dt=res["dt"], area_m2=area, severity=severity
-                        )
+                    success = update_map_fields(res["upload_id"], area, severity)
                     if success:
                         st.balloons()
                         st.success("✅ Successfully shared with the global database!")
