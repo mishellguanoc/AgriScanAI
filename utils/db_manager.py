@@ -7,6 +7,7 @@ Streamlit-specific wrappers (caching, error display, cache invalidation).
 
 import streamlit as st
 import pandas as pd
+from utils.text_utils import format_label
 
 # Re-export everything from db_core so existing imports elsewhere still work
 from utils.db_core import (
@@ -87,7 +88,7 @@ def fetch_diagnosis_context() -> str:
     )
     for _, row in grouped.iterrows():
         lines.append(
-            f"  • {row['plant']} — {row['disease']}: "
+            f"  • {format_label(row['plant'])} — {format_label(row['disease'])}: "
             f"{int(row['detecciones'])} detecciones, "
             f"severidad promedio {row['severidad_promedio']*100:.1f}%, "
             f"área promedio {row['area_promedio_m2']:.0f} m²"
@@ -101,7 +102,7 @@ def fetch_diagnosis_context() -> str:
         lat_str = f"{row['lat']:.4f}" if pd.notna(row['lat']) else "N/A"
         lon_str = f"{row['lon']:.4f}" if pd.notna(row['lon']) else "N/A"
         lines.append(
-            f"  [{row['date']}] {row['plant']} / {row['disease']} — "
+            f"  [{row['date']}] {format_label(row['plant'])} / {format_label(row['disease'])} — "
             f"severidad {row['severity']*100:.1f}%, "
             f"área {row['area_m2']} m², "
             f"ubicación ({lat_str}, {lon_str})"

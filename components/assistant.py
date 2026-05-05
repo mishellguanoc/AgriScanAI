@@ -78,7 +78,7 @@ def assistant_page():
         try:
             faiss_manager = _get_faiss()
         except Exception as e:
-            st.error(f"⚠️ Could not load knowledge base: {e}")
+            st.error(f"Could not load knowledge base: {e}")
             st.info("Run `scripts/build_kb.py` to generate the index.")
             return
 
@@ -92,12 +92,12 @@ def assistant_page():
             role = st.radio(
                 "Profile",
                 ["beginner", "expert"],
-                format_func=lambda x: "👨‍🌾 Farmer" if x == "beginner" else "👨‍🔬 Agronomist",
+                format_func=lambda x: "Farmer" if x == "beginner" else "Agronomist",
                 horizontal=True,
                 label_visibility="collapsed"
             )
         with col_clear:
-            if st.button("🗑 Clear", use_container_width=True):
+            if st.button("Clear", use_container_width=True):
                 st.session_state.rag_messages = []
                 st.rerun()
 
@@ -118,21 +118,21 @@ def assistant_page():
                 with st.chat_message(msg["role"]):
                     st.markdown(msg["content"])
                     if msg.get("sources"):
-                        st.caption("📄 " + " · ".join(msg["sources"]))
+                        st.caption("Source: " + " · ".join(msg["sources"]))
 
         # ── Input con alturas iguales ──────────────────────────────────────
         col_input, col_btn = st.columns([5, 1])
         with col_input:
             query = st.text_input(
             "query",
-            placeholder="🌱 e.g. ¿Qué síntomas tiene el tizón tardío en papa?",
+            placeholder="e.g. What are the symptoms of potato late blight?",
             label_visibility="collapsed",
             key="rag_input_field"
     )
 
         with col_btn:
             # Quitar type="primary" para que tome los estilos personalizados
-            send = st.button("➤", use_container_width=True)
+            send = st.button("Send", use_container_width=True)
 
         # ── Procesar ───────────────────────────────────────────────────────
         if send and query.strip():
@@ -162,7 +162,7 @@ def assistant_page():
                 except Exception as e:
                     st.session_state.rag_messages.append({
                         "role": "assistant",
-                        "content": f"⚠️ Error: {e}",
+                        "content": f"Error: {e}",
                         "sources": []
                     })
             st.rerun()

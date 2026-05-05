@@ -7,7 +7,7 @@ from utils.db_manager import fetch_all_records
 from utils.pwa_utils import enable_pwa
 
 # =========================
-# ⚙️ CONFIG SIEMPRE ARRIBA
+# CONFIG SIEMPRE ARRIBA
 # =========================
 st.set_page_config(
     page_title="AgriScan AI",
@@ -16,12 +16,6 @@ st.set_page_config(
 
 # Enable PWA features
 enable_pwa()
-
-# =========================
-# 🌙 TEMA (POR DEFECTO OSCURO)
-# =========================
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = True
 
 # Usaremos variables de Streamlit en el CSS para máxima compatibilidad.
 
@@ -36,7 +30,7 @@ st.markdown("""
 :root {
     --glass-bg: var(--secondary-background-color);
     --glass-border: rgba(128, 128, 128, 0.15);
-    --accent-gradient: linear-gradient(135deg, #2E7D32, #1E88E5);
+    --accent-gradient: linear-gradient(135deg, #2E7D32, #1B5E20);
 }
 
 .stApp {
@@ -88,7 +82,7 @@ div[data-testid="stVerticalBlock"] > div > div[data-testid="stVerticalBlock"] {
 
 /* ===== SELECTBOX & INPUTS ===== */
 div[data-baseweb="select"] > div, input {
-    background-color: rgba(255, 255, 255, 0.05) !important;
+    background-color: var(--background-color) !important;
     border: 1px solid var(--glass-border) !important;
     border-radius: 12px !important;
     color: var(--text-color) !important;
@@ -104,13 +98,13 @@ div[data-baseweb="select"] > div:hover, input:focus {
 .stButton > button {
     background: var(--accent-gradient) !important;
     color: white !important;
-    border: none !important;
-    border-radius: 14px !important;
-    padding: 12px 24px !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
     font-weight: 600 !important;
     font-family: 'Outfit', sans-serif !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.2s ease !important;
 }
 
 .stButton > button:hover {
@@ -134,7 +128,7 @@ button[aria-selected="true"] {
 
 /* ===== SIDEBAR ===== */
 section[data-testid="stSidebar"] {
-    background: rgba(14, 17, 23, 0.6) !important;
+    background-color: var(--secondary-background-color) !important;
     backdrop-filter: blur(20px);
     border-right: 1px solid var(--glass-border);
 }
@@ -153,15 +147,7 @@ footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
-# 🚀 PRELOAD DATA
-# =========================
-initial_data = fetch_all_records()
-if not initial_data.empty:
-    get_cached_map_html(initial_data)
-
-# =========================
-# 🧱 UI
+# UI
 # =========================
 show_header()
 

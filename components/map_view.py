@@ -7,6 +7,7 @@ import folium
 from folium.plugins import MarkerCluster, HeatMap
 from utils.map_export import export_map_to_jpg
 from utils.db_manager import fetch_all_records
+from utils.text_utils import format_label
 import os
 
 
@@ -29,8 +30,8 @@ def get_cached_map_html(filtered_df):
 
     for _, row in plot_df.iterrows():
         popup_text = f"""
-        <b>Plant:</b> {row['plant']}<br>
-        <b>Disease:</b> {row['disease']}<br>
+        <b>Plant:</b> {format_label(row['plant'])}<br>
+        <b>Disease:</b> {format_label(row['disease'])}<br>
         <b>Affected Area:</b> {row['area_m2']} m²<br>
         <b>Severity:</b> {row['severity']*100:.1f}%<br>
         <b>Registration:</b> {row['date']}
@@ -71,14 +72,16 @@ def map_page():
         plant_filter = st.selectbox(
             "Plant Type",
             ["All"] + sorted(data["plant"].unique().tolist()),
-            key="plant_filter"
+            key="plant_filter",
+            format_func=lambda x: format_label(x) if x != "All" else "All"
         )
 
     with col2:
         disease_filter = st.selectbox(
             "Disease",
             ["All"] + sorted(data["disease"].unique().tolist()),
-            key="disease_filter"
+            key="disease_filter",
+            format_func=lambda x: format_label(x) if x != "All" else "All"
         )
 
     with col3:

@@ -30,7 +30,7 @@ def show_header():
     st.markdown("""
         <div style="
             height: 2px;
-            background: linear-gradient(to right, transparent, #2E7D32, #1E88E5, transparent);
+            background: linear-gradient(to right, transparent, #2E7D32, #1B5E20, transparent);
             margin: 12px 0 24px 0;
             opacity: 0.8;
         "></div>
