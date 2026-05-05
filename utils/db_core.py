@@ -14,6 +14,7 @@ from sqlalchemy.dialects.postgresql import UUID
 import uuid
 import os
 from datetime import datetime
+from utils.config import _get_secret
 
 Base = declarative_base()
 
@@ -52,8 +53,8 @@ class DiagnosisResult(Base):
 
 
 def get_engine():
-    """Returns a SQLAlchemy engine from env var. Returns None if not configured."""
-    db_url = os.getenv("SUPABASE_DB_URL")
+    """Returns a SQLAlchemy engine, preferring st.secrets over env vars."""
+    db_url = _get_secret("SUPABASE_DB_URL")
     if db_url:
         return create_engine(db_url)
     return None
@@ -75,10 +76,10 @@ def create_initial_ticket(upload_id: uuid.UUID, lat: float, lon: float, captured
         session.add(upload)
         geo = GeospatialData(
             upload_id=upload_id,
-            latitude=lat if lat else None,
-            longitude=lon if lon else None,
+            latitude=lat if lat is not None else None,
+            longitude=lon if lon is not None else None,
             elevation=0.0,
-            captured_timestamp=captured_dt or datetime.now()
+            captured_timestamp=captured_dt if captured_dt is not None else datetime.now()
         )
         session.add(geo)
         session.commit()

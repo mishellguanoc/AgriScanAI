@@ -12,7 +12,12 @@ import os
 
 @st.cache_data
 def get_cached_map_html(filtered_df):
-    # cached
+    # Filter out records without valid coordinates
+    plot_df = filtered_df.dropna(subset=['lat', 'lon'])
+    
+    if plot_df.empty:
+        return "<h3>No GPS data available for the selected filters.</h3>"
+
     # CREAR MAPA
     m = folium.Map(
         location=[-0.8, -78.5],
@@ -22,7 +27,7 @@ def get_cached_map_html(filtered_df):
 
     cluster = MarkerCluster().add_to(m)
 
-    for _, row in filtered_df.iterrows():
+    for _, row in plot_df.iterrows():
         popup_text = f"""
         <b>Plant:</b> {row['plant']}<br>
         <b>Disease:</b> {row['disease']}<br>
@@ -42,7 +47,7 @@ def get_cached_map_html(filtered_df):
         ).add_to(cluster)
 
     # HEATMAP
-    heat_data = filtered_df[["lat","lon","severity"]].values.tolist()
+    heat_data = plot_df[["lat","lon","severity"]].values.tolist()
     HeatMap(heat_data, radius=10, blur=8, max_zoom=10).add_to(m)
 
     return m._repr_html_()

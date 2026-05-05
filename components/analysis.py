@@ -1,13 +1,49 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from PIL import Image
 from utils.image_utils import extract_exif_data
-from utils.db_manager import update_map_fields
+from utils.db_manager import update_map_fields, clear_db_cache
 from utils.config import BROKER_CLIENT_URL
 
 
 def analysis_page():
 
     st.title("Crop Image Analysis")
+
+    # --- Automatic Geolocation Fetch (Page Load) ---
+    if "geo_lat" not in st.session_state:
+        st.session_state.geo_lat = None
+    if "geo_lon" not in st.session_state:
+        st.session_state.geo_lon = None
+
+    # Trigger GPS fetch with a small delay to avoid prompt overlapping
+    components.html(
+        """
+        <script>
+        setTimeout(() => {
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lon = pos.coords.longitude;
+                    window.parent.postMessage({
+                        type: 'streamlit:set_component_value',
+                        value: {lat: lat, lon: lon},
+                        is_automatic: true
+                    }, '*');
+                },
+                (err) => { console.warn("GPS Fetch failed or denied."); },
+                options
+            );
+        }, 2000);
+        </script>
+        """,
+        height=0
+    )
 
     with st.container():
         st.write("### Analysis Configuration")
@@ -48,11 +84,24 @@ def analysis_page():
 
             with col_meta:
                 st.write("#### Metadata Extraction")
-                lat, lon, cap_dt = extract_exif_data(image_file)
-                if lat and lon:
-                    st.success(f"📍 GPS Found: {lat:.4f}, {lon:.4f}")
+                lat_exif, lon_exif, cap_dt = extract_exif_data(image_file)
+                
+                lat = lat_exif if lat_exif is not None else st.session_state.geo_lat
+                lon = lon_exif if lon_exif is not None else st.session_state.geo_lon
+
+                # Manual Override
+                st.write("---")
+                col_geo1, col_geo2 = st.columns(2)
+                with col_geo1:
+                    final_lat = st.number_input("Latitude", value=float(lat) if lat else 0.0, format="%.6f")
+                with col_geo2:
+                    final_lon = st.number_input("Longitude", value=float(lon) if lon else 0.0, format="%.6f")
+
+                if final_lat != 0.0:
+                    st.success(f"📍 Location Ready: {final_lat:.4f}, {final_lon:.4f}")
                 else:
-                    st.info("📍 No GPS found. Data will be saved without coordinates.")
+                    st.info("📍 No GPS found. Tap the button above or enter coordinates manually.")
+                
                 st.write(f"📅 captured_at: `{cap_dt.strftime('%Y-%m-%d %H:%M:%S')}`")
 
         if st.button("🚀 Run AI Analysis", use_container_width=True):
@@ -65,8 +114,9 @@ def analysis_page():
                     image_file.seek(0)
                     files = {"image": (image_file.name, image_file, "image/jpeg")}
                     data = {
-                        "latitude": lat if lat else 0.0, 
-                        "longitude": lon if lon else 0.0, 
+                        "latitude": final_lat, 
+                        "longitude": final_lon, 
+                        "captured_at": cap_dt.isoformat() if cap_dt else None,
                         "model": model_choice
                     }
                     res = requests.post(url_diagnose, files=files, data=data)
@@ -130,6 +180,7 @@ def analysis_page():
                 if st.button("📍 Submit to Epidemiological Map", type="primary", use_container_width=True):
                     success = update_map_fields(res["upload_id"], area, severity)
                     if success:
+                        clear_db_cache()
                         st.balloons()
                         st.success("✅ Successfully shared with the global database!")
                         del st.session_state["last_analysis"]

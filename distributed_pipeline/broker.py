@@ -25,6 +25,7 @@ async def diagnose(
     image: UploadFile = File(...),
     latitude: float = Form(0.0),
     longitude: float = Form(0.0),
+    captured_at: str = Form(None),
     model: str = Form("Crop Type Detection")
 ):
     if not redis_client:
@@ -43,7 +44,15 @@ async def diagnose(
     upload_id = uuid.uuid4()
     
     # 1. DB Save 
-    dt = datetime.now()
+    dt = None
+    if captured_at:
+        try:
+            dt = datetime.fromisoformat(captured_at)
+        except Exception:
+            dt = datetime.now()
+    else:
+        dt = datetime.now()
+        
     db_success = create_initial_ticket(upload_id, latitude, longitude, dt)
     if not db_success:
         raise HTTPException(status_code=500, detail="Failed to create database record")

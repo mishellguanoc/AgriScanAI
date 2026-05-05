@@ -4,7 +4,7 @@ from components.analysis import analysis_page
 from components.assistant import assistant_page
 from components.map_view import map_page, get_cached_map_html
 from utils.db_manager import fetch_all_records
-
+from utils.pwa_utils import enable_pwa
 
 # =========================
 # ⚙️ CONFIG SIEMPRE ARRIBA
@@ -13,6 +13,9 @@ st.set_page_config(
     page_title="AgriScan AI",
     layout="wide"
 )
+
+# Enable PWA features
+enable_pwa()
 
 # =========================
 # 🌙 TEMA (POR DEFECTO OSCURO)

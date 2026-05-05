@@ -5,12 +5,7 @@ Asistente agronómico con RAG (FAISS + Groq/LLaMA 3).
 
 import streamlit as st
 from rag.core import load_faiss_index, ask
-
-st.set_page_config(
-    page_title="AgriScanAI",
-    page_icon="assets/icon.png",
-    layout="centered",
-)
+from utils.db_manager import fetch_diagnosis_context
 
 @st.cache_resource
 def _get_faiss():
@@ -151,11 +146,13 @@ def assistant_page():
 
             with st.spinner("Consulting knowledge base..."):
                 try:
+                    db_context = fetch_diagnosis_context()
                     result = ask(
                         query=query,
                         faiss_manager=faiss_manager,
                         expertise=role,
-                        history=history
+                        history=history,
+                        db_context=db_context,
                     )
                     st.session_state.rag_messages.append({
                         "role": "assistant",
