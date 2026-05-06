@@ -1,10 +1,18 @@
 import streamlit as st
+import streamlit.components.v1 as st_components
 from components.header import show_header
 from components.analysis import analysis_page
 from components.assistant import assistant_page
 from components.map_view import map_page, get_cached_map_html
 from utils.db_manager import fetch_all_records
 from utils.pwa_utils import enable_pwa
+
+# Hide developer options in the 3-dot menu (theme is handled in-app).
+try:
+    st.set_option("client.toolbarMode", "viewer")
+except Exception:
+    # Older/newer Streamlit versions may not support this option.
+    pass
 
 # =========================
 # CONFIG SIEMPRE ARRIBA
@@ -14,8 +22,102 @@ st.set_page_config(
     layout="wide"
 )
 
+# Ensure mobile browsers use real device width so CSS media queries work.
+st.markdown(
+    '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">',
+    unsafe_allow_html=True,
+)
+
 # Enable PWA features
 enable_pwa()
+
+from streamlit_js_eval import streamlit_js_eval
+
+
+# ── Consent overlay — pure JS, no rerun, appears while app loads ────────
+if not st.session_state.get("permissions_acknowledged", False):
+    consent = streamlit_js_eval(
+        js_expressions="localStorage.getItem('agriscan_consent')",
+        key="consent_check",
+    )
+    if consent == "true":
+        st.session_state.permissions_acknowledged = True
+
+st_components.html("""
+<script>
+(function() {
+    var pd;
+    try { pd = window.parent.document; } catch(e) { return; }
+
+    // Already consented — skip entirely
+    if (localStorage.getItem('agriscan_consent') === 'true') return;
+
+    // Already injected on this render cycle
+    if (pd.getElementById('agriscan-consent-overlay')) return;
+
+    // Build the overlay
+    var ov = pd.createElement('div');
+    ov.id = 'agriscan-consent-overlay';
+    ov.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.55);z-index:999999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity 0.25s ease;';
+
+    ov.innerHTML = '<div style="background:var(--background-color,#0e1117);border:1px solid rgba(128,128,128,0.15);border-radius:20px;padding:32px 28px 26px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);font-family:Inter,sans-serif;color:var(--text-color,#fafafa);">'
+      + '<h3 style="font-family:Outfit,sans-serif;font-weight:700;margin:0 0 14px 0;">Welcome to AgriScan AI</h3>'
+      + '<p style="opacity:0.8;margin-bottom:20px;font-size:0.9rem;line-height:1.5;">To provide accurate epidemiological tracking and real-time crop analysis, this application requires access to:</p>'
+      + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">'
+        + '<div style="background:rgba(46,125,50,0.1);border-radius:8px;padding:10px;color:#2E7D32;flex-shrink:0;">'
+          + '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>'
+        + '</div>'
+        + '<div><b style="font-family:Outfit,sans-serif;">Camera</b><br><span style="font-size:0.8rem;opacity:0.7;">High-resolution images of crop samples for AI diagnosis.</span></div>'
+      + '</div>'
+      + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">'
+        + '<div style="background:rgba(232,163,23,0.1);border-radius:8px;padding:10px;color:#E8A317;flex-shrink:0;">'
+          + '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+        + '</div>'
+        + '<div><b style="font-family:Outfit,sans-serif;">Location</b><br><span style="font-size:0.8rem;opacity:0.7;">Geotag findings for the country-wide epidemiological map.</span></div>'
+      + '</div>'
+      + '<p style="font-size:0.72rem;opacity:0.45;font-style:italic;margin-bottom:20px;">Your data is securely processed and used exclusively for agricultural intelligence.</p>'
+      + '<button id="agriscan-consent-btn" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#2E7D32,#1B5E20);color:#fff;font-family:Outfit,sans-serif;font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:opacity 0.2s;">I Understand</button>'
+    + '</div>';
+
+    pd.body.appendChild(ov);
+
+    // Fade in
+    requestAnimationFrame(function() { ov.style.opacity = '1'; });
+
+    // Button click handler
+    pd.getElementById('agriscan-consent-btn').addEventListener('click', function() {
+        // 1. Persist consent
+        localStorage.setItem('agriscan_consent', 'true');
+
+        // 2. Fade out and remove overlay
+        ov.style.opacity = '0';
+        setTimeout(function() { ov.remove(); }, 250);
+
+        // 3. Request browser permissions
+        try { navigator.geolocation.getCurrentPosition(function(){}, function(){}); } catch(e) {}
+        try {
+            navigator.mediaDevices.getUserMedia({video:true})
+                .then(function(s){ s.getTracks().forEach(function(t){t.stop();}); })
+                .catch(function(){});
+        } catch(e) {}
+    });
+})();
+</script>
+""", height=0)
+
+@st.cache_data(show_spinner=False)
+def _warm_db_cache() -> bool:
+    # `fetch_all_records` is already cached; this ensures the first DB call happens
+    # before any visible UI is rendered.
+    fetch_all_records()
+    return True
+
+
+if not st.session_state.get("_agriscan_db_warmed", False):
+    _warm_db_cache()
+    st.session_state["_agriscan_db_warmed"] = True
+    # Show only the consent overlay on first paint; render the app after cache is warm.
+    st.rerun()
 
 # Usaremos variables de Streamlit en el CSS para máxima compatibilidad.
 
@@ -24,9 +126,51 @@ enable_pwa()
 # =========================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap');
+/* Font options that stay close to the existing "Outfit" look:
+   - Urbanist (implemented): slightly taller/more elegant geometry
+   - Plus Jakarta Sans (fallback option): `family=Plus+Jakarta+Sans:wght@400;500;600;700;800` */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Urbanist:wght@400;500;600;700;800&display=swap');
 
 /* ===== CORE STYLING ===== */
+/* Remove excessive top padding to bring content up */
+.stApp [data-testid="stDecoration"] {
+    display: none !important;
+}
+
+.stApp header[data-testid="stHeader"] {
+    display: block !important;
+    visibility: visible !important;
+    overflow: visible !important; /* avoid clipping the 3-dot popover */
+}
+
+.stApp [data-testid="stToolbar"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    overflow: visible !important; /* avoid clipping the 3-dot popover */
+}
+
+.stApp [data-testid="stAppViewContainer"] {
+    padding-top: 0 !important;
+}
+
+.stApp .block-container {
+    margin-top: 0 !important;
+}
+
+.block-container {
+    padding-top: 0.5rem !important;
+}
+
+@media screen and (max-width: 768px) {
+    .block-container {
+        padding-top: 0.25rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+}
+
 :root {
     --glass-bg: var(--secondary-background-color);
     --glass-border: rgba(128, 128, 128, 0.15);
@@ -36,37 +180,100 @@ st.markdown("""
 .stApp {
     background-color: transparent;
     font-family: 'Inter', sans-serif;
+    /* Slightly increase baseline text size across the app */
+    font-size: 15px;
 }
 
 /* ===== TITLES & HEADERS ===== */
 h1, h2, h3, [data-testid="stHeader"] {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Urbanist', 'Outfit', sans-serif !important;
     letter-spacing: -0.02em;
 }
 
 h1 { font-weight: 800 !important; }
 h2 { font-weight: 700 !important; }
 
-/* ===== LOGO FIX (NO CLIPPING) ===== */
-/* Remove any rounding or overflow from the logo container */
+/* ===== NORMALIZED PAGE TITLE BLOCK ===== */
+.agriscan-page-title {
+    margin: 0 0 10px 0;
+}
+
+.agriscan-page-title h1 {
+    margin: 0 0 6px 0 !important;
+    font-family: 'Urbanist', 'Outfit', sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.06 !important;
+}
+
+/* Standard subtitle styling (based on Crop Analysis) */
+.agriscan-page-subtitle {
+    margin: 0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.98rem;
+    color: var(--text-color);
+    opacity: 0.72;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+/* Make helper descriptions/captions readable (used across tabs) */
+.stCaption,
+[data-testid="stCaptionContainer"],
+[data-testid="stCaptionContainer"] p,
+.stCaption p {
+    color: var(--text-color) !important;
+    opacity: 0.76 !important;
+    font-weight: 500 !important;
+    font-size: 0.96rem !important;
+    line-height: 1.45 !important;
+}
+
+.section-desc,
+.section-header .section-text .section-desc,
+.workflow-step .step-label,
+.step-desc,
+.dash-card-subtitle {
+    color: var(--text-color) !important;
+    opacity: 0.76 !important;
+    font-weight: 500 !important;
+    font-size: 0.96rem !important;
+    line-height: 1.45 !important;
+}
+
+/* Widget labels (e.g., "Choose input method") skew small by default */
+div[data-testid="stRadio"] [data-testid="stWidgetLabel"] p,
+div[data-testid="stRadio"] label p {
+    font-size: 0.96rem !important;
+    line-height: 1.35 !important;
+    opacity: 0.9 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .agriscan-page-title {
+        margin-bottom: 8px;
+    }
+    .agriscan-page-title h1 {
+        font-size: 1.55rem !important;
+        margin-bottom: 4px !important;
+    }
+    .agriscan-page-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== IMAGE FIXES ===== */
 [data-testid="stImage"] {
     overflow: visible !important;
 }
 
 [data-testid="stImage"] > div {
-    border-radius: 0 !important;
-    overflow: visible !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
 }
 
 [data-testid="stImage"] img {
-    border-radius: 0 !important;
-    mix-blend-mode: difference;
-    filter: brightness(1.2); /* Boost visibility */
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-[data-testid="stImage"] img:hover {
-    transform: scale(1.05);
+    border-radius: 14px !important;
 }
 
 /* ===== CARDS & CONTAINERS ===== */
@@ -114,16 +321,66 @@ div[data-baseweb="select"] > div:hover, input:focus {
 }
 
 /* ===== TABS ===== */
-button[data-baseweb="tab"] {
+div[data-baseweb="tab-list"] {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+}
+
+/* BaseWeb tabs wrap the label in inner spans; style both the button and its children. */
+button[data-baseweb="tab"],
+div[data-baseweb="tab"] {
     font-family: 'Outfit', sans-serif !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
+    font-size: clamp(0.9rem, 0.52vw + 0.6rem, 1.25rem) !important;
     color: var(--text-color) !important;
-    opacity: 0.7;
+    opacity: 0.75;
+    padding: 14px 18px !important;
+    width: 100% !important;
+    justify-content: center !important;
+    border-radius: 12px 12px 0 0 !important;
+    transition: all 0.2s ease !important;
+    letter-spacing: -0.01em !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-height: 56px !important;
+}
+
+button[data-baseweb="tab"] *,
+div[data-baseweb="tab"] * {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    white-space: inherit !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+button[data-baseweb="tab"]:hover {
+    opacity: 0.9;
+    background-color: rgba(128,128,128,0.05);
 }
 
 button[aria-selected="true"] {
     opacity: 1 !important;
+    color: #2E7D32 !important;
+    font-weight: 700 !important;
     border-bottom: 3px solid #2E7D32 !important;
+    background-color: rgba(46,125,50,0.05);
+}
+
+@media screen and (max-width: 768px) {
+    button[data-baseweb="tab"],
+    div[data-baseweb="tab"] {
+        font-size: 1.05rem !important;
+        padding: 12px 10px !important;
+        min-height: 48px !important;
+    }
 }
 
 /* ===== SIDEBAR ===== */
@@ -158,10 +415,14 @@ tabs = st.tabs([
 ])
 
 with tabs[0]:
-    analysis_page()
+    _, col_main, _ = st.columns([0.08, 0.84, 0.08])
+    with col_main:
+        analysis_page()
 
 with tabs[1]:
     assistant_page()
 
 with tabs[2]:
-    map_page()
+    _, col_main, _ = st.columns([0.08, 0.84, 0.08])
+    with col_main:
+        map_page()

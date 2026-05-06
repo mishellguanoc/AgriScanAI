@@ -6,20 +6,27 @@
 echo "Starting secure tunnel for AgriScan AI..."
 echo "------------------------------------------------"
 
+# Ensure cloudflared is downloaded
+if [ ! -f "cloudflared-linux-amd64" ]; then
+    echo "Downloading Cloudflare Tunnel..."
+    wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+    chmod +x cloudflared-linux-amd64
+fi
+
 # Create a temporary log file
 TEMP_LOG=$(mktemp)
-# Run SSH in the background
-ssh -o StrictHostKeyChecking=no -R 80:localhost:8501 nokey@localhost.run > "$TEMP_LOG" 2>&1 &
-SSH_PID=$!
+# Run Cloudflare Tunnel in the background
+./cloudflared-linux-amd64 tunnel --url http://localhost:8501 > "$TEMP_LOG" 2>&1 &
+TUNNEL_PID=$!
 
 # Wait for the URL
 echo "Generating public link..."
 URL=""
 while [ -z "$URL" ]; do
     sleep 1
-    URL=$(grep -oE "https://[a-zA-Z0-9.-]+\.lhr\.life" "$TEMP_LOG" | head -n 1 | tr -d '[:space:]')
+    URL=$(grep -oE "https://[a-zA-Z0-9.-]+\.trycloudflare\.com" "$TEMP_LOG" | head -n 1 | tr -d '[:space:]')
     
-    if ! kill -0 $SSH_PID 2>/dev/null; then
+    if ! kill -0 $TUNNEL_PID 2>/dev/null; then
         echo "Error: Tunnel failed."
         rm "$TEMP_LOG"
         exit 1
@@ -43,5 +50,5 @@ echo -e "\033[1;4;34m$URL\033[0m"
 echo "------------------------------------------------"
 echo "Press Ctrl+C to close the tunnel."
 
-trap "kill $SSH_PID; rm $TEMP_LOG; exit" INT
+trap "kill $TUNNEL_PID; rm $TEMP_LOG; exit" INT
 wait

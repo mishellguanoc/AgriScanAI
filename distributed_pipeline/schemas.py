@@ -16,3 +16,5 @@ class WebhookPayload(BaseModel):
     confidence_score: Optional[float] = None
     area_m2: Optional[float] = 0.0
     severity: Optional[float] = 0.0
+    crop_type_verified: Optional[bool] = None
+    router_crop_prediction: Optional[str] = None

@@ -142,3 +142,114 @@ INSTRUCCIONES IMPORTANTES:
         "answer": response.choices[0].message.content,
         "sources": sources
     }
+
+
+# ── System prompt for the inline diagnosis chatbot ─────────────────────────
+SYSTEM_ANALYSIS = """You are an expert agronomic field advisor embedded in the AgriScan AI diagnostic platform.
+You have just received the results of an AI-powered crop disease analysis, including the predicted disease, model confidence score, GPS coordinates, and reverse-geocoded location data.
+
+Your role:
+1. Provide a thorough, actionable agronomic analysis of the diagnosed condition.
+2. Consider the geographic region and local climate when recommending treatments, resistant cultivars, and prevention strategies.
+3. If coordinates place the field in a known agricultural region (e.g., Ecuadorian highlands, coastal lowlands), tailor advice to that agroecological zone.
+4. Include: disease description, likely causal pathogen, favorable conditions, recommended chemical/biological treatments, cultural practices, and monitoring steps.
+5. If the crop appears healthy, confirm it and suggest preventive best practices for the region.
+6. Keep answers clear, structured with headers, and professional.
+7. Always respond in the same language the user writes in. Default to English unless the user writes in Spanish or another language."""
+
+
+def ask_diagnosis_analysis(
+    query: str,
+    faiss_manager: FAISSManager,
+    diagnosis_context: str,
+    history: list = None,
+    db_context: str = "",
+) -> dict:
+    """
+    Specialized RAG pipeline for the inline diagnosis chatbot in the
+    Crop Analysis tab.  Differs from `ask()` in that it:
+      - Uses a diagnosis-oriented system prompt (SYSTEM_ANALYSIS)
+      - Always injects the current scan's diagnosis context
+      - Searches FAISS for disease-specific agronomic knowledge
+      - Produces structured, region-aware field recommendations
+
+    Args:
+        query:              User question or 'auto' for auto-generated report
+        faiss_manager:      Loaded FAISSManager instance
+        diagnosis_context:  Text from build_diagnosis_context()
+        history:            Chat history [{role, content}, ...]
+        db_context:         Epidemiological DB summary (optional)
+
+    Returns:
+        {"answer": str, "sources": list[str]}
+    """
+    if history is None:
+        history = []
+
+    api_key = GROQ_API_KEY
+    if not api_key:
+        return {
+            "answer": "Groq API key not configured. Check .streamlit/secrets.toml.",
+            "sources": []
+        }
+
+    # 1. Semantic retrieval — search for disease-specific content
+    retrieved = retrieve(query, faiss_manager)
+
+    # 2. Build FAISS context
+    if retrieved:
+        faiss_context = "\n\n---\n\n".join([
+            f"[Source: {c['source']} | Relevance: {c['similarity_score']:.2f}]\n{c['text']}"
+            for c in retrieved
+        ])
+        sources = list(dict.fromkeys(c["source"] for c in retrieved))
+    else:
+        faiss_context = "No directly matching documents found in the knowledge base."
+        sources = []
+
+    # 3. Combine all context layers
+    context_parts = [diagnosis_context]
+    if db_context:
+        context_parts.append(
+            "### REAL-TIME EPIDEMIOLOGICAL DATA (platform database)\n\n" + db_context
+        )
+    context_parts.append(
+        "### AGRONOMIC KNOWLEDGE BASE\n\n" + faiss_context
+    )
+    context = "\n\n".join(context_parts)
+
+    # 4. Build messages
+    user_message = f"""You have access to the following diagnosis results and agronomic reference material. READ ALL CONTEXT CAREFULLY before responding.
+
+CONTEXT:
+{context}
+
+USER QUESTION: {query}
+
+INSTRUCTIONS:
+1. USE the diagnosis context (plant type, disease, confidence, location) to frame your analysis.
+2. If location data is available, tailor recommendations to the region's climate, altitude, and typical growing conditions.
+3. USE the agronomic knowledge base to provide scientifically accurate recommendations.
+4. If real-time epidemiological data is available, mention relevant regional trends.
+5. Structure your response with clear sections (e.g., Diagnosis Summary, Pathogen Info, Treatment, Prevention).
+6. Be actionable — give specific product names, dosages, and timing when possible.
+7. Respond in the same language the user writes in."""
+
+    messages = [{"role": "system", "content": SYSTEM_ANALYSIS}]
+    for h in history:
+        messages.append({"role": h["role"], "content": h["content"]})
+    messages.append({"role": "user", "content": user_message})
+
+    # 5. Call Groq
+    client = Groq(api_key=api_key)
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages,
+        max_tokens=1200,
+        temperature=0.3
+    )
+
+    return {
+        "answer": response.choices[0].message.content,
+        "sources": sources
+    }

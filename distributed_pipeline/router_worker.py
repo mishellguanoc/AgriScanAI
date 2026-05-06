@@ -72,19 +72,22 @@ while True:
         print(f"Router prediction: {predicted_class} ({confidence:.2f}%)")
         
         if predicted_class == 'Background':
-            send_webhook(task_id, "Desechado", "Background")
+            send_webhook(task_id, "Desechado", "Background",
+                         crop_type_verified=False, router_crop_prediction="Background")
             print(f"Dropped {task_id} as background.")
             
         elif predicted_class == 'Tomato':
             ticket["crop_type"] = "Tomato"
             redis_client.rpush(QUEUE_TOMATO, json.dumps(ticket))
-            send_webhook(task_id, "Enrutado", "Tomato")
+            send_webhook(task_id, "Enrutado", "Tomato",
+                         crop_type_verified=True, router_crop_prediction="Tomato")
             print(f"Routed {task_id} to Tomato Worker.")
             
         elif predicted_class == 'Potato':
             ticket["crop_type"] = "Potato"
             redis_client.rpush(QUEUE_POTATO, json.dumps(ticket))
-            send_webhook(task_id, "Enrutado", "Potato")
+            send_webhook(task_id, "Enrutado", "Potato",
+                         crop_type_verified=True, router_crop_prediction="Potato")
             print(f"Routed {task_id} to Potato Worker.")
             
     except Exception as e:

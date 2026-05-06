@@ -7,7 +7,7 @@ The Streamlit-specific functions (fetch_all_records, save_diagnosis_to_db)
 remain in db_manager.py which imports from here.
 """
 
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.dialects.postgresql import UUID
@@ -24,6 +24,7 @@ class FileUpload(Base):
     upload_id = Column(UUID(as_uuid=True), primary_key=True)
     received_timestamp = Column(DateTime(timezone=True))
     status = Column(String(50), nullable=True, default="Solicitado")
+    image_path = Column(String(512), nullable=True)
 
     geospatial = relationship("GeospatialData", back_populates="upload", uselist=False)
     diagnosis = relationship("DiagnosisResult", back_populates="upload", uselist=False)
@@ -48,6 +49,8 @@ class DiagnosisResult(Base):
     confidence_score = Column(Float, nullable=False)
     area_m2 = Column(Integer)
     severity = Column(Float)
+    crop_type_verified = Column(Boolean, default=False)
+    router_crop_prediction = Column(String(50), nullable=True)
 
     upload = relationship("FileUpload", back_populates="diagnosis")
 
@@ -60,7 +63,7 @@ def get_engine():
     return None
 
 
-def create_initial_ticket(upload_id: uuid.UUID, lat: float, lon: float, captured_dt: datetime):
+def create_initial_ticket(upload_id: uuid.UUID, lat: float, lon: float, captured_dt: datetime, image_path: str = None):
     """Creates the initial FileUpload and GeospatialData records when a job is submitted."""
     engine = get_engine()
     if not engine:
@@ -71,7 +74,8 @@ def create_initial_ticket(upload_id: uuid.UUID, lat: float, lon: float, captured
         upload = FileUpload(
             upload_id=upload_id,
             received_timestamp=datetime.now(),
-            status="Solicitado"
+            status="Solicitado",
+            image_path=image_path
         )
         session.add(upload)
         geo = GeospatialData(
@@ -100,6 +104,8 @@ def update_ticket_status(
     confidence: float = None,
     area_m2: float = 0.0,
     severity: float = 0.0,
+    crop_type_verified: bool = False,
+    router_crop_prediction: str = None,
 ):
     """Updates status and creates DiagnosisResult when a worker completes."""
     engine = get_engine()
@@ -112,14 +118,16 @@ def update_ticket_status(
         if upload:
             upload.status = status
 
-        if status == "Completado" and plant and disease:
+        if status in ("Completado", "Flagged_Incorrect") and plant and disease:
             diag = DiagnosisResult(
                 upload_id=upload_id,
                 crop_type=plant,
                 predicted_disease=disease,
                 confidence_score=confidence or 0.0,
                 area_m2=area_m2,
-                severity=severity
+                severity=severity,
+                crop_type_verified=crop_type_verified,
+                router_crop_prediction=router_crop_prediction,
             )
             session.add(diag)
 
@@ -154,6 +162,31 @@ def get_ticket_status(upload_id: uuid.UUID):
         return result
     except Exception as e:
         return {"status": f"Error: {e}", "disease": None}
+    finally:
+        session.close()
+
+
+def delete_ticket(upload_id: uuid.UUID):
+    """Deletes FileUpload, GeospatialData, and any DiagnosisResult for the given upload_id.
+    Used to clean up background/discarded images that should not persist in the DB."""
+    engine = get_engine()
+    if not engine:
+        return False
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    try:
+        if isinstance(upload_id, str):
+            upload_id = uuid.UUID(upload_id)
+        # Delete in correct order (foreign keys)
+        session.query(DiagnosisResult).filter_by(upload_id=upload_id).delete()
+        session.query(GeospatialData).filter_by(upload_id=upload_id).delete()
+        session.query(FileUpload).filter_by(upload_id=upload_id).delete()
+        session.commit()
+        return True
+    except Exception as e:
+        session.rollback()
+        print(f"[db_core] Error deleting ticket: {e}")
+        return False
     finally:
         session.close()
 
