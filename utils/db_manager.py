@@ -9,7 +9,7 @@ import math
 import streamlit as st
 import pandas as pd
 import numpy as np
-from utils.text_utils import format_label
+from utils.text_utils import format_label_es
 
 # Re-export everything from db_core so existing imports elsewhere still work
 from utils.db_core import (
@@ -46,7 +46,7 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
 
-@st.cache_data
+@st.cache_data(show_spinner=False)
 def fetch_all_records():
     """Fetches all joined diagnosis records for the epidemiological map."""
     engine = get_engine()
@@ -119,7 +119,7 @@ def fetch_diagnosis_context() -> str:
     )
     for _, row in grouped.iterrows():
         lines.append(
-            f"  • {format_label(row['plant'])} — {format_label(row['disease'])}: "
+            f"  • {format_label_es(row['plant'])} — {format_label_es(row['disease'])}: "
             f"{int(row['detecciones'])} detecciones, "
             f"severidad promedio {row['severidad_promedio']*100:.1f}%, "
             f"área promedio {row['area_promedio_m2']:.0f} m²"
@@ -133,7 +133,7 @@ def fetch_diagnosis_context() -> str:
         lat_str = f"{row['lat']:.4f}" if pd.notna(row['lat']) else "N/A"
         lon_str = f"{row['lon']:.4f}" if pd.notna(row['lon']) else "N/A"
         lines.append(
-            f"  [{row['date']}] {format_label(row['plant'])} / {format_label(row['disease'])} — "
+            f"  [{row['date']}] {format_label_es(row['plant'])} / {format_label_es(row['disease'])} — "
             f"severidad {row['severity']*100:.1f}%, "
             f"área {row['area_m2']} m², "
             f"ubicación ({lat_str}, {lon_str})"
@@ -169,7 +169,7 @@ def _summarize_tier(df: pd.DataFrame, tier_label: str, show_distances: bool = Fa
     )
     for _, row in grouped.iterrows():
         lines.append(
-            f"    - {format_label(row['plant'])} / {format_label(row['disease'])}: "
+            f"    - {format_label_es(row['plant'])} / {format_label_es(row['disease'])}: "
             f"{int(row['count'])} detections, "
             f"avg severity {row['avg_severity']*100:.1f}%, "
             f"avg area {row['avg_area']:.0f} m²"
@@ -184,7 +184,7 @@ def _summarize_tier(df: pd.DataFrame, tier_label: str, show_distances: bool = Fa
         lat_str = f"{row['lat']:.4f}" if pd.notna(row['lat']) else "N/A"
         lon_str = f"{row['lon']:.4f}" if pd.notna(row['lon']) else "N/A"
         lines.append(
-            f"    [{row['date']}] {format_label(row['plant'])} / {format_label(row['disease'])} — "
+            f"    [{row['date']}] {format_label_es(row['plant'])} / {format_label_es(row['disease'])} — "
             f"severity {row['severity']*100:.1f}%, "
             f"area {row['area_m2']} m², "
             f"at ({lat_str}, {lon_str}){dist_str}"

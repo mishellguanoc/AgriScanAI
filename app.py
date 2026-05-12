@@ -1,9 +1,8 @@
 import streamlit as st
-import streamlit.components.v1 as st_components
 from components.header import show_header
 from components.analysis import analysis_page
 from components.assistant import assistant_page
-from components.map_view import map_page, get_cached_map_html
+from components.map_view import map_page
 from utils.db_manager import fetch_all_records
 from utils.pwa_utils import enable_pwa
 
@@ -34,76 +33,124 @@ enable_pwa()
 from streamlit_js_eval import streamlit_js_eval
 
 
-# ── Consent overlay — pure JS, no rerun, appears while app loads ────────
-if not st.session_state.get("permissions_acknowledged", False):
-    consent = streamlit_js_eval(
-        js_expressions="localStorage.getItem('agriscan_consent')",
-        key="consent_check",
-    )
-    if consent == "true":
-        st.session_state.permissions_acknowledged = True
-
-st_components.html("""
-<script>
+# ── Consent + permission bridge ───────────────────────────────────────────
+# This component both displays the consent overlay and returns permission state
+# to Python. Returning a value lets Streamlit rerun once with coordinates in
+# session_state; a plain HTML overlay cannot do that until a manual reload.
+_CONSENT_AND_LOCATION_JS = r"""
 (function() {
+  return new Promise(function(resolve) {
     var pd;
-    try { pd = window.parent.document; } catch(e) { return; }
+    try { pd = window.parent.document; } catch(e) {
+      resolve({consent: false, error: "parent_document_unavailable"});
+      return;
+    }
 
-    // Already consented — skip entirely
-    if (localStorage.getItem('agriscan_consent') === 'true') return;
+    function readLocation(done) {
+      if (!navigator.geolocation) {
+        done({geo_error: "Browser does not support geolocation."});
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          done({
+            coords: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy
+            },
+            timestamp: position.timestamp
+          });
+        },
+        function(error) {
+          done({geo_error: error.message, geo_code: error.code});
+        },
+        {enableHighAccuracy: true, timeout: 10000, maximumAge: 300000}
+      );
+    }
 
-    // Already injected on this render cycle
-    if (pd.getElementById('agriscan-consent-overlay')) return;
+    function requestCamera(done) {
+      try {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          done();
+          return;
+        }
+        navigator.mediaDevices.getUserMedia({video: true})
+          .then(function(stream) {
+            stream.getTracks().forEach(function(track) { track.stop(); });
+            done();
+          })
+          .catch(function() { done(); });
+      } catch(e) {
+        done();
+      }
+    }
 
-    // Build the overlay
-    var ov = pd.createElement('div');
-    ov.id = 'agriscan-consent-overlay';
-    ov.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.55);z-index:999999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity 0.25s ease;';
+    function resolveWithLocation() {
+      readLocation(function(locationPayload) {
+        resolve(Object.assign({consent: true}, locationPayload || {}));
+      });
+    }
+
+    if (localStorage.getItem("agriscan_consent") === "true") {
+      resolveWithLocation();
+      return;
+    }
+
+    var existing = pd.getElementById("agriscan-consent-overlay");
+    if (existing) existing.remove();
+
+    var ov = pd.createElement("div");
+    ov.id = "agriscan-consent-overlay";
+    ov.style.cssText = "position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.55);z-index:999999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity 0.25s ease;";
 
     ov.innerHTML = '<div style="background:var(--background-color,#0e1117);border:1px solid rgba(128,128,128,0.15);border-radius:20px;padding:32px 28px 26px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);font-family:Inter,sans-serif;color:var(--text-color,#fafafa);">'
-      + '<h3 style="font-family:Outfit,sans-serif;font-weight:700;margin:0 0 14px 0;">Welcome to AgriScan AI</h3>'
-      + '<p style="opacity:0.8;margin-bottom:20px;font-size:0.9rem;line-height:1.5;">To provide accurate epidemiological tracking and real-time crop analysis, this application requires access to:</p>'
+      + '<h3 style="font-family:Outfit,sans-serif;font-weight:700;margin:0 0 14px 0;">Bienvenido a AgriScan AI</h3>'
+      + '<p style="opacity:0.8;margin-bottom:20px;font-size:0.9rem;line-height:1.5;">Para ofrecer seguimiento epidemiológico y análisis agrícola en tiempo real, esta aplicación requiere acceso a:</p>'
       + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">'
         + '<div style="background:rgba(46,125,50,0.1);border-radius:8px;padding:10px;color:#2E7D32;flex-shrink:0;">'
           + '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>'
         + '</div>'
-        + '<div><b style="font-family:Outfit,sans-serif;">Camera</b><br><span style="font-size:0.8rem;opacity:0.7;">High-resolution images of crop samples for AI diagnosis.</span></div>'
+        + '<div><b style="font-family:Outfit,sans-serif;">Cámara</b><br><span style="font-size:0.8rem;opacity:0.7;">Imágenes de cultivos para diagnóstico con IA.</span></div>'
       + '</div>'
       + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">'
         + '<div style="background:rgba(232,163,23,0.1);border-radius:8px;padding:10px;color:#E8A317;flex-shrink:0;">'
           + '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'
         + '</div>'
-        + '<div><b style="font-family:Outfit,sans-serif;">Location</b><br><span style="font-size:0.8rem;opacity:0.7;">Geotag findings for the country-wide epidemiological map.</span></div>'
+        + '<div><b style="font-family:Outfit,sans-serif;">Ubicación</b><br><span style="font-size:0.8rem;opacity:0.7;">Georreferencia hallazgos para el mapa epidemiológico.</span></div>'
       + '</div>'
-      + '<p style="font-size:0.72rem;opacity:0.45;font-style:italic;margin-bottom:20px;">Your data is securely processed and used exclusively for agricultural intelligence.</p>'
-      + '<button id="agriscan-consent-btn" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#2E7D32,#1B5E20);color:#fff;font-family:Outfit,sans-serif;font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:opacity 0.2s;">I Understand</button>'
+      + '<p style="font-size:0.72rem;opacity:0.45;font-style:italic;margin-bottom:20px;">Tus datos se procesan de forma segura y solo para inteligencia agrícola.</p>'
+      + '<button id="agriscan-consent-btn" style="width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,#2E7D32,#1B5E20);color:#fff;font-family:Outfit,sans-serif;font-weight:600;font-size:1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:opacity 0.2s;">Entendido</button>'
     + '</div>';
 
     pd.body.appendChild(ov);
+    requestAnimationFrame(function() { ov.style.opacity = "1"; });
 
-    // Fade in
-    requestAnimationFrame(function() { ov.style.opacity = '1'; });
-
-    // Button click handler
-    pd.getElementById('agriscan-consent-btn').addEventListener('click', function() {
-        // 1. Persist consent
-        localStorage.setItem('agriscan_consent', 'true');
-
-        // 2. Fade out and remove overlay
-        ov.style.opacity = '0';
-        setTimeout(function() { ov.remove(); }, 250);
-
-        // 3. Request browser permissions
-        try { navigator.geolocation.getCurrentPosition(function(){}, function(){}); } catch(e) {}
-        try {
-            navigator.mediaDevices.getUserMedia({video:true})
-                .then(function(s){ s.getTracks().forEach(function(t){t.stop();}); })
-                .catch(function(){});
-        } catch(e) {}
+    pd.getElementById("agriscan-consent-btn").addEventListener("click", function() {
+      localStorage.setItem("agriscan_consent", "true");
+      ov.style.opacity = "0";
+      setTimeout(function() { ov.remove(); }, 250);
+      requestCamera(resolveWithLocation);
     });
-})();
-</script>
-""", height=0)
+  });
+})()
+"""
+
+permission_payload = streamlit_js_eval(
+    js_expressions=_CONSENT_AND_LOCATION_JS,
+    key="agriscan_permission_bridge",
+)
+if isinstance(permission_payload, dict) and permission_payload.get("consent"):
+    st.session_state.permissions_acknowledged = True
+    coords = permission_payload.get("coords") or {}
+    if coords.get("latitude") is not None and coords.get("longitude") is not None:
+        st.session_state.geo_lat = coords["latitude"]
+        st.session_state.geo_lon = coords["longitude"]
+
+# Do not render the app until the permission bridge has responded. Otherwise
+# the map paints once without GPS and then paints again when coordinates arrive.
+if permission_payload is None:
+    st.stop()
 
 @st.cache_data(show_spinner=False)
 def _warm_db_cache() -> bool:
@@ -116,8 +163,6 @@ def _warm_db_cache() -> bool:
 if not st.session_state.get("_agriscan_db_warmed", False):
     _warm_db_cache()
     st.session_state["_agriscan_db_warmed"] = True
-    # Show only the consent overlay on first paint; render the app after cache is warm.
-    st.rerun()
 
 # Usaremos variables de Streamlit en el CSS para máxima compatibilidad.
 
@@ -377,9 +422,22 @@ button[aria-selected="true"] {
 @media screen and (max-width: 768px) {
     button[data-baseweb="tab"],
     div[data-baseweb="tab"] {
-        font-size: 1.05rem !important;
-        padding: 12px 10px !important;
-        min-height: 48px !important;
+        font-size: 0.82rem !important;
+        padding: 10px 4px !important;
+        min-height: 44px !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        word-break: break-word !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+    }
+    button[data-baseweb="tab"] *,
+    div[data-baseweb="tab"] * {
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        word-break: break-word !important;
     }
 }
 
@@ -409,9 +467,9 @@ footer { visibility: hidden; }
 show_header()
 
 tabs = st.tabs([
-    "Crop Analysis",
-    "Agronomic Assistant",
-    "Epidemiological Map"
+    "Análisis de Cultivo",
+    "Asistente Agronómico",
+    "Mapa Epidemiológico"
 ])
 
 with tabs[0]:

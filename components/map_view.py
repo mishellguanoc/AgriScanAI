@@ -8,7 +8,7 @@ import folium
 from folium.plugins import MarkerCluster, HeatMap, FastMarkerCluster
 from utils.map_export import export_map_to_jpg
 from utils.db_manager import fetch_all_records, _haversine_km
-from utils.text_utils import format_label
+from utils.text_utils import format_label_es
 from utils.rag_utils import reverse_geocode
 import os
 import datetime
@@ -65,7 +65,7 @@ _DASHBOARD_CSS = """
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px;
     align-items: stretch;
-    margin: 6px 0 0 0;
+    margin: 2px 0 0 0;
 }
 .desktop-card-row .dash-card,
 .desktop-card-row .risk-card {
@@ -200,6 +200,34 @@ div[data-testid="stPopover"] button:hover p {
     }
 }
 
+/* Map: tighten space between Filters card and map (hide js_eval iframe chrome) */
+.st-key-map_filters_card { margin-bottom: 0 !important; }
+.st-key-map_filters_card [data-testid="stVerticalBlockBorderWrapper"] {
+    padding-bottom: 10px !important;
+    margin-bottom: 0 !important;
+}
+.st-key-map_geo_js,
+.st-key-map_geo_js [data-testid="stVerticalBlock"],
+.st-key-map_geo_js [data-testid="stVerticalBlock"] > div,
+.st-key-map_geo_js [data-testid="stVerticalBlock"] > div > div {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+}
+.st-key-map_geo_js iframe {
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    border: 0 !important;
+    display: block !important;
+    overflow: hidden !important;
+}
+.st-key-map_geo_js [data-testid="stIFrame"] {
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+}
+
 /* No layout switching via CSS: we decide layout server-side (UA) to avoid mobile viewport quirks. */
 
 /* Temporal tendency — match the app's section-header language */
@@ -312,22 +340,30 @@ div[data-testid="stPopover"] button:hover p {
 }
 
 
-/* Mobile: horizontally scrollable minicards under map */
-.mobile-card-row {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding: 2px 2px 8px 2px;
-    margin: 8px 0 12px 0;
-    -webkit-overflow-scrolling: touch;
+/* Mobile: 2x2 grid minicards under map */
+.mobile-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 10px 0 12px 0;
 }
-.mobile-card-row::-webkit-scrollbar { height: 8px; }
-.mobile-card-row::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.25); border-radius: 999px; }
-.mobile-card {
-    min-width: 240px;
-    max-width: 280px;
-    margin-bottom: 0 !important; /* override .dash-card default */
-    flex: 0 0 auto;
+.mobile-card-grid .dash-card,
+.mobile-card-grid .dash-card-risk {
+    margin-bottom: 0 !important;
+}
+/* Slightly compact values on mobile so numbers fit */
+.mobile-card-grid .dash-card-value {
+    font-size: 1.4rem !important;
+}
+.mobile-card-grid .dash-card-risk .risk-mini-icon {
+    width: 28px;
+    height: 28px;
+    right: 10px;
+    top: 10px;
+}
+.mobile-card-grid .dash-card-risk .risk-mini-badge {
+    right: 10px;
+    bottom: 10px;
 }
 </style>
 """
@@ -407,7 +443,7 @@ def get_cached_map_html(filtered_df, user_lat=None, user_lon=None):
     plot_df = filtered_df.dropna(subset=['lat', 'lon'])
     
     if plot_df.empty and (user_lat is None or user_lon is None):
-        return "<h3 style='font-family: Inter, sans-serif; padding: 20px;'>No GPS data available for the selected filters.</h3>"
+        return "<h3 style='font-family: Inter, sans-serif; padding: 20px;'>No hay datos GPS para los filtros seleccionados.</h3>"
 
     start_loc = [-0.8, -78.5]
     zoom = 8
@@ -420,7 +456,7 @@ def get_cached_map_html(filtered_df, user_lat=None, user_lon=None):
     if user_lat is not None and user_lon is not None:
         folium.Marker(
             location=[user_lat, user_lon],
-            popup="<div style='font-family:Outfit,sans-serif;font-weight:700;'>Your Location</div>",
+            popup="<div style='font-family:Outfit,sans-serif;font-weight:700;'>Tu ubicación</div>",
             icon=folium.Icon(color='blue', icon='user', prefix='fa')
         ).add_to(m)
         
@@ -434,8 +470,8 @@ def get_cached_map_html(filtered_df, user_lat=None, user_lon=None):
         ).add_to(m)
 
     # Pre-format lists for maximum iteration speed (bypasses pandas iterrows overhead)
-    plants = plot_df['plant'].apply(format_label).tolist()
-    diseases = plot_df['disease'].apply(format_label).tolist()
+    plants = plot_df['plant'].apply(format_label_es).tolist()
+    diseases = plot_df['disease'].apply(format_label_es).tolist()
     areas = plot_df['area_m2'].tolist()
     severities = plot_df['severity'].tolist()
     dates = plot_df['date'].astype(str).tolist()
@@ -447,8 +483,8 @@ def get_cached_map_html(filtered_df, user_lat=None, user_lon=None):
     for i in range(len(plot_df)):
         popup_text = f"""
         <div style="font-family:Inter,sans-serif;">
-            <b style="font-family:Outfit,sans-serif;">Plant:</b> {plants[i]}<br>
-            <b style="font-family:Outfit,sans-serif;">Disease:</b> {diseases[i]}<br>
+            <b style="font-family:Outfit,sans-serif;">Cultivo:</b> {plants[i]}<br>
+            <b style="font-family:Outfit,sans-serif;">Enfermedad:</b> {diseases[i]}<br>
             <b>Area:</b> {areas[i]} m² | <b>Sev:</b> {severities[i]*100:.1f}%<br>
             <span style="font-size:0.8em; opacity:0.7;">{dates[i]}</span>
         </div>
@@ -518,11 +554,11 @@ def calculate_stats(df, all_df):
         else:
             stats['active_regions'] = 0
             stats['highest_cluster_count'] = 0
-            stats['highest_cluster_name'] = "None"
+            stats['highest_cluster_name'] = "Ninguno"
     else:
         stats['active_regions'] = 0
         stats['highest_cluster_count'] = 0
-        stats['highest_cluster_name'] = "None"
+        stats['highest_cluster_name'] = "Ninguno"
         
     stats['avg_per_region'] = int(stats['total'] / stats['active_regions']) if stats['active_regions'] > 0 else 0
 
@@ -541,8 +577,8 @@ def map_page():
     # ── Header ──
     st.markdown("""
         <div class="agriscan-page-title map-header">
-            <h1>AgriScan Epidemiological Map</h1>
-            <p class="agriscan-page-subtitle">Visualize and monitor crop disease outbreaks across regions in real time.</p>
+            <h1>Mapa Epidemiológico AgriScan</h1>
+            <p class="agriscan-page-subtitle">Visualiza y monitorea brotes de enfermedades agrícolas por región en tiempo real.</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -553,23 +589,23 @@ def map_page():
         return
 
     # ── Filters Card ──
-    with st.container(border=True):
+    with st.container(border=True, key="map_filters_card"):
         header_container = st.container()
         
         col_f1, col_f2, col_f3 = st.columns([1, 1, 1])
         with col_f1:
             plant_filter = st.selectbox(
-                "Plant Type", ["All"] + sorted(data["plant"].unique().tolist()), 
-                key="plant_filter", format_func=lambda x: format_label(x) if x != "All" else "All"
+                "Tipo de cultivo", ["All"] + sorted(data["plant"].unique().tolist()), 
+                key="plant_filter", format_func=lambda x: format_label_es(x) if x != "All" else "Todos"
             )
         with col_f2:
             disease_filter = st.selectbox(
-                "Disease", ["All"] + sorted(data["disease"].unique().tolist()), 
-                key="disease_filter", format_func=lambda x: format_label(x) if x != "All" else "All"
+                "Enfermedad", ["All"] + sorted(data["disease"].unique().tolist()), 
+                key="disease_filter", format_func=lambda x: format_label_es(x) if x != "All" else "Todas"
             )
         with col_f3:
             min_date, max_date = data["date"].min(), data["date"].max()
-            date_range = st.date_input("Date Range", value=(min_date, max_date), min_value=min_date, max_value=max_date, key="date_filter")
+            date_range = st.date_input("Rango de fechas", value=(min_date, max_date), min_value=min_date, max_value=max_date, key="date_filter")
         
         filtered = data.copy()
         if plant_filter != "All": filtered = filtered[filtered["plant"] == plant_filter]
@@ -580,24 +616,24 @@ def map_page():
         with header_container:
             c_head1, c_head2 = st.columns([5, 1])
             with c_head1:
-                st.markdown("<h3 style='margin-top:0; margin-bottom:12px; font-family:Outfit, sans-serif; font-size:1.1rem;'>Filters</h3>", unsafe_allow_html=True)
+                st.markdown("<h3 style='margin-top:0; margin-bottom:12px; font-family:Outfit, sans-serif; font-size:1.1rem;'>Filtros</h3>", unsafe_allow_html=True)
             with c_head2:
-                with st.popover("↓ Export Map", use_container_width=True):
+                with st.popover("↓ Exportar mapa", use_container_width=True):
                     csv = filtered.to_csv(index=False)
-                    st.download_button("Download CSV", data=csv, file_name="agriscan_data.csv", mime="text/csv", use_container_width=True)
-                    if st.button("Generate JPG", use_container_width=True):
+                    st.download_button("Descargar CSV", data=csv, file_name="agriscan_data.csv", mime="text/csv", use_container_width=True)
+                    if st.button("Generar JPG", use_container_width=True):
                         with st.spinner("Generating..."):
                             m_temp = folium.Map(location=[-0.8, -78.5], zoom_start=8, tiles="cartodbpositron")
                             HeatMap(filtered.dropna(subset=['lat','lon'])[["lat","lon","severity"]].values.tolist(), radius=12, blur=10).add_to(m_temp)
                             m_temp.save("agriscan_map.html")
                             jpg_path = export_map_to_jpg(os.path.abspath("agriscan_map.html"))
                             with open(jpg_path, "rb") as file:
-                                st.download_button("Download JPG Ready", data=file, file_name="agriscan_map.jpg", mime="image/jpeg", key="dl_jpg")
+                                st.download_button("Descargar JPG listo", data=file, file_name="agriscan_map.jpg", mime="image/jpeg", key="dl_jpg")
 
         st.markdown(f"""
-            <div class="pulse-indicator" style="margin-bottom: 8px;">
+            <div class="pulse-indicator" style="margin-bottom: 0;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                Detected outbreaks: <span style="color:#2E7D32;">{len(filtered):,}</span>
+                Brotes detectados: <span style="color:#2E7D32;">{len(filtered):,}</span>
             </div>
         """, unsafe_allow_html=True)
 
@@ -607,17 +643,24 @@ def map_page():
     if "geo_lon" not in st.session_state:
         st.session_state.geo_lon = None
 
-    if st.session_state.get("permissions_acknowledged") and callable(get_geolocation):
-        # Avoid StreamlitDuplicateElementKey: get_geolocation() defaults to key='getLocation()'
-        # so each page must provide a unique component_key.
-        loc = get_geolocation(component_key="agriscan_geo_map")
-        if loc and isinstance(loc, dict) and "coords" in loc:
-            coords = loc.get("coords") or {}
-            lat = coords.get("latitude")
-            lon = coords.get("longitude")
-            if lat is not None and lon is not None:
-                st.session_state.geo_lat = lat
-                st.session_state.geo_lon = lon
+    # streamlit_js_eval expands its iframe to a large height by default — collapse it so it
+    # does not leave a blank gap between Filters and the map.
+    with st.container(key="map_geo_js"):
+        if (
+            st.session_state.get("permissions_acknowledged")
+            and callable(get_geolocation)
+            and (st.session_state.geo_lat is None or st.session_state.geo_lon is None)
+        ):
+            # Avoid StreamlitDuplicateElementKey: get_geolocation() defaults to key='getLocation()'
+            # so each page must provide a unique component_key.
+            loc = get_geolocation(component_key="agriscan_geo_map")
+            if loc and isinstance(loc, dict) and "coords" in loc:
+                coords = loc.get("coords") or {}
+                lat = coords.get("latitude")
+                lon = coords.get("longitude")
+                if lat is not None and lon is not None:
+                    st.session_state.geo_lat = lat
+                    st.session_state.geo_lon = lon
 
     u_lat = st.session_state.get("geo_lat")
     u_lon = st.session_state.get("geo_lon")
@@ -628,13 +671,11 @@ def map_page():
         # Keep map tall enough to be useful but avoid trapping the user (phone screens vary a lot).
         map_iframe_h = 520
     else:
-        _, map_iframe_h = _map_layout_from_viewport()
+        # Avoid a second streamlit_js_eval iframe here (it reserved a huge blank strip above the map).
+        map_iframe_h = 620
 
-    footer_html = f"""
-        <div class="map-footer">
-            <span>Last updated: {datetime.datetime.now().strftime('%b %d, %Y %H:%M %p')}</span>
-        </div>
-        """
+    # Keep map flush with minicards; remove the visual separator/footer strip.
+    footer_html = ""
 
     def _render_stats_sidebar():
         stats = calculate_stats(filtered, data)
@@ -651,37 +692,37 @@ def map_page():
                 min_dist = filtered_copy["dist"].min()
 
                 if disease_filter == "All":
-                    near_lbl = "Nearest outbreak"
-                    mid_lbl = "Outbreaks"
-                    low_lbl = "Nearest outbreak"
+                    near_lbl = "Brote más cercano"
+                    mid_lbl = "Brotes"
+                    low_lbl = "Brote más cercano"
                 else:
-                    near_lbl = "Outbreak"
-                    mid_lbl = "Cases"
-                    low_lbl = "Nearest case"
+                    near_lbl = "Brote"
+                    mid_lbl = "Casos"
+                    low_lbl = "Caso más cercano"
 
                 if min_dist < 10:
                     r_lvl, r_desc, r_cls = (
-                        "High",
-                        f"{near_lbl} {min_dist:.1f}km away. Take immediate preventive action.",
+                        "Alto",
+                        f"{near_lbl} {min_dist:.1f}km de distancia.",
                         "high",
                     )
                     r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
                 elif min_dist < 50:
                     r_lvl, r_desc, r_cls = (
-                        "Moderate",
-                        f"{mid_lbl} {min_dist:.1f}km away. Increased monitoring advised.",
+                        "Moderado",
+                        f"{near_lbl} {min_dist:.1f}km de distancia.",
                         "mod",
                     )
                     r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
                 else:
                     r_lvl, r_desc, r_cls = (
-                        "Low",
-                        f"{low_lbl} {min_dist:.1f}km away. No immediate threat.",
+                        "Bajo",
+                        f"{near_lbl} {min_dist:.1f}km de distancia.",
                         "low",
                     )
                     r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
             else:
-                r_lvl, r_desc, r_cls = "Unknown", "No GPS coordinates available for filtered outbreaks.", "unk"
+                r_lvl, r_desc, r_cls = "Desconocido", "No hay coordenadas GPS para los brotes filtrados.", "unk"
                 r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
 
             st.markdown(
@@ -690,7 +731,7 @@ def map_page():
                 <span class="risk-badge {r_cls}">{r_lvl}</span>
                 <div class="risk-icon {r_cls}">{r_icn}</div>
                 <div style="width: 100%;">
-                    <div class="dash-card-title" style="margin:0;">Overall Risk</div>
+                    <div class="dash-card-title" style="margin:0;">Riesgo general</div>
                     <div style="font-weight:800; font-size:1.3rem; color:var(--text-color); margin-bottom: 4px;">{r_lvl}</div>
                     <div class="dash-card-subtitle" style="line-height:1.4;">{r_desc}</div>
                 </div>
@@ -706,9 +747,9 @@ def map_page():
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                 </div>
                 <div style="width: 100%;">
-                    <div class="dash-card-title" style="margin:0;">Overall Risk</div>
-                    <div style="font-weight:800; font-size:1.2rem; color:var(--text-color); margin-bottom: 4px;">Location Required</div>
-                    <div class="dash-card-subtitle" style="line-height:1.4;">Enable GPS to see your local risk level.</div>
+                    <div class="dash-card-title" style="margin:0;">Riesgo general</div>
+                    <div style="font-weight:800; font-size:1.2rem; color:var(--text-color); margin-bottom: 4px;">Ubicación requerida</div>
+                    <div class="dash-card-subtitle" style="line-height:1.4;">Activa el GPS para ver tu riesgo local.</div>
                 </div>
             </div>
             """,
@@ -717,7 +758,7 @@ def map_page():
 
         st.markdown(f"""
         <div class="dash-card">
-            <div class="dash-card-title">Total Outbreaks</div>
+            <div class="dash-card-title">Brotes totales</div>
             <div class="dash-card-value">{stats['total']:,}</div>
             <div class="dash-card-subtitle">{stats['trend_str']}</div>
         </div>
@@ -725,17 +766,17 @@ def map_page():
 
         st.markdown(f"""
         <div class="dash-card">
-            <div class="dash-card-title">Highest Cluster</div>
-            <div class="dash-card-value">{stats['highest_cluster_count']:,} <span style="font-size:0.8rem; font-weight:500;">cases</span></div>
+            <div class="dash-card-title">Mayor concentración</div>
+            <div class="dash-card-value">{stats['highest_cluster_count']:,} <span style="font-size:0.8rem; font-weight:500;">casos</span></div>
             <div class="dash-card-subtitle">{stats['highest_cluster_name']}</div>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown(f"""
         <div class="dash-card">
-            <div class="dash-card-title">Avg. Cases / 10km</div>
+            <div class="dash-card-title">Prom. casos / 10km</div>
             <div class="dash-card-value">{stats['avg_per_region']:,}</div>
-            <div class="dash-card-subtitle">Across active zones</div>
+            <div class="dash-card-subtitle">En zonas activas</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -745,8 +786,8 @@ def map_page():
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2979ff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
             </div>
             <div>
-                <b>About this map</b><br>
-                Heatmap shows outbreak density by location. Click on a cluster to view details.
+                <b>Acerca de este mapa</b><br>
+                El mapa de calor muestra densidad de brotes por ubicación. Haz clic en un grupo para ver detalles.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -757,7 +798,12 @@ def map_page():
         u_lat_r = st.session_state.get("geo_lat")
         u_lon_r = st.session_state.get("geo_lon")
 
-        # Risk first (keep readable; avoid stuffing into a scroll row)
+        # Compute risk card values
+        risk_level = "Ubicación requerida"
+        risk_desc = "Activa el GPS para ver tu riesgo local."
+        risk_cls = "unk"
+        risk_icn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+
         if u_lat_r and u_lon_r and not filtered.empty:
             filtered_copy = filtered.dropna(subset=["lat", "lon"]).copy()
             if not filtered_copy.empty:
@@ -765,109 +811,65 @@ def map_page():
                     lambda r: _haversine_km(u_lat_r, u_lon_r, r["lat"], r["lon"]), axis=1
                 )
                 min_dist = filtered_copy["dist"].min()
-
-                if disease_filter == "All":
-                    near_lbl = "Nearest outbreak"
-                    mid_lbl = "Outbreaks"
-                    low_lbl = "Nearest outbreak"
-                else:
-                    near_lbl = "Outbreak"
-                    mid_lbl = "Cases"
-                    low_lbl = "Nearest case"
+                near_lbl = "Brote más cercano" if disease_filter == "All" else "Brote"
 
                 if min_dist < 10:
-                    r_lvl, r_desc, r_cls = (
-                        "High",
-                        f"{near_lbl} {min_dist:.1f}km away. Take immediate preventive action.",
-                        "high",
-                    )
-                    r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+                    risk_level, risk_desc, risk_cls = "Alto", f"{near_lbl} {min_dist:.1f}km de distancia.", "high"
+                    risk_icn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
                 elif min_dist < 50:
-                    r_lvl, r_desc, r_cls = (
-                        "Moderate",
-                        f"{mid_lbl} {min_dist:.1f}km away. Increased monitoring advised.",
-                        "mod",
-                    )
-                    r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
+                    risk_level, risk_desc, risk_cls = "Moderado", f"{near_lbl} {min_dist:.1f}km de distancia.", "mod"
+                    risk_icn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
                 else:
-                    r_lvl, r_desc, r_cls = (
-                        "Low",
-                        f"{low_lbl} {min_dist:.1f}km away. No immediate threat.",
-                        "low",
-                    )
-                    r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
+                    risk_level, risk_desc, risk_cls = "Bajo", f"{near_lbl} {min_dist:.1f}km de distancia.", "low"
+                    risk_icn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
             else:
-                r_lvl, r_desc, r_cls = "Unknown", "No GPS coordinates available for filtered outbreaks.", "unk"
-                r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+                risk_level, risk_desc, risk_cls = "Desconocido", "Sin datos GPS de brotes.", "unk"
 
-            st.markdown(
-                f"""
-            <div class="risk-card">
-                <span class="risk-badge {r_cls}">{r_lvl}</span>
-                <div class="risk-icon {r_cls}">{r_icn}</div>
-                <div style="width: 100%;">
-                    <div class="dash-card-title" style="margin:0;">Overall Risk</div>
-                    <div style="font-weight:800; font-size:1.3rem; color:var(--text-color); margin-bottom: 4px;">{r_lvl}</div>
-                    <div class="dash-card-subtitle" style="line-height:1.4;">{r_desc}</div>
-                </div>
-            </div>
-            """,
-                unsafe_allow_html=True,
-            )
-        else:
-            st.markdown(
-                """
-            <div class="risk-card" style="opacity: 0.7;">
-                <div class="risk-icon unk">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                </div>
-                <div style="width: 100%;">
-                    <div class="dash-card-title" style="margin:0;">Overall Risk</div>
-                    <div style="font-weight:800; font-size:1.2rem; color:var(--text-color); margin-bottom: 4px;">Location Required</div>
-                    <div class="dash-card-subtitle" style="line-height:1.4;">Enable GPS to see your local risk level.</div>
-                </div>
-            </div>
-            """,
-                unsafe_allow_html=True,
-            )
+        risk_badge = risk_level if risk_level in ["Alto", "Moderado", "Bajo"] else "Info"
 
-        # Metrics row (scrollable)
+        # Render all 4 cards in a 2x2 grid (single HTML block — no Streamlit columns needed)
         st.markdown(
-            f"""
-        <div class="mobile-card-row" role="region" aria-label="Outbreak metrics">
-            <div class="dash-card mobile-card">
-                <div class="dash-card-title">Total Outbreaks</div>
-                <div class="dash-card-value">{stats['total']:,}</div>
-                <div class="dash-card-subtitle">{stats['trend_str']}</div>
-            </div>
-            <div class="dash-card mobile-card">
-                <div class="dash-card-title">Highest Cluster</div>
-                <div class="dash-card-value">{stats['highest_cluster_count']:,} <span style="font-size:0.8rem; font-weight:500;">cases</span></div>
-                <div class="dash-card-subtitle">{stats['highest_cluster_name']}</div>
-            </div>
-            <div class="dash-card mobile-card">
-                <div class="dash-card-title">Avg. Cases / 10km</div>
-                <div class="dash-card-value">{stats['avg_per_region']:,}</div>
-                <div class="dash-card-subtitle">Across active zones</div>
-            </div>
-        </div>
-        """,
+            f"""<div class="mobile-card-grid" role="region" aria-label="Métricas de brotes">
+  <div class="dash-card dash-card-risk">
+    <div class="dash-card-title">Riesgo general</div>
+    <div class="dash-card-value" style="font-size:1.2rem;">{risk_level}</div>
+    <div class="dash-card-subtitle">{risk_desc}</div>
+    <div class="risk-mini-icon {risk_cls}">{risk_icn}</div>
+    <span class="risk-mini-badge {risk_cls}">{risk_badge}</span>
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-title">Brotes totales</div>
+    <div class="dash-card-value">{stats['total']:,}</div>
+    <div class="dash-card-subtitle">{stats['trend_str']}</div>
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-title">Mayor concentración</div>
+    <div class="dash-card-value">{stats['highest_cluster_count']:,} <span style="font-size:0.75rem; font-weight:500;">casos</span></div>
+    <div class="dash-card-subtitle">{stats['highest_cluster_name']}</div>
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-title">Prom. casos / 10km</div>
+    <div class="dash-card-value">{stats['avg_per_region']:,}</div>
+    <div class="dash-card-subtitle">En zonas activas</div>
+  </div>
+</div>""",
             unsafe_allow_html=True,
         )
 
         # About below (full width)
         st.markdown(
-            """
-        <div class="info-block">
-            <div>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2979ff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-            </div>
-            <div>
-                <b>About this map</b><br>
-                Heatmap shows outbreak density by location. Click on a cluster to view details.
-            </div>
-        </div>
-        """,
+            """<div class="info-block">
+  <div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2979ff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+  </div>
+  <div>
+    <b>Acerca de este mapa</b><br>
+    El mapa de calor muestra densidad de brotes por ubicación. Haz clic en un grupo para ver detalles.
+  </div>
+</div>""",
             unsafe_allow_html=True,
         )
 
@@ -883,8 +885,8 @@ def map_page():
             return s if len(s) <= n else (s[: max(0, n - 1)].rstrip() + "…")
 
         # Compute risk content, then render as a compact minicard (same style as others).
-        risk_level = "Unknown"
-        risk_desc = "No GPS coordinates available for filtered outbreaks."
+        risk_level = "Desconocido"
+        risk_desc = "No hay coordenadas GPS para los brotes filtrados."
         risk_cls = "unk"
         risk_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
         if u_lat_r and u_lon_r and not filtered.empty:
@@ -896,32 +898,32 @@ def map_page():
                 min_dist = filtered_copy["dist"].min()
 
                 if disease_filter == "All":
-                    near_lbl = "Nearest outbreak"
-                    mid_lbl = "Outbreaks"
-                    low_lbl = "Nearest outbreak"
+                    near_lbl = "Brote más cercano"
+                    mid_lbl = "Brotes"
+                    low_lbl = "Brote más cercano"
                 else:
-                    near_lbl = "Outbreak"
-                    mid_lbl = "Cases"
-                    low_lbl = "Nearest case"
+                    near_lbl = "Brote"
+                    mid_lbl = "Casos"
+                    low_lbl = "Caso más cercano"
 
                 if min_dist < 10:
                     r_lvl, r_desc, r_cls = (
-                        "High",
-                        f"{near_lbl} {min_dist:.1f}km away. Take immediate preventive action.",
+                        "Alto",
+                        f"{near_lbl} {min_dist:.1f}km de distancia.",
                         "high",
                     )
                     r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
                 elif min_dist < 50:
                     r_lvl, r_desc, r_cls = (
-                        "Moderate",
-                        f"{mid_lbl} {min_dist:.1f}km away. Increased monitoring advised.",
+                        "Moderado",
+                        f"{near_lbl} {min_dist:.1f}km de distancia.",
                         "mod",
                     )
                     r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
                 else:
                     r_lvl, r_desc, r_cls = (
-                        "Low",
-                        f"{low_lbl} {min_dist:.1f}km away. No immediate threat.",
+                        "Bajo",
+                        f"{near_lbl} {min_dist:.1f}km de distancia.",
                         "low",
                     )
                     r_icn = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>'
@@ -930,19 +932,19 @@ def map_page():
                 # keep defaults
                 pass
         elif not (u_lat_r and u_lon_r):
-            risk_level = "Location Required"
-            risk_desc = "Enable GPS to see your local risk level."
+            risk_level = "Ubicación requerida"
+            risk_desc = "Activa el GPS para ver tu riesgo local."
             risk_cls = "unk"
 
         risk_desc = _ellipsize(risk_desc, 92)
-        risk_badge = risk_level if risk_level in ["High", "Moderate", "Low"] else "Info"
+        risk_badge = risk_level if risk_level in ["Alto", "Moderado", "Bajo"] else "Info"
 
         # Render as a single grid so cards align cleanly (Streamlit columns don't equalize heights).
         # IMPORTANT: don't indent this HTML block; leading spaces turn it into a Markdown code block.
         st.markdown(
             f"""<div class="desktop-card-row">
   <div class="dash-card dash-card-risk">
-    <div class="dash-card-title">Overall Risk</div>
+    <div class="dash-card-title">Riesgo general</div>
     <div class="dash-card-value" style="font-size: 1.45rem;">{risk_level}</div>
     <div class="dash-card-subtitle">{risk_desc}</div>
     <div class="risk-mini-icon {risk_cls}">{risk_icn}</div>
@@ -950,21 +952,21 @@ def map_page():
   </div>
 
   <div class="dash-card">
-    <div class="dash-card-title">Total Outbreaks</div>
+    <div class="dash-card-title">Brotes totales</div>
     <div class="dash-card-value">{stats['total']:,}</div>
     <div class="dash-card-subtitle">{stats['trend_str']}</div>
   </div>
 
   <div class="dash-card">
-    <div class="dash-card-title">Highest Cluster</div>
-    <div class="dash-card-value">{stats['highest_cluster_count']:,} <span style="font-size:0.8rem; font-weight:500;">cases</span></div>
-    <div class="dash-card-subtitle">{_ellipsize(stats.get('highest_cluster_name') or 'None', 26)}</div>
+    <div class="dash-card-title">Mayor concentración</div>
+    <div class="dash-card-value">{stats['highest_cluster_count']:,} <span style="font-size:0.8rem; font-weight:500;">casos</span></div>
+    <div class="dash-card-subtitle">{_ellipsize(stats.get('highest_cluster_name') or 'Ninguno', 26)}</div>
   </div>
 
   <div class="dash-card">
-    <div class="dash-card-title">Avg. Cases / 10km</div>
+    <div class="dash-card-title">Prom. casos / 10km</div>
     <div class="dash-card-value">{stats['avg_per_region']:,}</div>
-    <div class="dash-card-subtitle">Across active zones</div>
+    <div class="dash-card-subtitle">En zonas activas</div>
   </div>
 </div>""",
             unsafe_allow_html=True,
@@ -977,8 +979,8 @@ def map_page():
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2979ff" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
             </div>
             <div>
-                <b>About this map</b><br>
-                Heatmap shows outbreak density by location. Click on a cluster to view details.
+                <b>Acerca de este mapa</b><br>
+                El mapa de calor muestra densidad de brotes por ubicación. Haz clic en un grupo para ver detalles.
             </div>
         </div>
         """,
@@ -1015,8 +1017,8 @@ def map_page():
     </svg>
   </div>
   <div>
-    <h3>Temporal tendency</h3>
-    <p class="t-desc">Trend over time for your current map filters.</p>
+    <h3>Tendencia temporal</h3>
+    <p class="t-desc">Evolución en el tiempo según los filtros actuales.</p>
   </div>
 </div>
 """,
@@ -1025,16 +1027,16 @@ def map_page():
         with col_t_right:
             # Keep Streamlit toggle for state; label is short to avoid redundancy.
             with st.container(key="tendency_toggle_right"):
-                show_tendency = st.toggle("Show", key="tendency_toggle")
+                show_tendency = st.toggle("Mostrar", key="tendency_toggle")
 
     if show_tendency:
         st.markdown(
             f"""<div class="tendency-body">
   <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;">
     <div style="font-family:Outfit,sans-serif;font-weight:800;letter-spacing:-0.01em;color:var(--text-color);font-size:1.02rem;">
-      Trend analysis
+      Análisis de tendencia
     </div>
-    <span class="tendency-chip">{plant_filter if plant_filter != "All" else "All crops"} · {disease_filter if disease_filter != "All" else "All diseases"}</span>
+    <span class="tendency-chip">{plant_filter if plant_filter != "All" else "Todos los cultivos"} · {disease_filter if disease_filter != "All" else "Todas las enfermedades"}</span>
   </div>
 """,
             unsafe_allow_html=True,
@@ -1046,14 +1048,14 @@ def map_page():
             cumulative_counts = daily_counts.cumsum()
 
             fig = make_subplots(specs=[[{"secondary_y": True}]])
-            plant_title = plant_filter if plant_filter != "All" else "All Crops"
+            plant_title = plant_filter if plant_filter != "All" else "Todos los cultivos"
             disease_title = f" - {disease_filter}" if disease_filter != "All" else ""
-            full_title = f"Trend: {plant_title}{disease_title}"
+            full_title = f"Tendencia: {plant_title}{disease_title}"
 
             fig.add_trace(go.Bar(
                 x=[d.strftime('%Y-%m-%d') for d in all_dates],
                 y=daily_counts,
-                name="New Daily Cases",
+                name="Casos diarios nuevos",
                 marker_color="#e74c3c",
                 opacity=0.7
             ), secondary_y=False)
@@ -1061,7 +1063,7 @@ def map_page():
             fig.add_trace(go.Scatter(
                 x=[d.strftime('%Y-%m-%d') for d in all_dates],
                 y=cumulative_counts,
-                name="Cumulative Trend",
+                name="Tendencia acumulada",
                 mode="lines+markers",
                 line=dict(color="#2c3e50", width=3),
                 marker=dict(size=6)
@@ -1069,18 +1071,18 @@ def map_page():
 
             fig.update_layout(
                 title=full_title,
-                xaxis_title="Registration Date",
+                xaxis_title="Fecha de registro",
                 hovermode="x unified",
                 template="plotly_white",
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
                 margin=dict(l=0, r=0, t=50, b=0),
                 height=400
             )
-            fig.update_yaxes(title_text="New Daily Cases", secondary_y=False)
-            fig.update_yaxes(title_text="Cumulative Cases", secondary_y=True, showgrid=False)
+            fig.update_yaxes(title_text="Casos diarios nuevos", secondary_y=False)
+            fig.update_yaxes(title_text="Casos acumulados", secondary_y=True, showgrid=False)
 
             st.plotly_chart(fig, use_container_width=True)
-            st.caption(f"Daily incidence (bars) and cumulative progression (line) for **{plant_title}** outbreaks.")
+            st.caption(f"Incidencia diaria (barras) y progresión acumulada (línea) para brotes de **{plant_title}**.")
         else:
-            st.warning("No data matches the selected filters. Please adjust your criteria to see the tendency.")
+            st.warning("No hay datos para los filtros seleccionados. Ajusta los criterios para ver la tendencia.")
         st.markdown("</div>", unsafe_allow_html=True)

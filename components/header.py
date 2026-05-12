@@ -31,7 +31,7 @@ def show_header():
                         AgriScan AI
                     </h1>
                     <p style="margin-top:2px; color: #888; font-size:clamp(0.85rem, 3.5vw, 22px); font-weight:500; letter-spacing:-0.01em;">
-                        Distributed Agricultural Monitoring Platform
+                        Plataforma Distribuida de Monitoreo Agrícola
                     </p>
                 </div>
             """, unsafe_allow_html=True)

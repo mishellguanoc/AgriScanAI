@@ -36,6 +36,37 @@ def format_label(label: str) -> str:
     cleaned = label.replace('___', ' ').replace('__', ' ').replace('_', ' ')
     return " ".join(word for word in cleaned.split() if word).title()
 
+
+def format_label_es(label: str) -> str:
+    """
+    Translates raw model labels or formatted English labels into Spanish UI names.
+    """
+    if not label:
+        return "Desconocido"
+
+    normalized = format_label(label)
+    label_map = {
+        "Tomato Bacterial Spot": "Tomate - Mancha bacteriana",
+        "Tomato Early Blight": "Tomate - Tizón temprano",
+        "Tomato Late Blight": "Tomate - Tizón tardío",
+        "Tomato Leaf Mold": "Tomate - Moho foliar",
+        "Tomato Septoria Leaf Spot": "Tomate - Mancha foliar por Septoria",
+        "Tomato Spider Mites": "Tomate - Ácaros",
+        "Tomato Target Spot": "Tomate - Mancha diana",
+        "Tomato Yellow Leaf Curl Virus": "Tomate - Virus del rizado amarillo",
+        "Tomato Mosaic Virus": "Tomate - Virus del mosaico",
+        "Tomato Healthy": "Tomate sano",
+        "Potato Early Blight": "Papa - Tizón temprano",
+        "Potato Late Blight": "Papa - Tizón tardío",
+        "Potato Healthy": "Papa sana",
+        "Background": "Fondo",
+        "Potato": "Papa",
+        "Tomato": "Tomate",
+        "Crop": "Cultivo",
+        "Unknown": "Desconocido",
+    }
+    return label_map.get(normalized, normalized)
+
 def translate_status(status: str) -> str:
     """
     Translates internal Spanish statuses to English for UI display.

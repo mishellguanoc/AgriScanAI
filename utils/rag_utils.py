@@ -18,11 +18,11 @@ def reverse_geocode(lat: float, lon: float) -> dict:
     """
     if lat is None or lon is None or (lat == 0.0 and lon == 0.0):
         return {
-            "display_name": "Unknown",
+            "display_name": "Desconocido",
             "city": None,
             "state": None,
             "country": None,
-            "summary": "Location not available.",
+            "summary": "Ubicación no disponible.",
         }
 
     try:
@@ -34,7 +34,7 @@ def reverse_geocode(lat: float, lon: float) -> dict:
                 "format": "json",
                 "zoom": 14,
                 "addressdetails": 1,
-                "accept-language": "en",
+                "accept-language": "es",
             },
             headers={"User-Agent": "AgriScanAI/1.0"},
             timeout=5,
@@ -47,7 +47,7 @@ def reverse_geocode(lat: float, lon: float) -> dict:
             "city": None,
             "state": None,
             "country": None,
-            "summary": f"Coordinates: {lat:.4f}, {lon:.4f} (geocoding unavailable).",
+            "summary": f"Coordenadas: {lat:.4f}, {lon:.4f} (geocodificación no disponible).",
         }
 
     addr = data.get("address", {})
@@ -62,10 +62,10 @@ def reverse_geocode(lat: float, lon: float) -> dict:
     county = addr.get("county")
 
     parts = [p for p in [city, county, state, country] if p]
-    summary = ", ".join(parts) if parts else data.get("display_name", "Unknown")
+    summary = ", ".join(parts) if parts else data.get("display_name", "Desconocido")
 
     return {
-        "display_name": data.get("display_name", "Unknown"),
+        "display_name": data.get("display_name", "Desconocido"),
         "city": city,
         "state": state,
         "country": country,
@@ -88,24 +88,24 @@ def build_diagnosis_context(
     can produce a highly contextual analysis report.
     """
     lines = [
-        "=== DIAGNOSIS CONTEXT (current scan) ===",
-        f"Plant type: {plant}",
-        f"Detected condition: {disease}",
-        f"Model confidence: {confidence * 100:.1f}%",
+        "=== CONTEXTO DEL DIAGNÓSTICO (análisis actual) ===",
+        f"Tipo de cultivo: {plant}",
+        f"Condición detectada: {disease}",
+        f"Confianza del modelo: {confidence * 100:.1f}%",
     ]
 
     if captured_at:
-        lines.append(f"Capture timestamp: {captured_at}")
+        lines.append(f"Fecha de captura: {captured_at}")
 
     if lat and lon and not (lat == 0.0 and lon == 0.0):
-        lines.append(f"GPS coordinates: {lat:.6f}, {lon:.6f}")
+        lines.append(f"Coordenadas GPS: {lat:.6f}, {lon:.6f}")
     else:
-        lines.append("GPS coordinates: Not available")
+        lines.append("Coordenadas GPS: No disponibles")
 
     if location_info and location_info.get("summary"):
-        lines.append(f"Location: {location_info['summary']}")
-        if location_info.get("display_name") and location_info["display_name"] != "Unknown":
-            lines.append(f"Full address: {location_info['display_name']}")
+        lines.append(f"Ubicación: {location_info['summary']}")
+        if location_info.get("display_name") and location_info["display_name"] != "Desconocido":
+            lines.append(f"Dirección completa: {location_info['display_name']}")
 
-    lines.append("=== END DIAGNOSIS CONTEXT ===")
+    lines.append("=== FIN DEL CONTEXTO DEL DIAGNÓSTICO ===")
     return "\n".join(lines)

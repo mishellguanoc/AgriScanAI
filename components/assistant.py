@@ -28,7 +28,24 @@ def assistant_page():
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .st-key-assistant_header .assistant-title-text {
+            min-width: 0;
+            flex: 1 1 200px;
+        }
+
+        .st-key-assistant_header .assistant-title-text h1 {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+        }
+
+        .st-key-assistant_header .assistant-title-text p {
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         .st-key-assistant_header .assistant-badges {
@@ -38,6 +55,7 @@ def assistant_page():
             flex-wrap: wrap;
             margin-top: 2px;
             flex-shrink: 0;
+            flex-basis: auto;
         }
 
         .st-key-assistant_header a.model-badge {
@@ -186,14 +204,14 @@ def assistant_page():
                 <div class="agriscan-page-title">
                     <div class="assistant-title-row">
                         <div class="assistant-title-text">
-                            <h1>Agronomic Assistant</h1>
+                            <h1>Asistente Agronómico</h1>
                             <p class="agriscan-page-subtitle">
-                                Ask about symptoms, treatment, prevention, and local outbreak context.
+                                Consulta síntomas, tratamientos, prevención y contexto local de brotes.
                             </p>
                         </div>
                         <div class="assistant-badges">
                             <a class="model-badge" href="https://console.groq.com/docs/models" target="_blank" rel="noopener noreferrer">
-                                Powered by LLaMA 3.3-70b via Groq
+                                Impulsado por LLaMA 3.3-70b vía Groq
                             </a>
                         </div>
                     </div>
@@ -206,8 +224,8 @@ def assistant_page():
         try:
             faiss_manager = _get_faiss()
         except Exception as e:
-            st.error(f"Could not load knowledge base: {e}")
-            st.info("Run `scripts/build_kb.py` to generate the index.")
+            st.error(f"No se pudo cargar la base de conocimiento: {e}")
+            st.info("Ejecuta `scripts/build_kb.py` para generar el índice.")
             return
 
         # ── Session state ──────────────────────────────────────────────────
@@ -219,21 +237,21 @@ def assistant_page():
             col_role, col_clear = st.columns([5, 1], vertical_alignment="center")
             with col_role:
                 role = st.radio(
-                    "Profile",
+                    "Perfil",
                     ["beginner", "expert"],
-                    format_func=lambda x: "Farmer" if x == "beginner" else "Agronomist",
+                    format_func=lambda x: "Agricultor" if x == "beginner" else "Agrónomo",
                     horizontal=True,
                     label_visibility="collapsed",
                 )
             with col_clear:
                 with st.container(key="rag_clear_btn"):
-                    if st.button("Clear", use_container_width=True):
+                    if st.button("Limpiar", use_container_width=True):
                         st.session_state.rag_messages = []
                         st.rerun()
 
             st.markdown(
                 '<div class="assistant-controls-caption">'
-                'Farmer: Simplified explanations • Agronomist: Technical & detailed'
+                'Agricultor: explicaciones simples • Agrónomo: técnico y detallado'
                 "</div>",
                 unsafe_allow_html=True,
             )
@@ -246,8 +264,8 @@ def assistant_page():
             if not st.session_state.rag_messages:
                 st.markdown(
                     "<div style='text-align:center; color:#3a3737; padding-top:60px; font-size:2rem;'>"
-                    "<b>Start by asking about a crop disease,<br>"
-                    "treatment or prevention method</b>"
+                    "<b>Empieza preguntando por una enfermedad,<br>"
+                    "tratamiento o método preventivo</b>"
                     "</div>",
                     unsafe_allow_html=True
                 )
@@ -255,7 +273,7 @@ def assistant_page():
                 with st.chat_message(msg["role"]):
                     st.markdown(msg["content"])
                     if msg.get("sources"):
-                        st.caption("Source: " + " · ".join(msg["sources"]))
+                        st.caption("Fuente: " + " · ".join(msg["sources"]))
 
         # ── Input: Enter should submit ─────────────────────────────────────
         with st.container(key="rag_input_row"):
@@ -264,12 +282,12 @@ def assistant_page():
                 with col_input:
                     query = st.text_input(
                         "query",
-                        placeholder="e.g. What are the symptoms of potato late blight?",
+                        placeholder="Ej. ¿Cuáles son los síntomas del tizón tardío en papa?",
                         label_visibility="collapsed",
                         key="rag_input_field",
                     )
                 with col_btn:
-                    send = st.form_submit_button("Send", type="primary", use_container_width=True)
+                    send = st.form_submit_button("Enviar", type="primary", use_container_width=True)
 
         # ── Procesar ──────────────────────────────────────────────────────
         if send and query.strip():
@@ -281,7 +299,7 @@ def assistant_page():
                 if m["role"] in ("user", "assistant")
             ]
 
-            with st.spinner("Consulting knowledge base..."):
+            with st.spinner("Consultando la base de conocimiento..."):
                 try:
                     db_context = fetch_diagnosis_context()
                     result = ask(

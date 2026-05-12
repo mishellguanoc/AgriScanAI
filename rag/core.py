@@ -145,17 +145,17 @@ INSTRUCCIONES IMPORTANTES:
 
 
 # ── System prompt for the inline diagnosis chatbot ─────────────────────────
-SYSTEM_ANALYSIS = """You are an expert agronomic field advisor embedded in the AgriScan AI diagnostic platform.
-You have just received the results of an AI-powered crop disease analysis, including the predicted disease, model confidence score, GPS coordinates, and reverse-geocoded location data.
+SYSTEM_ANALYSIS = """Eres un asesor agronómico experto integrado en la plataforma AgriScan AI.
+Acabas de recibir los resultados de un análisis de enfermedades de cultivos con IA, incluyendo enfermedad predicha, confianza del modelo, coordenadas GPS y ubicación aproximada.
 
-Your role:
-1. Provide a thorough, actionable agronomic analysis of the diagnosed condition.
-2. Consider the geographic region and local climate when recommending treatments, resistant cultivars, and prevention strategies.
-3. If coordinates place the field in a known agricultural region (e.g., Ecuadorian highlands, coastal lowlands), tailor advice to that agroecological zone.
-4. Include: disease description, likely causal pathogen, favorable conditions, recommended chemical/biological treatments, cultural practices, and monitoring steps.
-5. If the crop appears healthy, confirm it and suggest preventive best practices for the region.
-6. Keep answers clear, structured with headers, and professional.
-7. Always respond in the same language the user writes in. Default to English unless the user writes in Spanish or another language."""
+Tu rol:
+1. Proporcionar un análisis agronómico completo, claro y accionable de la condición diagnosticada.
+2. Considerar la región geográfica y el clima local al recomendar tratamientos, variedades resistentes y prevención.
+3. Si las coordenadas ubican el lote en una región agrícola conocida (por ejemplo, Sierra ecuatoriana o Costa), adapta el consejo a esa zona agroecológica.
+4. Incluir: descripción de la enfermedad, patógeno probable, condiciones favorables, tratamientos químicos/biológicos recomendados, prácticas culturales y pasos de monitoreo.
+5. Si el cultivo parece sano, confírmalo y sugiere prácticas preventivas para la región.
+6. Mantén respuestas profesionales, estructuradas con encabezados y fáciles de aplicar en campo.
+7. Responde siempre en español, salvo que el usuario pida explícitamente otro idioma."""
 
 
 def ask_diagnosis_analysis(
@@ -189,7 +189,7 @@ def ask_diagnosis_analysis(
     api_key = GROQ_API_KEY
     if not api_key:
         return {
-            "answer": "Groq API key not configured. Check .streamlit/secrets.toml.",
+            "answer": "La API key de Groq no está configurada. Revisa `.streamlit/secrets.toml`.",
             "sources": []
         }
 
@@ -199,41 +199,41 @@ def ask_diagnosis_analysis(
     # 2. Build FAISS context
     if retrieved:
         faiss_context = "\n\n---\n\n".join([
-            f"[Source: {c['source']} | Relevance: {c['similarity_score']:.2f}]\n{c['text']}"
+            f"[Fuente: {c['source']} | Relevancia: {c['similarity_score']:.2f}]\n{c['text']}"
             for c in retrieved
         ])
         sources = list(dict.fromkeys(c["source"] for c in retrieved))
     else:
-        faiss_context = "No directly matching documents found in the knowledge base."
+        faiss_context = "No se encontraron documentos directamente relacionados en la base de conocimiento."
         sources = []
 
     # 3. Combine all context layers
     context_parts = [diagnosis_context]
     if db_context:
         context_parts.append(
-            "### REAL-TIME EPIDEMIOLOGICAL DATA (platform database)\n\n" + db_context
+            "### DATOS EPIDEMIOLÓGICOS EN TIEMPO REAL (base de datos de la plataforma)\n\n" + db_context
         )
     context_parts.append(
-        "### AGRONOMIC KNOWLEDGE BASE\n\n" + faiss_context
+        "### BASE DE CONOCIMIENTO AGRONÓMICO\n\n" + faiss_context
     )
     context = "\n\n".join(context_parts)
 
     # 4. Build messages
-    user_message = f"""You have access to the following diagnosis results and agronomic reference material. READ ALL CONTEXT CAREFULLY before responding.
+    user_message = f"""Tienes acceso a los siguientes resultados de diagnóstico y material agronómico de referencia. LEE TODO EL CONTEXTO cuidadosamente antes de responder.
 
-CONTEXT:
+CONTEXTO:
 {context}
 
-USER QUESTION: {query}
+PREGUNTA DEL USUARIO: {query}
 
-INSTRUCTIONS:
-1. USE the diagnosis context (plant type, disease, confidence, location) to frame your analysis.
-2. If location data is available, tailor recommendations to the region's climate, altitude, and typical growing conditions.
-3. USE the agronomic knowledge base to provide scientifically accurate recommendations.
-4. If real-time epidemiological data is available, mention relevant regional trends.
-5. Structure your response with clear sections (e.g., Diagnosis Summary, Pathogen Info, Treatment, Prevention).
-6. Be actionable — give specific product names, dosages, and timing when possible.
-7. Respond in the same language the user writes in."""
+INSTRUCCIONES:
+1. USA el contexto del diagnóstico (cultivo, enfermedad, confianza, ubicación) para orientar el análisis.
+2. Si hay datos de ubicación, adapta recomendaciones al clima, altitud y condiciones típicas de la región.
+3. USA la base de conocimiento agronómica para dar recomendaciones científicamente correctas.
+4. Si hay datos epidemiológicos en tiempo real, menciona tendencias regionales relevantes.
+5. Estructura la respuesta con secciones claras (por ejemplo: Resumen, Patógeno, Tratamiento, Prevención).
+6. Sé accionable: indica productos, dosis y tiempos cuando sea posible y seguro.
+7. Responde siempre en español."""
 
     messages = [{"role": "system", "content": SYSTEM_ANALYSIS}]
     for h in history:
