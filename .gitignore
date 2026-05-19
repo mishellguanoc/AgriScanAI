@@ -37,4 +37,3 @@ tmp/
 
 .env
 *.pid
-*.sh
