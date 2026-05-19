@@ -140,6 +140,183 @@ This integration enables the agronomic chatbot to provide **context-specific adv
 
 ---
 
+### 1.4 Arquitectura del Componente RAG
+
+El módulo RAG (*Retrieval-Augmented Generation*) de AgriScan AI constituye la capa de razonamiento lingüístico del sistema. Su función es responder consultas agronómicas con información fundamentada en documentación científica local y en datos epidemiológicos en tiempo real, sin depender exclusivamente del conocimiento paramétrico del modelo de lenguaje. La arquitectura combina búsqueda semántica vectorial (FAISS), un modelo LLM externo vía API (Groq/LLaMA 3.3-70B) y contexto dinámico extraído de la base de datos PostgreSQL del sistema.
+
+---
+
+#### 1.4.1 Corpus Documental y Base de Conocimiento
+
+La base de conocimiento se construye a partir de 10 documentos fuente en formato PDF, los cuales cubren enfermedades agrícolas prevalentes en cultivos de tomate (*Solanum lycopersicum*) y papa (*Solanum tuberosum*) en el contexto andino ecuatoriano. Los documentos incluyen artículos científicos indexados, manuales fitosanitarios del INIAP y estudios sobre control biológico y epidemiología vegetal.
+
+El proceso de construcción (`scripts/build_kb.py`) sigue un pipeline de tres etapas ejecutado una sola vez de forma *offline*:
+
+```text
+PDFs originales (data/raw/)
+        │
+        ▼  [extracción y limpieza manual]
+Textos planos limpios (data/processed/ — 10 archivos .txt)
+        │
+        ▼  Chunker (scripts/chunker.py)
+Chunks con metadata (≈ 330 fragmentos)
+        │
+        ▼  FAISSManager.build() — all-MiniLM-L6-v2
+Embeddings normalizados (384 dim, cosine similarity)
+        │
+        ▼  faiss.IndexFlatIP
+data/embeddings/faiss_index.bin
+data/embeddings/chunks.pkl
+```
+
+##### Estrategia de Chunking
+
+La clase `Chunker` (`scripts/chunker.py`) divide los documentos por párrafos con los siguientes parámetros:
+
+| Parámetro | Valor | Descripción |
+|---|---|---|
+| `chunk_size` | 400 caracteres | Tamaño objetivo por fragmento |
+| `overlap` | 80 caracteres | Solapamiento entre chunks consecutivos |
+| Unidad mínima | 50 caracteres | Umbral de descarte para párrafos triviales |
+
+Cada *chunk* resultante lleva *metadata* automáticamente enriquecida: identificador único (`chunk_id`), nombre del documento fuente (`source`), cultivos detectados por presencia léxica (`crops: papa, tomate, general`) y enfermedades asociadas (`diseases`) reconocidas por un mapeo de términos clave (*e.g.*, *tizón tardío → late_blight*, *septoria → septoria*).
+
+##### Indexación Vectorial
+
+Los *embeddings* se generan con el modelo `sentence-transformers/all-MiniLM-L6-v2` (384 dimensiones). Los vectores se normalizan a norma unitaria antes de la indexación, lo que convierte el producto interior (*Inner Product*) de FAISS (`IndexFlatIP`) en equivalente a la similitud coseno, métrica estándar para tareas de recuperación semántica. El índice resultante contiene aproximadamente 330 vectores y se serializa en disco en formato binario para carga eficiente en tiempo de ejecución.
+
+---
+
+#### 1.4.2 Inicialización en Tiempo de Ejecución
+
+Al iniciar la aplicación Streamlit, el índice FAISS se carga desde disco mediante `FAISSManager.load()` y se almacena en caché usando el decorador `@st.cache_resource`, garantizando que la carga del modelo de *embeddings* y el índice ocurra una única vez por sesión de servidor, independientemente del número de usuarios concurrentes.
+
+```python
+@st.cache_resource
+def _get_faiss():
+    return load_faiss_index()   # lee faiss_index.bin + chunks.pkl
+```
+
+---
+
+#### 1.4.3 Flujos de Inferencia RAG
+
+El sistema expone dos funciones de inferencia diferenciadas según el contexto de la consulta.
+
+##### Flujo 1 — Asistente Agronómico General (`rag.core.ask`)
+
+Este flujo atiende las consultas libres del usuario en la pestaña **“Asistente Agronómico”**. El usuario puede preguntar sobre síntomas, tratamientos, epidemiología o prevención de enfermedades. El flujo soporta dos perfiles de respuesta:
+
+- **Agricultor (`beginner`)**: lenguaje claro y accesible, sin terminología técnica compleja.
+- **Agrónomo (`expert`)**: respuestas con terminología científica precisa, orientadas a profesionales del agro.
+
+El pipeline de inferencia es el siguiente:
+
+```text
+Consulta del usuario
+        │
+        ▼  sanitize_query()          ← elimina patrones de prompt injection
+        │
+        ▼  is_allowed_query()        ← filtra por listas ALLOWED/BLOCKED_TOPICS
+        │                              rechaza preguntas fuera del dominio agrícola
+        ▼  retrieve(query, top_k=15) ← convierte query a embedding (all-MiniLM-L6-v2)
+        │                              busca en FAISS (IndexFlatIP)
+        │                              filtra resultados con similarity_score ≥ 0.20
+        ▼  Construcción del contexto
+        │    ├── [opcional] db_context: resumen epidemiológico de PostgreSQL
+        │    └── faiss_context: hasta 15 chunks con fuente y score de relevancia
+        ▼  Construcción del prompt
+        │    ├── system_prompt: SYSTEM_BEGINNER o SYSTEM_EXPERT
+        │    ├── historial conversacional (últimos 6 turnos)
+        │    └── user_message: CONTEXTO + PREGUNTA + INSTRUCCIONES
+        ▼  Groq API → llama-3.3-70b-versatile
+           (max_tokens=600, temperature=0.3)
+        │
+        ▼  Respuesta + lista de fuentes documentales
+```
+
+### Flujo 2 — Análisis Post-Diagnóstico (`rag.core.ask_diagnosis_analysis`)
+
+Este flujo se activa automáticamente en la pestaña **“Análisis de Cultivo”** cuando el modelo CNN completa una predicción de enfermedad. Su propósito es generar un informe agronómico contextualizado a partir del resultado de la inferencia visual, sin requerir intervención manual del usuario.
+
+A diferencia del Flujo 1, este recibe un `diagnosis_context` estructurado construido por `utils/rag_utils.py` (`build_diagnosis_context`), que contiene:
+
+```text
+=== CONTEXTO DEL DIAGNÓSTICO (análisis actual) ===
+Tipo de cultivo:          {plant}            ← resultado del modelo CNN
+Condición detectada:      {disease}          ← clase predicha
+Confianza del modelo:     {confidence}%      ← score de softmax
+Fecha de captura:         {captured_at}
+Coordenadas GPS:          {lat}, {lon}       ← geolocalización del dispositivo
+Ubicación:                {summary}          ← reverse-geocoding via Nominatim/OSM
+=== FIN DEL CONTEXTO DEL DIAGNÓSTICO ===
+```
+
+El pipeline sigue la misma lógica de *retrieval* y generación que el Flujo 1, con dos diferencias clave:
+
+1. El `diagnosis_context` ocupa el primer lugar en el contexto compuesto, antes del contexto epidemiológico y de la base de conocimiento, para dar máxima prioridad a los datos del caso específico.
+
+2. El `system_prompt` es `SYSTEM_ANALYSIS`, orientado a producir recomendaciones de tratamiento y prevención adaptadas a la región geográfica detectada.
+
+3. El límite de tokens de respuesta es mayor (`max_tokens=1200`) para permitir informes más extensos.
+
+---
+
+#### 1.4.4 Contexto Epidemiológico en Tiempo Real (Integración con PostgreSQL)
+
+Ambos flujos RAG reciben opcionalmente un `db_context` generado por `utils/db_manager.fetch_diagnosis_context()`. Esta función consulta la base de datos PostgreSQL (Supabase) mediante un `JOIN` entre las tablas `file_upload`, `geospatial_data` y `diagnosis_result`, y produce un resumen en lenguaje natural que es inyectado directamente en el *prompt* del LLM.
+
+El contexto epidemiológico incluye:
+
+- Número total de detecciones registradas en el sistema y rango de fechas.
+- Desglose por enfermedad y cultivo: número de detecciones, severidad promedio (%) y área afectada promedio (m²).
+- Listado de las 10 detecciones más recientes con fecha, cultivo, enfermedad, severidad, área y coordenadas GPS.
+
+Cuando el diagnóstico proviene de una imagen con coordenadas GPS válidas, se utiliza la función `fetch_contextual_diagnosis()`, que aplica la fórmula de Haversine para construir un contexto espacialmente consciente en dos niveles:
+
+| Nivel | Radio | Contenido |
+|---|---|---|
+| Local | ≤ 50 km | Detecciones en el entorno inmediato del agricultor |
+| Regional | 51–500 km | Detecciones en la región o país |
+| Global | > 500 km | Conteo de detecciones fuera del radio regional |
+
+Este mecanismo permite que el LLM responda preguntas como *“¿hay brotes cercanos de tizón tardío?”* con datos reales del sistema, sin *hallucination*.
+
+---
+
+#### 1.4.5 Mecanismos de Seguridad y Restricción de Dominio
+
+El módulo implementa dos capas de control para prevenir el uso indebido del asistente:
+
+### Sanitización de consultas (`sanitize_query`)
+
+Aplica expresiones regulares para detectar y eliminar patrones de *prompt injection* comunes (*e.g.*, *“ignora...”*, *“actúa como...”*, *“developer mode...”*).
+
+### Restricción de dominio (`is_allowed_query`)
+
+Verifica que la consulta contenga al menos un término de la lista `ALLOWED_TOPICS` (*e.g.*, enfermedad, cultivo, plaga, tizón, fungicida) y que no contenga ninguno de los términos de `BLOCKED_TOPICS` (*e.g.*, python, código, sql, html, prompt). Las consultas que no superan esta verificación reciben una respuesta de rechazo estandarizada sin llegar a ejecutar el *retrieval* ni consumir tokens del LLM.
+
+---
+
+#### 1.4.6 Resumen de Parámetros del Sistema RAG
+
+| Parámetro | Valor |
+|---|---|
+| Modelo de embeddings | `all-MiniLM-L6-v2` (`sentence-transformers`) |
+| Dimensión del espacio vectorial | 384 |
+| Tipo de índice FAISS | `IndexFlatIP` (producto interior = cosine similarity) |
+| Documentos fuente | 10 PDFs |
+| Chunks indexados | ≈ 330 |
+| Top-K retrieval | 15 candidatos |
+| Umbral mínimo de similitud | 0.20 (cosine) |
+| Modelo LLM | LLaMA 3.3-70B Versatile (vía Groq API) |
+| Temperature | 0.3 |
+| Max tokens — Asistente general | 600 |
+| Max tokens — Análisis post-diagnóstico | 1 200 |
+| Historial conversacional | Últimos 6 turnos |
+| Caché del índice FAISS | `@st.cache_resource` (por sesión de servidor) |
+| Caché del contexto BD | `@st.cache_data` (TTL implícito por sesión) |
+
 ## **TECHNOLOGY STACK & DEPENDENCIES**
 
 ### **2.1 Frontend Framework (Streamlit)**
